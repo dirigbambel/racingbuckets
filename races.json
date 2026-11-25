@@ -1,0 +1,83 @@
+[
+  {
+    "series": "Formula 1",
+    "name": "Гран-при Лас-Вегаса",
+    "circuit": "Las Vegas Strip Circuit",
+    "country": "США",
+    "wheels": "open",
+    "start": "2026-11-22T04:00:00Z",
+    "color": "#e10600"
+  },
+  {
+    "series": "Formula 1",
+    "name": "Гран-при Катара",
+    "circuit": "Лусаил",
+    "country": "Катар",
+    "wheels": "open",
+    "start": "2026-11-29T16:00:00Z",
+    "color": "#e10600"
+  },
+  {
+    "series": "Formula E",
+    "name": "E-Prix Сан-Паулу",
+    "circuit": "Анхемби",
+    "country": "Бразилия",
+    "wheels": "open",
+    "start": "2026-12-05T17:00:00Z",
+    "color": "#00a3e0"
+  },
+  {
+    "series": "Formula 1",
+    "name": "Гран-при Абу-Даби",
+    "circuit": "Яс-Марина",
+    "country": "ОАЭ",
+    "wheels": "open",
+    "start": "2026-12-06T13:00:00Z",
+    "color": "#e10600"
+  },
+  {
+    "series": "IMSA",
+    "name": "24 часа Дайтоны",
+    "circuit": "Daytona International Speedway",
+    "country": "США",
+    "wheels": "closed",
+    "start": "2027-01-23T18:40:00Z",
+    "color": "#f59e0b"
+  },
+  {
+    "series": "WRC",
+    "name": "Ралли Монте-Карло (Power Stage)",
+    "circuit": "Монте-Карло",
+    "country": "Монако",
+    "wheels": "closed",
+    "start": "2027-01-24T11:15:00Z",
+    "color": "#10b981"
+  },
+  {
+    "series": "WEC",
+    "name": "1812 км Катара",
+    "circuit": "Лусаил",
+    "country": "Катар",
+    "wheels": "closed",
+    "start": "2027-02-27T08:00:00Z",
+    "color": "#3b82f6"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Гран-при Сент-Питерсберга",
+    "circuit": "St. Petersburg Street Circuit",
+    "country": "США",
+    "wheels": "open",
+    "start": "2027-03-07T17:00:00Z",
+    "color": "#8b5cf6"
+  },
+  {
+    "series": "Super Formula",
+    "name": "Этап в Сузуке",
+    "circuit": "Сузука",
+    "country": "Япония",
+    "wheels": "open",
+    "start": "2027-03-14T05:30:00Z",
+    "color": "#ec4899"
+  }
+]

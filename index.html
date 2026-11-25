@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Календарь автогонок</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #181b24;
+      --surface-hover: #202430;
+      --border: #2a2f3d;
+      --text: #e6e8ef;
+      --muted: #8f96a8;
+      --accent: #e10600;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 24px 16px 48px;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+    }
+
+    .tz-info {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .filters {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .filter-group label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    select, input[type="date"], input[type="text"] {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.92rem;
+      outline: none;
+      width: 100%;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--accent);
+    }
+
+    .filter-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-reset {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .btn-reset:hover {
+      color: var(--text);
+      border-color: var(--muted);
+    }
+
+    .stats {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .race-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--series-color, var(--accent));
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.15s, background 0.15s;
+      position: relative;
+    }
+
+    .card:hover {
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+
+    .card.past {
+      opacity: 0.55;
+    }
+
+    .card.next-up {
+      box-shadow: 0 0 0 1px rgba(225, 6, 0, 0.5);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .series-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--series-color, #fff);
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--muted);
+    }
+
+    .pill.next-badge {
+      background: rgba(225, 6, 0, 0.2);
+      color: #ff6b66;
+      font-weight: 600;
+    }
+
+    .race-title {
+      font-size: 1.12rem;
+      font-weight: 600;
+    }
+
+    .race-meta {
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .race-time {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .countdown {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .empty, .error {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+    }
+
+    .error code {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 8px;
+      background: var(--bg);
+      border-radius: 6px;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Календарь гонок</h1>
+      <div class="tz-info" id="tzInfo"></div>
+    </header>
+
+    <section class="filters">
+      <div class="filter-group">
+        <label for="fSeries">Серия</label>
+        <select id="fSeries"><option value="">Все серии</option></select>
+      </div>
+
+      <div class="filter-group">
+        <label for="fWheels">Тип колес</label>
+        <select id="fWheels">
+          <option value="">Любые</option>
+          <option value="open">Открытые колеса</option>
+          <option value="closed">Закрытые колеса</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="fCountry">Страна</label>
+        <select id="fCountry"><option value="">Все страны</option></select>
+      </div>
+
+      <div class="filter-group">
+        <label for="fFrom">Дата от</label>
+        <input type="date" id="fFrom">
+      </div>
+
+      <div class="filter-group">
+        <label for="fTo">Дата до</label>
+        <input type="date" id="fTo">
+      </div>
+
+      <div class="filter-group">
+        <label for="fSearch">Поиск</label>
+        <input type="text" id="fSearch" placeholder="Трасса, этап...">
+      </div>
+
+      <div class="filter-actions">
+        <label class="checkbox-label">
+          <input type="checkbox" id="fHidePast" checked>
+          Скрыть прошедшие гонки
+        </label>
+        <button class="btn-reset" id="btnReset">Сбросить фильтры</button>
+      </div>
+    </section>
+
+    <div class="stats" id="stats"></div>
+    <main class="race-list" id="raceList"></main>
+  </div>
+
+  <script>
+    const els = {
+      series: document.getElementById('fSeries'),
+      wheels: document.getElementById('fWheels'),
+      country: document.getElementById('fCountry'),
+      from: document.getElementById('fFrom'),
+      to: document.getElementById('fTo'),
+      search: document.getElementById('fSearch'),
+      hidePast: document.getElementById('fHidePast'),
+      reset: document.getElementById('btnReset'),
+      list: document.getElementById('raceList'),
+      stats: document.getElementById('stats'),
+      tzInfo: document.getElementById('tzInfo')
+    };
+
+    let allRaces = [];
+    const LIVE_WINDOW_MS = 3 * 60 * 60 * 1000; // 3 часа на саму гонку
+
+    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    els.tzInfo.textContent = `Часовой пояс: ${userTz}`;
+
+    const escapeHtml = (str = '') =>
+      str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+
+    function populateSelect(selectEl, values) {
+      [...new Set(values)].sort((a, b) => a.localeCompare(b, 'ru')).forEach(val => {
+        const opt = document.createElement('option');
+        opt.value = val;
+        opt.textContent = val;
+        selectEl.appendChild(opt);
+      });
+    }
+
+    function formatCountdown(msDiff) {
+      if (msDiff < -LIVE_WINDOW_MS) return 'Завершена';
+      if (msDiff <= 0) return 'Идет сейчас';
+
+      const totalHours = Math.floor(msDiff / (1000 * 60 * 60));
+      const days = Math.floor(totalHours / 24);
+      const hours = totalHours % 24;
+
+      if (days > 0) return `Через ${days} дн. ${hours} ч.`;
+      const mins = Math.floor((msDiff / (1000 * 60)) % 60);
+      return hours > 0 ? `Через ${hours} ч. ${mins} м.` : `Через ${mins} мин.`;
+    }
+
+    function render() {
+      const now = Date.now();
+      const seriesVal = els.series.value;
+      const wheelsVal = els.wheels.value;
+      const countryVal = els.country.value;
+      const fromTs = els.from.value ? new Date(els.from.value + 'T00:00:00').getTime() : null;
+      const toTs = els.to.value ? new Date(els.to.value + 'T23:59:59').getTime() : null;
+      const query = els.search.value.trim().toLowerCase();
+      const hidePast = els.hidePast.checked;
+
+      const filtered = allRaces.filter(r => {
+        const ts = r._ts;
+        if (hidePast && ts < now - LIVE_WINDOW_MS) return false;
+        if (seriesVal && r.series !== seriesVal) return false;
+        if (wheelsVal && r.wheels !== wheelsVal) return false;
+        if (countryVal && r.country !== countryVal) return false;
+        if (fromTs && ts < fromTs) return false;
+        if (toTs && ts > toTs) return false;
+        if (query) {
+          const hay = `${r.series} ${r.name} ${r.circuit} ${r.country}`.toLowerCase();
+          if (!hay.includes(query)) return false;
+        }
+        return true;
+      });
+
+      const nextUpcoming = filtered.find(r => r._ts >= now - LIVE_WINDOW_MS);
+      els.stats.textContent = `Найдено этапов: ${filtered.length}`;
+
+      if (!filtered.length) {
+        els.list.innerHTML = '<div class="empty">По выбранным фильтрам гонок нет.</div>';
+        return;
+      }
+
+      els.list.innerHTML = filtered.map(r => {
+        const diff = r._ts - now;
+        const isPast = diff < -LIVE_WINDOW_MS;
+        const isNext = nextUpcoming && r === nextUpcoming;
+        const wheelLabel = r.wheels === 'open' ? 'Открытые колеса' : 'Закрытые колеса';
+
+        const formattedDate = new Date(r._ts).toLocaleString('ru-RU', {
+          day: 'numeric',
+          month: 'short',
+          weekday: 'short',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        return `
+          <article class="card ${isPast ? 'past' : ''} ${isNext ? 'next-up' : ''}" style="--series-color: ${escapeHtml(r.color || '#e10600')}">
+            <div class="card-top">
+              <span class="series-badge">${escapeHtml(r.series)}</span>
+              ${isNext
+                ? '<span class="pill next-badge">Ближайшая</span>'
+                : `<span class="pill">${wheelLabel}</span>`
+              }
+            </div>
+            <div class="race-title">${escapeHtml(r.name)}</div>
+            <div class="race-meta">
+              <span>Трасса: ${escapeHtml(r.circuit)}</span>
+              <span>Страна: ${escapeHtml(r.country)} · ${wheelLabel}</span>
+            </div>
+            <div class="race-time">
+              <strong>${formattedDate}</strong>
+              <span class="countdown">${formatCountdown(diff)}</span>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    async function init() {
+      try {
+        const res = await fetch('./races.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        allRaces = data
+          .map(r => ({ ...r, _ts: new Date(r.start).getTime() }))
+          .sort((a, b) => a._ts - b._ts);
+
+        populateSelect(els.series, allRaces.map(r => r.series));
+        populateSelect(els.country, allRaces.map(r => r.country));
+        render();
+      } catch (err) {
+        els.list.innerHTML = `
+          <div class="error">
+            Не удалось загрузить <b>races.json</b>.<br>
+            Если ты открыл файл двойным кликом с диска, браузер блокирует чтение JSON по соображениям безопасности (CORS).<br>
+            На GitHub Pages всё заработает само, а локально можно запустить в папке с файлами:<br>
+            <code>python -m http.server 8000</code>
+          </div>`;
+      }
+    }
+
+    ['change', 'input'].forEach(evt => {
+      [els.series, els.wheels, els.country, els.from, els.to, els.search, els.hidePast]
+        .forEach(el => el.addEventListener(evt, render));
+    });
+
+    els.reset.addEventListener('click', () => {
+      els.series.value = '';
+      els.wheels.value = '';
+      els.country.value = '';
+      els.from.value = '';
+      els.to.value = '';
+      els.search.value = '';
+      els.hidePast.checked = true;
+      render();
+    });
+
+    init();
+  </script>
+</body>
+</html>
