@@ -492,6 +492,34 @@
       border-color: var(--series-color, var(--muted));
     }
 
+    .load-more-wrap {
+      display: none;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    .btn-load-more {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 26px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.12s;
+    }
+
+    .btn-load-more:hover {
+      background: var(--surface-hover);
+      border-color: var(--accent);
+    }
+
+    .btn-load-more:active {
+      transform: translateY(1px);
+    }
+
     .empty, .error {
       grid-column: 1 / -1;
       text-align: center;
@@ -845,6 +873,10 @@
 
     <div class="stats" id="stats"></div>
     <main class="race-list" id="raceList"></main>
+
+    <div class="load-more-wrap" id="loadMoreWrap">
+      <button type="button" class="btn-load-more" id="btnLoadMore">Показать ещё</button>
+    </div>
   </div>
 
   <!-- Модальное окно этапа -->
@@ -866,6 +898,7 @@
 
   <script>
     // --- НАСТРОЙКИ ---
+    const PAGE_SIZE = 30;           // Сколько карточек показывать за раз
     const ENABLE_MODAL = true;      // false — убрать всплывающее окно вообще
     const SHOW_RESULTS = false;     // true — показать вкладку «Результаты»
     const SHOW_STANDINGS = false;   // true — показать вкладку «Таблица чемпионата»
@@ -909,6 +942,8 @@
       list: document.getElementById('raceList'),
       stats: document.getElementById('stats'),
       tzInfo: document.getElementById('tzInfo'),
+      loadMoreWrap: document.getElementById('loadMoreWrap'),
+      loadMoreBtn: document.getElementById('btnLoadMore'),
       backdrop: document.getElementById('modalBackdrop'),
       modalBox: document.getElementById('modalBox'),
       modalSeries: document.getElementById('modalSeries'),
@@ -921,6 +956,10 @@
     };
 
     let allRaces = [];
+    let currentFiltered = [];
+    let renderedCount = 0;
+    let nextUpcomingId = null;
+
     let standingsData = {};
     let currentRace = null;
     let activeTab = 'schedule';
@@ -937,6 +976,37 @@
       const trimmed = String(url).trim();
       return /^https?:\/\//i.test(trimmed) ? trimmed : '';
     };
+
+    /* Безопасный парсинг дат (ISO, YYYY-MM-DD HH:MM, ДД.ММ.ГГГГ ЧЧ:ММ) */
+    function parseDateMs(val) {
+      if (!val) return Infinity;
+      const s = String(val).trim();
+      if (!s) return Infinity;
+
+      const ruMatch = s.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})(?:[\sT]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+      if (ruMatch) {
+        const [, d, m, y, hh = '00', mm = '00', ss = '00'] = ruMatch;
+        const iso = `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}T${hh.padStart(2, '0')}:${mm.padStart(2, '0')}:${ss.padStart(2, '0')}+03:00`;
+        const ts = Date.parse(iso);
+        return Number.isFinite(ts) ? ts : Infinity;
+      }
+
+      const normalized = /^\d{4}-\d{2}-\d{2}\s+\d{1,2}:\d{2}/.test(s) ? s.replace(/\s+/, 'T') : s;
+      const ts = Date.parse(normalized);
+      return Number.isFinite(ts) ? ts : Infinity;
+    }
+
+    function compareRaces(a, b) {
+      const aOk = Number.isFinite(a._ts);
+      const bOk = Number.isFinite(b._ts);
+      if (aOk && bOk) {
+        if (a._ts !== b._ts) return a._ts - b._ts;
+      } else if (aOk !== bOk) {
+        return aOk ? -1 : 1;
+      }
+      return (a.series || '').localeCompare(b.series || '', 'ru')
+        || (a.name || '').localeCompare(b.name || '', 'ru');
+    }
 
     function getCountryCode(country) {
       const key = String(country || '').trim().toLowerCase();
@@ -1080,6 +1150,7 @@
     });
 
     function formatCountdown(msDiff) {
+      if (!Number.isFinite(msDiff)) return '';
       if (msDiff < -LIVE_WINDOW_MS) return 'Завершена';
       if (msDiff <= 0) return 'Идет сейчас';
 
@@ -1092,6 +1163,93 @@
       return hours > 0 ? `Через ${hours} ч. ${mins} м.` : `Через ${mins} мин.`;
     }
 
+    function buildCardHtml(r, now) {
+      const hasDate = Number.isFinite(r._ts);
+      const diff = hasDate ? (r._ts - now) : Infinity;
+      const isPast = hasDate && diff < -LIVE_WINDOW_MS;
+      const isNext = r._id === nextUpcomingId;
+
+      const watchUrl = safeUrl(r.watch || DEFAULT_WATCH_URL);
+      const watchLabel = escapeHtml(r.watchLabel || DEFAULT_WATCH_LABEL);
+      const showWatch = Boolean(watchUrl && !isPast);
+      const showActions = ENABLE_MODAL || showWatch;
+
+      const formattedDate = hasDate
+        ? new Date(r._ts).toLocaleString('ru-RU', {
+            day: 'numeric',
+            month: 'short',
+            weekday: 'short',
+            hour: '2-digit',
+            minute: '2-digit'
+          })
+        : 'Дата уточняется';
+
+      const hasResults = SHOW_RESULTS && r.results?.length;
+      const detailLabel = isPast && hasResults ? 'Результаты' : 'Подробнее';
+      const cardStyle = `--series-color: ${escapeHtml(r.color || '#e10600')}${ENABLE_MODAL ? '' : '; cursor: default'}`;
+
+      const tagsHtml = r._tags.length
+        ? `<div class="tag-list">${r._tags.map(t => `<span class="pill">${escapeHtml(t)}</span>`).join('')}</div>`
+        : '';
+
+      return `
+        <article class="card ${isPast ? 'past' : ''} ${isNext ? 'next-up' : ''}"
+                 data-id="${r._id}"
+                 style="${cardStyle}">
+          <div class="card-top">
+            <span class="series-badge">${escapeHtml(r.series)}</span>
+            <div class="card-top-right">
+              ${isNext ? '<span class="pill next-badge">Ближайшая</span>' : ''}
+              ${renderFlag(r.country)}
+            </div>
+          </div>
+          <div class="race-title">${escapeHtml(r.name)}</div>
+          ${r.circuit ? `<div class="race-meta">Трасса: ${escapeHtml(r.circuit)}</div>` : ''}
+          ${tagsHtml}
+          <div class="card-footer">
+            <div class="race-time">
+              <strong>${formattedDate}</strong>
+              <span class="countdown">${formatCountdown(diff)}</span>
+            </div>
+            ${showActions ? `
+              <div class="card-actions">
+                ${ENABLE_MODAL ? `<span class="details-hint">${detailLabel}</span>` : ''}
+                ${showWatch
+                  ? `<a class="watch-link" href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener noreferrer">▶ ${watchLabel} ↗</a>`
+                  : ''
+                }
+              </div>
+            ` : ''}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderNextBatch() {
+      const now = Date.now();
+      const batch = currentFiltered.slice(renderedCount, renderedCount + PAGE_SIZE);
+
+      if (batch.length) {
+        els.list.insertAdjacentHTML('beforeend', batch.map(r => buildCardHtml(r, now)).join(''));
+        renderedCount += batch.length;
+      }
+
+      const total = currentFiltered.length;
+      const remaining = total - renderedCount;
+
+      els.stats.textContent = remaining > 0
+        ? `Показано ${renderedCount} из ${total} этапов`
+        : `Найдено этапов: ${total}`;
+
+      if (remaining > 0) {
+        const nextStep = Math.min(PAGE_SIZE, remaining);
+        els.loadMoreBtn.textContent = `Показать ещё ${nextStep} (осталось ${remaining})`;
+        els.loadMoreWrap.style.display = 'flex';
+      } else {
+        els.loadMoreWrap.style.display = 'none';
+      }
+    }
+
     function render() {
       const now = Date.now();
       const selectedSeries = getSelectedSet(els.msSeries);
@@ -1101,11 +1259,13 @@
       const query = els.search.value.trim().toLowerCase();
       const hidePast = els.hidePast.checked;
 
-      const filtered = allRaces.filter(r => {
+      currentFiltered = allRaces.filter(r => {
         const ts = r._ts;
-        if (hidePast && ts < now - LIVE_WINDOW_MS) return false;
+        const hasDate = Number.isFinite(ts);
+        if (hidePast && hasDate && ts < now - LIVE_WINDOW_MS) return false;
         if (selectedSeries.size && !selectedSeries.has(r.series)) return false;
         if (selectedTags.size && !r._tags.some(t => selectedTags.has(t))) return false;
+        if ((fromTs || toTs) && !hasDate) return false;
         if (fromTs && ts < fromTs) return false;
         if (toTs && ts > toTs) return false;
         if (query) {
@@ -1115,72 +1275,20 @@
         return true;
       });
 
-      const nextUpcoming = filtered.find(r => r._ts >= now - LIVE_WINDOW_MS);
-      els.stats.textContent = `Найдено этапов: ${filtered.length}`;
+      const nextUpcoming = currentFiltered.find(r => Number.isFinite(r._ts) && r._ts >= now - LIVE_WINDOW_MS);
+      nextUpcomingId = nextUpcoming ? nextUpcoming._id : null;
 
-      if (!filtered.length) {
+      renderedCount = 0;
+      els.list.innerHTML = '';
+
+      if (!currentFiltered.length) {
+        els.stats.textContent = 'Найдено этапов: 0';
         els.list.innerHTML = '<div class="empty">По выбранным фильтрам гонок нет.</div>';
+        els.loadMoreWrap.style.display = 'none';
         return;
       }
 
-      els.list.innerHTML = filtered.map(r => {
-        const diff = r._ts - now;
-        const isPast = diff < -LIVE_WINDOW_MS;
-        const isNext = nextUpcoming && r === nextUpcoming;
-
-        const watchUrl = safeUrl(r.watch || DEFAULT_WATCH_URL);
-        const watchLabel = escapeHtml(r.watchLabel || DEFAULT_WATCH_LABEL);
-        const showWatch = Boolean(watchUrl && !isPast);
-        const showActions = ENABLE_MODAL || showWatch;
-
-        const formattedDate = new Date(r._ts).toLocaleString('ru-RU', {
-          day: 'numeric',
-          month: 'short',
-          weekday: 'short',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-
-        const hasResults = SHOW_RESULTS && r.results?.length;
-        const detailLabel = isPast && hasResults ? 'Результаты' : 'Подробнее';
-        const cardStyle = `--series-color: ${escapeHtml(r.color || '#e10600')}${ENABLE_MODAL ? '' : '; cursor: default'}`;
-
-        const tagsHtml = r._tags.length
-          ? `<div class="tag-list">${r._tags.map(t => `<span class="pill">${escapeHtml(t)}</span>`).join('')}</div>`
-          : '';
-
-        return `
-          <article class="card ${isPast ? 'past' : ''} ${isNext ? 'next-up' : ''}"
-                   data-id="${r._id}"
-                   style="${cardStyle}">
-            <div class="card-top">
-              <span class="series-badge">${escapeHtml(r.series)}</span>
-              <div class="card-top-right">
-                ${isNext ? '<span class="pill next-badge">Ближайшая</span>' : ''}
-                ${renderFlag(r.country)}
-              </div>
-            </div>
-            <div class="race-title">${escapeHtml(r.name)}</div>
-            ${r.circuit ? `<div class="race-meta">Трасса: ${escapeHtml(r.circuit)}</div>` : ''}
-            ${tagsHtml}
-            <div class="card-footer">
-              <div class="race-time">
-                <strong>${formattedDate}</strong>
-                <span class="countdown">${formatCountdown(diff)}</span>
-              </div>
-              ${showActions ? `
-                <div class="card-actions">
-                  ${ENABLE_MODAL ? `<span class="details-hint">${detailLabel}</span>` : ''}
-                  ${showWatch
-                    ? `<a class="watch-link" href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener noreferrer">▶ ${watchLabel} ↗</a>`
-                    : ''
-                  }
-                </div>
-              ` : ''}
-            </div>
-          </article>
-        `;
-      }).join('');
+      renderNextBatch();
     }
 
     /* --- Логика модального окна --- */
@@ -1202,7 +1310,7 @@
       closeAllMultiSelects();
       currentRace = race;
       const color = race.color || '#e10600';
-      const isPast = race._ts < Date.now() - LIVE_WINDOW_MS;
+      const isPast = Number.isFinite(race._ts) && race._ts < Date.now() - LIVE_WINDOW_MS;
 
       els.modalBox.style.setProperty('--modal-color', color);
       els.modalSeries.style.color = color;
@@ -1253,27 +1361,36 @@
       const now = Date.now();
       const hasFull = Array.isArray(race.sessions) && race.sessions.length > 0;
       const sessions = hasFull
-        ? [...race.sessions].sort((a, b) => new Date(a.start) - new Date(b.start))
+        ? [...race.sessions].sort((a, b) => {
+            const ta = parseDateMs(a.start);
+            const tb = parseDateMs(b.start);
+            if (Number.isFinite(ta) && Number.isFinite(tb)) return ta - tb;
+            if (Number.isFinite(ta) !== Number.isFinite(tb)) return Number.isFinite(ta) ? -1 : 1;
+            return 0;
+          })
         : [{ name: 'Старт гонки', start: race.start, main: true }];
 
       const watchUrl = safeUrl(race.watch || DEFAULT_WATCH_URL);
       const watchLabel = escapeHtml(race.watchLabel || DEFAULT_WATCH_LABEL);
-      const isPastRace = race._ts < now - LIVE_WINDOW_MS;
+      const isPastRace = Number.isFinite(race._ts) && race._ts < now - LIVE_WINDOW_MS;
 
       const rows = sessions.map(s => {
-        const ts = new Date(s.start).getTime();
-        const isPast = ts < now - LIVE_WINDOW_MS;
-        const d = new Date(ts);
-        const dayStr = d.toLocaleDateString('ru-RU', { weekday: 'short', day: 'numeric', month: 'short' });
-        const timeStr = d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+        const ts = parseDateMs(s.start);
+        const hasDate = Number.isFinite(ts);
+        const isPast = hasDate && ts < now - LIVE_WINDOW_MS;
+        let dateHtml = '<strong>Уточняется</strong>';
+
+        if (hasDate) {
+          const d = new Date(ts);
+          const dayStr = d.toLocaleDateString('ru-RU', { weekday: 'short', day: 'numeric', month: 'short' });
+          const timeStr = d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+          dateHtml = `<span class="session-day">${dayStr}</span><strong>${timeStr}</strong>`;
+        }
 
         return `
           <div class="session-row ${s.main ? 'is-main' : ''} ${isPast ? 'is-past' : ''}">
             <span class="session-name">${escapeHtml(s.name)}</span>
-            <span class="session-date">
-              <span class="session-day">${dayStr}</span>
-              <strong>${timeStr}</strong>
-            </span>
+            <span class="session-date">${dateHtml}</span>
           </div>
         `;
       }).join('');
@@ -1377,6 +1494,8 @@
     }
 
     /* --- События --- */
+    els.loadMoreBtn.addEventListener('click', renderNextBatch);
+
     els.list.addEventListener('click', e => {
       if (!ENABLE_MODAL) return;
       if (e.target.closest('a')) return;
@@ -1446,10 +1565,10 @@
           .map((r, idx) => ({
             ...r,
             _id: idx,
-            _ts: new Date(r.start).getTime(),
+            _ts: parseDateMs(r.start),
             _tags: normalizeTags(r)
           }))
-          .sort((a, b) => a._ts - b._ts);
+          .sort(compareRaces);
 
         populateMultiSelect(els.msSeries, allRaces.map(r => r.series));
         populateMultiSelect(els.msTag, allRaces.flatMap(r => r._tags), PRIORITY_TAGS);
