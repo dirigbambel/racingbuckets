@@ -1,398 +1,542 @@
 [
   {
+    "id": "1",
     "series": "Формула-1",
     "name": "Гран-при Лас-Вегаса",
     "circuit": "Las Vegas",
     "country": "США",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2026-11-22T07:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "2",
     "series": "Формула-1",
     "name": "Гран-при Катара",
     "circuit": "Lusail",
     "country": "Катар",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-11-29T19:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "3",
     "series": "Формула-1",
     "name": "Гран-при Абу-Даби",
     "circuit": "Yas Marina",
     "country": "ОАЭ",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-12-06T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "4",
     "series": "Формула-1",
     "name": "Гран-при Бахрейна",
     "circuit": "Bahrain",
     "country": "Бахрейн",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-03-14T17:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "5",
     "series": "Формула-1",
     "name": "Гран-при Саудовской Аравии",
     "circuit": "Jeddah",
     "country": "Саудовская Аравия",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-03-21T19:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "6",
     "series": "Формула-1",
     "name": "Гран-при Австралии",
     "circuit": "Albert Park",
     "country": "Австралия",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-04-04T07:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "7",
     "series": "Формула-1",
     "name": "Гран-при Японии",
     "circuit": "Suzuka",
     "country": "Япония",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-04-11T08:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "8",
     "series": "Формула-1",
     "name": "Гран-при Китая",
     "circuit": "Shanghai",
     "country": "Китай",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-04-18T10:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "9",
     "series": "Формула-1",
     "name": "Гран-при Майами",
     "circuit": "Miami",
     "country": "США",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-05-02T23:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "10",
     "series": "Формула-1",
     "name": "Гран-при Канады",
     "circuit": "Montreal",
     "country": "Канада",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-05-23T23:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "11",
     "series": "Формула-1",
     "name": "Гран-при Монако",
     "circuit": "Monaco",
     "country": "Монако",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-06-06T17:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "12",
     "series": "Формула-1",
     "name": "Гран-при Португалии",
     "circuit": "Portimao",
     "country": "Португалия",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-06-20T17:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "13",
     "series": "Формула-1",
     "name": "Гран-при Великобритании",
     "circuit": "Silverstone",
     "country": "Великобритания",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-07-04T17:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "14",
     "series": "Формула-1",
     "name": "Гран-при Австрии",
     "circuit": "Spielberg",
     "country": "Австрия",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-07-11T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "15",
     "series": "Формула-1",
     "name": "Гран-при Бельгии",
     "circuit": "Spa",
     "country": "Бельгия",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-07-25T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "16",
     "series": "Формула-1",
     "name": "Гран-при Венгрии",
     "circuit": "Hungaroring",
     "country": "Венгрия",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-08-01T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "17",
     "series": "Формула-1",
     "name": "Гран-при Италии",
     "circuit": "Monza",
     "country": "Италия",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-09-05T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "18",
     "series": "Формула-1",
     "name": "Гран-при Испании",
     "circuit": "Madring",
     "country": "Испания",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-09-12T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "19",
     "series": "Формула-1",
     "name": "Гран-при Азербайджана",
     "circuit": "Baku",
     "country": "Азербайджан",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-09-26T14:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "20",
     "series": "Формула-1",
     "name": "Гран-при Турции",
     "circuit": "Istanbul Park",
     "country": "Турция",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-10-03T15:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "21",
     "series": "Формула-1",
     "name": "Гран-при Сингапура",
     "circuit": "Marina Bay",
     "country": "Сингапур",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-10-10T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "22",
     "series": "Формула-1",
     "name": "Гран-при США",
     "circuit": "COTA",
     "country": "США",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-10-24T23:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "23",
     "series": "Формула-1",
     "name": "Гран-при Мексики",
     "circuit": "Hermanos Rodríguez",
     "country": "Мексика",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-10-31T22:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "24",
     "series": "Формула-1",
     "name": "Гран-при Бразилии",
     "circuit": "Interlagos",
     "country": "Бразилия",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-11-07T21:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "25",
     "series": "Формула-1",
     "name": "Гран-при Лас-Вегаса",
     "circuit": "Las Vegas",
     "country": "США",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-11-20T07:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "26",
     "series": "Формула-1",
     "name": "Гран-при Катара",
     "circuit": "Lusail",
     "country": "Катар",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-12-05T19:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "27",
     "series": "Формула-1",
     "name": "Гран-при Абу-Даби",
     "circuit": "Yas Marina",
     "country": "ОАЭ",
-    "wheels": "открытые",
+    "tags": "открытые колеса",
     "start": "2027-12-12T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "#e10600",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "28",
     "series": "WEC",
     "name": "1825 км Катара",
     "circuit": "Lusail",
-    "country": "",
-    "wheels": "open",
+    "country": "Катар",
+    "tags": "Гиперкары, GT3",
     "start": "2027-03-27T16:00:00+03:00",
-    "color": "#e10600"
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "29",
     "series": "WEC",
     "name": "6 часов Имолы",
     "circuit": "Imola",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "country": "Италия",
+    "tags": "Гиперкары, GT3",
+    "start": "2027-04-11T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "30",
     "series": "WEC",
     "name": "6 часов Сильверстоуна",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Silverstone",
+    "country": "Великобритания",
+    "tags": "Гиперкары, GT3",
+    "start": "2027-04-25T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "31",
     "series": "WEC",
-    "name": "6 часов Спа-Франкоршарм",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "name": "6 часов Спа-Франкоршам",
+    "circuit": "Spa",
+    "country": "Бельгия",
+    "tags": "Гиперкары, GT3",
+    "start": "2027-05-15T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "32",
     "series": "WEC",
     "name": "24 часа Ле-Мана",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Le Mans",
+    "country": "Франция",
+    "tags": "Гиперкары, GT3, LMP2",
+    "start": "2027-06-12T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "33",
     "series": "WEC",
-    "name": "6 часов Сан Пауло",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "name": "6 часов Сан-Паулу",
+    "circuit": "Interlagos",
+    "country": "Бразилия",
+    "tags": "Гиперкары, GT3",
+    "start": "2027-07-11T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "34",
     "series": "WEC",
     "name": "Одинокая звезда Ле-Ман",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "COTA",
+    "country": "США",
+    "tags": "Гиперкары, GT3",
+    "start": "2027-09-12T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "35",
     "series": "WEC",
     "name": "6 часов Фудзи",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Fuji",
+    "country": "Япония",
+    "tags": "Гиперкары, GT3",
+    "start": "2027-09-26T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "36",
     "series": "WEC",
     "name": "8 часов Бахрейна",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Bahrain",
+    "country": "Бахрейн",
+    "tags": "Гиперкары, GT3",
+    "start": "2027-11-06T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "37",
     "series": "Super GT",
     "name": "300 км Окаямы",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Okayama",
+    "country": "Япония",
+    "tags": "GT500, GT300",
+    "start": "2027-04-03T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "38",
     "series": "Super GT",
     "name": "3 часа Фудзи",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Fuji",
+    "country": "Япония",
+    "tags": "GT500, GT300",
+    "start": "2027-05-03T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "39",
     "series": "Super GT",
     "name": "300 км Сепанга",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Sepang",
+    "country": "Малайзия",
+    "tags": "GT500, GT300",
+    "start": "2027-06-18T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "40",
     "series": "Super GT",
     "name": "300 км Судзуки",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Suzuka",
+    "country": "Япония",
+    "tags": "GT500, GT300",
+    "start": "2027-07-31T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "41",
+    "series": "Super GT",
+    "name": "1000 км Судзуки",
+    "circuit": "Suzuka",
+    "country": "Япония",
+    "tags": "GT500",
+    "start": "2027-09-04T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
+  },
+  {
+    "id": "42",
     "series": "Super GT",
     "name": "300 км Суго",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Sugo",
+    "country": "Япония",
+    "tags": "GT500, GT300",
+    "start": "2027-09-18T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "43",
     "series": "Super GT",
     "name": "3 часа Аутополиса",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Autopolis",
+    "country": "Япония",
+    "tags": "GT500, GT300",
+    "start": "2027-10-16T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "44",
     "series": "Super GT",
     "name": "300 км Фудзи",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Fuji",
+    "country": "Япония",
+    "tags": "GT500, GT300",
+    "start": "2027-11-06T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   },
   {
+    "id": "45",
     "series": "Super GT",
     "name": "300 км Мотеги",
-    "circuit": "",
-    "country": "",
-    "wheels": "open",
-    "start": "",
-    "color": "#e10600"
+    "circuit": "Motegi",
+    "country": "Япония",
+    "tags": "GT500, GT300",
+    "start": "2027-11-20T16:00:00+03:00",
+    "color": "",
+    "watch": "",
+    "watchLabel": ""
   }
 ]
