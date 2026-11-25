@@ -1,17 +1,1 @@
-{
-  "Formula 1": {
-    "updated": "После Гран-при Лас-Вегаса",
-    "drivers": [
-      { "pos": 1, "name": "Оскар Пиастри", "team": "McLaren", "points": 384 },
-      { "pos": 2, "name": "Макс Ферстаппен", "team": "Red Bull Racing", "points": 371 },
-      { "pos": 3, "name": "Шарль Леклер", "team": "Ferrari", "points": 339 },
-      { "pos": 4, "name": "Фернандо Алонсо", "team": "Aston Martin", "points": 215 }
-    ],
-    "teams": [
-      { "pos": 1, "name": "McLaren", "points": 698 },
-      { "pos": 2, "name": "Ferrari", "points": 642 },
-      { "pos": 3, "name": "Red Bull Racing", "points": 589 },
-      { "pos": 4, "name": "Aston Martin", "points": 340 }
-    ]
-  }
-}
+{}
