@@ -328,6 +328,36 @@
       gap: 14px;
     }
 
+    /* Разделители по месяцам */
+    .month-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      margin-bottom: 2px;
+    }
+
+    .month-divider:first-child {
+      margin-top: 0;
+    }
+
+    .month-divider-label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .month-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -906,6 +936,11 @@
     const DEFAULT_WATCH_URL = '';
     const DEFAULT_WATCH_LABEL = 'Где смотреть';
 
+    const MONTH_NAMES = [
+      'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+      'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+    ];
+
     // Словарь «Название страны -> ISO-код для флага»
     const COUNTRY_CODES = {
       'австралия': 'au', 'австрия': 'at', 'азербайджан': 'az', 'аргентина': 'ar', 'армения': 'am',
@@ -958,6 +993,7 @@
     let allRaces = [];
     let currentFiltered = [];
     let renderedCount = 0;
+    let lastRenderedMonthKey = null;
     let nextUpcomingId = null;
 
     let standingsData = {};
@@ -977,7 +1013,6 @@
       return /^https?:\/\//i.test(trimmed) ? trimmed : '';
     };
 
-    /* Безопасный парсинг дат (ISO, YYYY-MM-DD HH:MM, ДД.ММ.ГГГГ ЧЧ:ММ) */
     function parseDateMs(val) {
       if (!val) return Infinity;
       const s = String(val).trim();
@@ -1006,6 +1041,19 @@
       }
       return (a.series || '').localeCompare(b.series || '', 'ru')
         || (a.name || '').localeCompare(b.name || '', 'ru');
+    }
+
+    function getMonthInfo(ts) {
+      if (!Number.isFinite(ts)) {
+        return { key: 'tba', label: 'Дата уточняется' };
+      }
+      const d = new Date(ts);
+      const y = d.getFullYear();
+      const m = d.getMonth();
+      return {
+        key: `${y}-${String(m + 1).padStart(2, '0')}`,
+        label: `${MONTH_NAMES[m]} ${y}`
+      };
     }
 
     function getCountryCode(country) {
@@ -1230,7 +1278,16 @@
       const batch = currentFiltered.slice(renderedCount, renderedCount + PAGE_SIZE);
 
       if (batch.length) {
-        els.list.insertAdjacentHTML('beforeend', batch.map(r => buildCardHtml(r, now)).join(''));
+        let html = '';
+        for (const r of batch) {
+          const mInfo = getMonthInfo(r._ts);
+          if (mInfo.key !== lastRenderedMonthKey) {
+            html += `<div class="month-divider"><span class="month-divider-label">${escapeHtml(mInfo.label)}</span></div>`;
+            lastRenderedMonthKey = mInfo.key;
+          }
+          html += buildCardHtml(r, now);
+        }
+        els.list.insertAdjacentHTML('beforeend', html);
         renderedCount += batch.length;
       }
 
@@ -1279,6 +1336,7 @@
       nextUpcomingId = nextUpcoming ? nextUpcoming._id : null;
 
       renderedCount = 0;
+      lastRenderedMonthKey = null;
       els.list.innerHTML = '';
 
       if (!currentFiltered.length) {
