@@ -230,6 +230,13 @@
       gap: 8px;
     }
 
+    .card-top-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
     .series-badge {
       font-size: 0.78rem;
       font-weight: 700;
@@ -238,12 +245,29 @@
       color: var(--series-color, #fff);
     }
 
+    .flag-icon {
+      width: 22px;
+      height: 15px;
+      object-fit: cover;
+      border-radius: 3px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .country-fallback {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
     .pill {
       font-size: 0.72rem;
       padding: 3px 8px;
       border-radius: 99px;
       background: rgba(255, 255, 255, 0.07);
       color: var(--muted);
+      white-space: nowrap;
     }
 
     .pill.next-badge {
@@ -260,9 +284,12 @@
     .race-meta {
       font-size: 0.88rem;
       color: var(--muted);
+    }
+
+    .tag-list {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .card-footer {
@@ -347,7 +374,7 @@
       color: var(--text);
     }
 
-    /* Модальное окно (фрейм этапа) */
+    /* Модальное окно */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -397,7 +424,15 @@
     .modal-subtitle {
       font-size: 0.88rem;
       color: var(--muted);
-      margin-top: 4px;
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-tags {
+      margin-top: 8px;
     }
 
     .modal-close {
@@ -455,7 +490,6 @@
       overflow-y: auto;
     }
 
-    /* Расписание сессий */
     .session-list {
       display: flex;
       flex-direction: column;
@@ -499,7 +533,6 @@
       font-size: 0.82rem;
     }
 
-    /* Таблицы (результаты и зачёт) */
     .sub-tabs {
       display: flex;
       align-items: center;
@@ -627,12 +660,8 @@
       </div>
 
       <div class="filter-group">
-        <label for="fWheels">Тип колес</label>
-        <select id="fWheels">
-          <option value="">Любые</option>
-          <option value="open">Открытые колеса</option>
-          <option value="closed">Закрытые колеса</option>
-        </select>
+        <label for="fTag">Класс / тип</label>
+        <select id="fTag"><option value="">Любые</option></select>
       </div>
 
       <div class="filter-group">
@@ -652,7 +681,7 @@
 
       <div class="filter-group">
         <label for="fSearch">Поиск</label>
-        <input type="text" id="fSearch" placeholder="Трасса, этап...">
+        <input type="text" id="fSearch" placeholder="Трасса, тег, этап...">
       </div>
 
       <div class="filter-actions">
@@ -676,6 +705,7 @@
           <span class="series-badge" id="modalSeries"></span>
           <h2 class="modal-title" id="modalTitle"></h2>
           <div class="modal-subtitle" id="modalSubtitle"></div>
+          <div class="tag-list modal-tags" id="modalTags"></div>
         </div>
         <button class="modal-close" id="modalClose" aria-label="Закрыть">&times;</button>
       </div>
@@ -685,12 +715,43 @@
   </div>
 
   <script>
+    // --- НАСТРОЙКИ ---
+    const ENABLE_MODAL = true;      // false — убрать всплывающее окно вообще
+    const SHOW_RESULTS = false;     // true — показать вкладку «Результаты»
+    const SHOW_STANDINGS = false;   // true — показать вкладку «Таблица чемпионата»
+
     const DEFAULT_WATCH_URL = '';
     const DEFAULT_WATCH_LABEL = 'Где смотреть';
 
+    // Словарь «Название страны -> ISO-код для флага» (можно дополнять)
+    const COUNTRY_CODES = {
+      'австралия': 'au', 'австрия': 'at', 'азербайджан': 'az', 'аргентина': 'ar', 'армения': 'am',
+      'бахрейн': 'bh', 'беларусь': 'by', 'белоруссия': 'by', 'бельгия': 'be', 'болгария': 'bg', 'бразилия': 'br',
+      'великобритания': 'gb', 'англия': 'gb', 'венгрия': 'hu', 'вьетнам': 'vn',
+      'германия': 'de', 'греция': 'gr', 'грузия': 'ge',
+      'дания': 'dk', 'египет': 'eg',
+      'израиль': 'il', 'индия': 'in', 'индонезия': 'id', 'ирландия': 'ie', 'исландия': 'is', 'испания': 'es', 'италия': 'it',
+      'казахстан': 'kz', 'канада': 'ca', 'катар': 'qa', 'кения': 'ke', 'кипр': 'cy', 'китай': 'cn', 'колумбия': 'co', 'корея': 'kr', 'южная корея': 'kr',
+      'латвия': 'lv', 'литва': 'lt', 'люксембург': 'lu',
+      'малайзия': 'my', 'марокко': 'ma', 'мексика': 'mx', 'монако': 'mc',
+      'нидерланды': 'nl', 'голландия': 'nl', 'новая зеландия': 'nz', 'норвегия': 'no',
+      'оаэ': 'ae', 'эмираты': 'ae', 'оман': 'om',
+      'парагвай': 'py', 'перу': 'pe', 'польша': 'pl', 'португалия': 'pt',
+      'россия': 'ru', 'рф': 'ru', 'румыния': 'ro',
+      'сан-марино': 'sm', 'саудовская аравия': 'sa', 'сербия': 'rs', 'сингапур': 'sg', 'словакия': 'sk', 'словения': 'si', 'сша': 'us',
+      'таиланд': 'th', 'тайвань': 'tw', 'турция': 'tr',
+      'узбекистан': 'uz', 'украина': 'ua', 'уругвай': 'uy',
+      'финляндия': 'fi', 'франция': 'fr',
+      'хорватия': 'hr', 'черногория': 'me', 'чехия': 'cz', 'чили': 'cl',
+      'швейцария': 'ch', 'швеция': 'se', 'эстония': 'ee', 'юар': 'za', 'япония': 'jp'
+    };
+
+    // Теги, которые всегда показываются вверху списка фильтра
+    const PRIORITY_TAGS = ['Открытые колеса', 'Закрытые колеса'];
+
     const els = {
       series: document.getElementById('fSeries'),
-      wheels: document.getElementById('fWheels'),
+      tag: document.getElementById('fTag'),
       country: document.getElementById('fCountry'),
       from: document.getElementById('fFrom'),
       to: document.getElementById('fTo'),
@@ -705,6 +766,7 @@
       modalSeries: document.getElementById('modalSeries'),
       modalTitle: document.getElementById('modalTitle'),
       modalSubtitle: document.getElementById('modalSubtitle'),
+      modalTags: document.getElementById('modalTags'),
       modalTabs: document.getElementById('modalTabs'),
       modalBody: document.getElementById('modalBody'),
       modalClose: document.getElementById('modalClose')
@@ -728,8 +790,48 @@
       return /^https?:\/\//i.test(trimmed) ? trimmed : '';
     };
 
-    function populateSelect(selectEl, values) {
-      [...new Set(values)].sort((a, b) => a.localeCompare(b, 'ru')).forEach(val => {
+    function getCountryCode(country) {
+      const key = String(country || '').trim().toLowerCase();
+      if (!key) return '';
+      if (COUNTRY_CODES[key]) return COUNTRY_CODES[key];
+      if (/^[a-z]{2}$/.test(key)) return key;
+      return '';
+    }
+
+    function renderFlag(country) {
+      const name = String(country || '').trim();
+      if (!name) return '';
+      const code = getCountryCode(name);
+      const safeName = escapeHtml(name);
+      if (!code) return `<span class="country-fallback">${safeName}</span>`;
+      return `<img class="flag-icon" src="https://flagcdn.com/w40/${code}.png" srcset="https://flagcdn.com/w80/${code}.png 2x" alt="${safeName}" title="${safeName}" loading="lazy">`;
+    }
+
+    function normalizeTags(race) {
+      if (Array.isArray(race.tags) && race.tags.length) {
+        return race.tags.map(t => String(t).trim()).filter(Boolean);
+      }
+      if (typeof race.tags === 'string' && race.tags.trim()) {
+        return race.tags.split(/[,;]+/).map(t => t.trim()).filter(Boolean);
+      }
+      if (race.wheels === 'open') return ['Открытые колеса'];
+      if (race.wheels === 'closed') return ['Закрытые колеса'];
+      return [];
+    }
+
+    function populateSelect(selectEl, values, priority = []) {
+      const unique = [...new Set(values.filter(Boolean))];
+      unique.sort((a, b) => {
+        const pa = priority.indexOf(a);
+        const pb = priority.indexOf(b);
+        if (pa !== -1 || pb !== -1) {
+          if (pa === -1) return 1;
+          if (pb === -1) return -1;
+          return pa - pb;
+        }
+        return a.localeCompare(b, 'ru');
+      });
+      unique.forEach(val => {
         const opt = document.createElement('option');
         opt.value = val;
         opt.textContent = val;
@@ -753,7 +855,7 @@
     function render() {
       const now = Date.now();
       const seriesVal = els.series.value;
-      const wheelsVal = els.wheels.value;
+      const tagVal = els.tag.value;
       const countryVal = els.country.value;
       const fromTs = els.from.value ? new Date(els.from.value + 'T00:00:00').getTime() : null;
       const toTs = els.to.value ? new Date(els.to.value + 'T23:59:59').getTime() : null;
@@ -764,12 +866,12 @@
         const ts = r._ts;
         if (hidePast && ts < now - LIVE_WINDOW_MS) return false;
         if (seriesVal && r.series !== seriesVal) return false;
-        if (wheelsVal && r.wheels !== wheelsVal) return false;
+        if (tagVal && !r._tags.includes(tagVal)) return false;
         if (countryVal && r.country !== countryVal) return false;
         if (fromTs && ts < fromTs) return false;
         if (toTs && ts > toTs) return false;
         if (query) {
-          const hay = `${r.series} ${r.name} ${r.circuit} ${r.country}`.toLowerCase();
+          const hay = `${r.series} ${r.name} ${r.circuit} ${r.country} ${r._tags.join(' ')}`.toLowerCase();
           if (!hay.includes(query)) return false;
         }
         return true;
@@ -787,10 +889,11 @@
         const diff = r._ts - now;
         const isPast = diff < -LIVE_WINDOW_MS;
         const isNext = nextUpcoming && r === nextUpcoming;
-        const wheelLabel = r.wheels === 'open' ? 'Открытые колеса' : 'Закрытые колеса';
 
         const watchUrl = safeUrl(r.watch || DEFAULT_WATCH_URL);
         const watchLabel = escapeHtml(r.watchLabel || DEFAULT_WATCH_LABEL);
+        const showWatch = Boolean(watchUrl && !isPast);
+        const showActions = ENABLE_MODAL || showWatch;
 
         const formattedDate = new Date(r._ts).toLocaleString('ru-RU', {
           day: 'numeric',
@@ -800,36 +903,42 @@
           minute: '2-digit'
         });
 
-        const detailLabel = isPast && r.results?.length ? 'Результаты' : 'Подробнее';
+        const hasResults = SHOW_RESULTS && r.results?.length;
+        const detailLabel = isPast && hasResults ? 'Результаты' : 'Подробнее';
+        const cardStyle = `--series-color: ${escapeHtml(r.color || '#e10600')}${ENABLE_MODAL ? '' : '; cursor: default'}`;
+
+        const tagsHtml = r._tags.length
+          ? `<div class="tag-list">${r._tags.map(t => `<span class="pill">${escapeHtml(t)}</span>`).join('')}</div>`
+          : '';
 
         return `
           <article class="card ${isPast ? 'past' : ''} ${isNext ? 'next-up' : ''}"
                    data-id="${r._id}"
-                   style="--series-color: ${escapeHtml(r.color || '#e10600')}">
+                   style="${cardStyle}">
             <div class="card-top">
               <span class="series-badge">${escapeHtml(r.series)}</span>
-              ${isNext
-                ? '<span class="pill next-badge">Ближайшая</span>'
-                : `<span class="pill">${wheelLabel}</span>`
-              }
+              <div class="card-top-right">
+                ${isNext ? '<span class="pill next-badge">Ближайшая</span>' : ''}
+                ${renderFlag(r.country)}
+              </div>
             </div>
             <div class="race-title">${escapeHtml(r.name)}</div>
-            <div class="race-meta">
-              <span>Трасса: ${escapeHtml(r.circuit)}</span>
-              <span>Страна: ${escapeHtml(r.country)} · ${wheelLabel}</span>
-            </div>
+            ${r.circuit ? `<div class="race-meta">Трасса: ${escapeHtml(r.circuit)}</div>` : ''}
+            ${tagsHtml}
             <div class="card-footer">
               <div class="race-time">
                 <strong>${formattedDate}</strong>
                 <span class="countdown">${formatCountdown(diff)}</span>
               </div>
-              <div class="card-actions">
-                <span class="details-hint">${detailLabel}</span>
-                ${watchUrl && !isPast
-                  ? `<a class="watch-link" href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener noreferrer">▶ ${watchLabel} ↗</a>`
-                  : ''
-                }
-              </div>
+              ${showActions ? `
+                <div class="card-actions">
+                  ${ENABLE_MODAL ? `<span class="details-hint">${detailLabel}</span>` : ''}
+                  ${showWatch
+                    ? `<a class="watch-link" href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener noreferrer">▶ ${watchLabel} ↗</a>`
+                    : ''
+                  }
+                </div>
+              ` : ''}
             </div>
           </article>
         `;
@@ -839,12 +948,14 @@
     /* --- Логика модального окна --- */
     function getAvailableTabs(race) {
       const tabs = [{ id: 'schedule', label: 'Расписание уик-энда' }];
-      if (Array.isArray(race.results) && race.results.length) {
+      if (SHOW_RESULTS && Array.isArray(race.results) && race.results.length) {
         tabs.push({ id: 'results', label: 'Результаты' });
       }
-      const st = standingsData[race.series];
-      if (st && (st.drivers?.length || st.teams?.length)) {
-        tabs.push({ id: 'standings', label: 'Таблица чемпионата' });
+      if (SHOW_STANDINGS) {
+        const st = standingsData[race.series];
+        if (st && (st.drivers?.length || st.teams?.length)) {
+          tabs.push({ id: 'standings', label: 'Таблица чемпионата' });
+        }
       }
       return tabs;
     }
@@ -852,14 +963,14 @@
     function openModal(race) {
       currentRace = race;
       const color = race.color || '#e10600';
-      const wheelLabel = race.wheels === 'open' ? 'Открытые колеса' : 'Закрытые колеса';
       const isPast = race._ts < Date.now() - LIVE_WINDOW_MS;
 
       els.modalBox.style.setProperty('--modal-color', color);
       els.modalSeries.style.color = color;
       els.modalSeries.textContent = race.series;
       els.modalTitle.textContent = race.name;
-      els.modalSubtitle.textContent = `${race.circuit} · ${race.country} · ${wheelLabel}`;
+      els.modalSubtitle.innerHTML = `${renderFlag(race.country)} <span>${escapeHtml(race.circuit || race.country || '')}</span>`;
+      els.modalTags.innerHTML = race._tags.map(t => `<span class="pill">${escapeHtml(t)}</span>`).join('');
 
       const tabs = getAvailableTabs(race);
       activeTab = (isPast && tabs.some(t => t.id === 'results')) ? 'results' : 'schedule';
@@ -882,11 +993,17 @@
       if (!currentRace) return;
       const tabs = getAvailableTabs(currentRace);
 
-      els.modalTabs.innerHTML = tabs.map(t => `
-        <button class="tab-btn ${t.id === activeTab ? 'active' : ''}" data-tab="${t.id}">
-          ${t.label}
-        </button>
-      `).join('');
+      if (tabs.length <= 1) {
+        els.modalTabs.style.display = 'none';
+        els.modalTabs.innerHTML = '';
+      } else {
+        els.modalTabs.style.display = '';
+        els.modalTabs.innerHTML = tabs.map(t => `
+          <button class="tab-btn ${t.id === activeTab ? 'active' : ''}" data-tab="${t.id}">
+            ${t.label}
+          </button>
+        `).join('');
+      }
 
       if (activeTab === 'schedule') renderScheduleTab(currentRace);
       else if (activeTab === 'results') renderResultsTab(currentRace);
@@ -1022,6 +1139,7 @@
 
     /* --- События --- */
     els.list.addEventListener('click', e => {
+      if (!ENABLE_MODAL) return;
       if (e.target.closest('a')) return;
       const card = e.target.closest('.card');
       if (!card) return;
@@ -1052,13 +1170,13 @@
     });
 
     ['change', 'input'].forEach(evt => {
-      [els.series, els.wheels, els.country, els.from, els.to, els.search, els.hidePast]
+      [els.series, els.tag, els.country, els.from, els.to, els.search, els.hidePast]
         .forEach(el => el.addEventListener(evt, render));
     });
 
     els.reset.addEventListener('click', () => {
       els.series.value = '';
-      els.wheels.value = '';
+      els.tag.value = '';
       els.country.value = '';
       els.from.value = '';
       els.to.value = '';
@@ -1069,29 +1187,30 @@
 
     async function init() {
       try {
-        const [racesRes, standingsRes] = await Promise.allSettled([
-          fetch('./races.json'),
-          fetch('./standings.json')
-        ]);
+        const racesRes = await fetch('./races.json');
+        if (!racesRes.ok) throw new Error('races.json load failed');
+        const data = await racesRes.json();
 
-        if (racesRes.status !== 'fulfilled' || !racesRes.value.ok) {
-          throw new Error('races.json load failed');
-        }
-        const data = await racesRes.value.json();
-
-        if (standingsRes.status === 'fulfilled' && standingsRes.value.ok) {
+        if (SHOW_STANDINGS) {
           try {
-            standingsData = await standingsRes.value.json();
+            const stRes = await fetch('./standings.json');
+            if (stRes.ok) standingsData = await stRes.json();
           } catch {
             standingsData = {};
           }
         }
 
         allRaces = data
-          .map((r, idx) => ({ ...r, _id: idx, _ts: new Date(r.start).getTime() }))
+          .map((r, idx) => ({
+            ...r,
+            _id: idx,
+            _ts: new Date(r.start).getTime(),
+            _tags: normalizeTags(r)
+          }))
           .sort((a, b) => a._ts - b._ts);
 
         populateSelect(els.series, allRaces.map(r => r.series));
+        populateSelect(els.tag, allRaces.flatMap(r => r._tags), PRIORITY_TAGS);
         populateSelect(els.country, allRaces.map(r => r.country));
         render();
       } catch (err) {
