@@ -1,12 +1,14 @@
 [
   {
     "series": "Formula 1",
-    "name": "Гран-при Лас-Вегаса",
-    "circuit": "Las Vegas Strip Circuit",
-    "country": "США",
+    "name": "Гран-при Абу-Даби",
+    "circuit": "Яс-Марина",
+    "country": "ОАЭ",
     "wheels": "open",
-    "start": "2026-11-22T04:00:00Z",
-    "color": "#e10600"
+    "start": "2026-12-06T13:00:00Z",
+    "color": "#e10600",
+    "watch": "https://youtube.com/",
+    "watchLabel": "Где смотреть"
   },
   {
     "series": "Formula 1",
