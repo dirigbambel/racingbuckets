@@ -13,6 +13,7 @@
       --text: #e6e8ef;
       --muted: #8f96a8;
       --accent: #e10600;
+      --tg: #2aabee;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,21 +35,70 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
+      align-items: center;
+      gap: 14px;
       margin-bottom: 24px;
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
     }
 
+    .header-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
     h1 {
       font-size: 1.6rem;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     .tz-info {
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: var(--muted);
+    }
+
+    /* Ненавязчивые плашки Telegram-каналов */
+    .tg-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tg-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    .tg-pill svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      opacity: 0.85;
+      transition: fill 0.15s, opacity 0.15s;
+    }
+
+    .tg-pill:hover {
+      color: var(--text);
+      border-color: rgba(42, 171, 238, 0.55);
+      background: rgba(42, 171, 238, 0.08);
+    }
+
+    .tg-pill:hover svg {
+      fill: var(--tg);
+      opacity: 1;
     }
 
     .filters {
@@ -206,10 +256,16 @@
       gap: 4px;
     }
 
-    .race-time {
+    .card-footer {
       margin-top: auto;
       padding-top: 10px;
       border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .race-time {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -219,6 +275,28 @@
     .countdown {
       font-size: 0.8rem;
       color: var(--muted);
+    }
+
+    /* Кнопка «Где смотреть» внутри карточки */
+    .watch-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .watch-link:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: var(--series-color, var(--muted));
     }
 
     .empty, .error {
@@ -244,8 +322,21 @@
 <body>
   <div class="container">
     <header>
-      <h1>Календарь гонок</h1>
-      <div class="tz-info" id="tzInfo"></div>
+      <div class="header-main">
+        <h1>Календарь гонок</h1>
+        <div class="tz-info" id="tzInfo"></div>
+      </div>
+
+      <nav class="tg-links" aria-label="Telegram-каналы">
+        <a class="tg-pill" href="https://t.me/racing_journalf1" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          @racing_journalf1
+        </a>
+        <a class="tg-pill" href="https://t.me/racingbuckets" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+          @racingbuckets
+        </a>
+      </nav>
     </header>
 
     <section class="filters">
@@ -297,6 +388,11 @@
   </div>
 
   <script>
+    // Если есть одна общая ссылка «Где смотреть» для всех гонок — впиши её сюда.
+    // Индивидуальная ссылка "watch" из races.json имеет приоритет.
+    const DEFAULT_WATCH_URL = '';
+    const DEFAULT_WATCH_LABEL = 'Где смотреть';
+
     const els = {
       series: document.getElementById('fSeries'),
       wheels: document.getElementById('fWheels'),
@@ -312,13 +408,18 @@
     };
 
     let allRaces = [];
-    const LIVE_WINDOW_MS = 3 * 60 * 60 * 1000; // 3 часа на саму гонку
+    const LIVE_WINDOW_MS = 3 * 60 * 60 * 1000;
 
     const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     els.tzInfo.textContent = `Часовой пояс: ${userTz}`;
 
     const escapeHtml = (str = '') =>
       str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+
+    const safeUrl = (url = '') => {
+      const trimmed = String(url).trim();
+      return /^https?:\/\//i.test(trimmed) ? trimmed : '';
+    };
 
     function populateSelect(selectEl, values) {
       [...new Set(values)].sort((a, b) => a.localeCompare(b, 'ru')).forEach(val => {
@@ -381,6 +482,9 @@
         const isNext = nextUpcoming && r === nextUpcoming;
         const wheelLabel = r.wheels === 'open' ? 'Открытые колеса' : 'Закрытые колеса';
 
+        const watchUrl = safeUrl(r.watch || DEFAULT_WATCH_URL);
+        const watchLabel = escapeHtml(r.watchLabel || DEFAULT_WATCH_LABEL);
+
         const formattedDate = new Date(r._ts).toLocaleString('ru-RU', {
           day: 'numeric',
           month: 'short',
@@ -403,9 +507,15 @@
               <span>Трасса: ${escapeHtml(r.circuit)}</span>
               <span>Страна: ${escapeHtml(r.country)} · ${wheelLabel}</span>
             </div>
-            <div class="race-time">
-              <strong>${formattedDate}</strong>
-              <span class="countdown">${formatCountdown(diff)}</span>
+            <div class="card-footer">
+              <div class="race-time">
+                <strong>${formattedDate}</strong>
+                <span class="countdown">${formatCountdown(diff)}</span>
+              </div>
+              ${watchUrl && !isPast
+                ? `<a class="watch-link" href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener noreferrer">▶ ${watchLabel} ↗</a>`
+                : ''
+              }
             </div>
           </article>
         `;
