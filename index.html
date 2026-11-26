@@ -830,6 +830,127 @@
       margin-top: 16px;
       display: inline-flex;
     }
+    .support-meta {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    .support-meta strong {
+      color: #d1d5db;
+      font-weight: 500;
+    }
+    .btn-export-cal {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.12);
+      color: #e0f2fe;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-export-cal:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: rgba(56, 189, 248, 0.6);
+    }
+    .export-section {
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 12px;
+    }
+    .export-section:last-child {
+      margin-bottom: 0;
+    }
+    .export-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin: 0 0 6px;
+    }
+    .export-hint {
+      font-size: 12px;
+      color: #9ca3af;
+      margin: 0 0 12px;
+      line-height: 1.45;
+    }
+    .export-mode-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .export-mode-opt {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      color: #e5e7eb;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .export-mode-opt:has(input:checked) {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.14);
+    }
+    .export-select {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #141824;
+      color: #f3f4f6;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .export-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .export-btn {
+      flex: 1 1 140px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 12px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.06);
+      color: #f3f4f6;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .export-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .export-btn.primary {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: #fff;
+    }
+    .export-btn.primary:hover {
+      background: #1d4ed8;
+    }
+    .export-status {
+      font-size: 12px;
+      color: #34d399;
+      margin-top: 8px;
+      min-height: 16px;
+    }
   </style>
 </head>
 <body>
@@ -902,6 +1023,7 @@
           Скрыть прошедшие гонки
         </label>
         <button class="btn-reset" id="btnReset">Сбросить фильтры</button>
+        <button id="btnOpenExport" class="btn-export-cal" type="button">📅 Экспорт в календарь</button>
       </div>
     </section>
 
@@ -929,13 +1051,59 @@
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
+<div id="exportBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="exportTitle">
+    <div class="modal" style="--modal-color: #38bdf8; max-width: 520px;">
+      <div class="modal-header">
+        <div>
+          <div class="series-badge" style="color: #38bdf8;">ЭКСПОРТ И ПОДПИСКА</div>
+          <h2 id="exportTitle" class="modal-title" style="margin-top: 4px;">Добавить в календарь</h2>
+        </div>
+        <button id="exportClose" class="modal-close" type="button" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="export-mode-group">
+          <label class="export-mode-opt">
+            <input type="radio" name="exportMode" value="races" checked>
+            <span>Только гонки</span>
+          </label>
+          <label class="export-mode-opt">
+            <input type="radio" name="exportMode" value="full">
+            <span>Весь уик-энд</span>
+          </label>
+        </div>
 
+        <div class="export-section" id="exportSubBlock">
+          <h3 class="export-section-title">Живая подписка (обновляется сама)</h3>
+          <p class="export-hint" id="exportSubHint">
+            При добавлении новых этапов или уточнении времени события обновятся в вашем календаре автоматически.
+          </p>
+          <select id="exportSubSelect" class="export-select"></select>
+          <div class="export-btn-row">
+            <a id="exportWebcalBtn" class="export-btn primary" href="#">Apple / iOS / Outlook</a>
+            <a id="exportGoogleBtn" class="export-btn" href="#" target="_blank" rel="noopener noreferrer">Google Календарь</a>
+            <button id="exportCopyBtn" class="export-btn" type="button">Скопировать ссылку</button>
+          </div>
+          <div id="exportCopyStatus" class="export-status"></div>
+        </div>
+
+        <div class="export-section">
+          <h3 class="export-section-title">Скачать .ics по текущим фильтрам</h3>
+          <p class="export-hint" id="exportDownloadHint">
+            Разовый файл для выбранных фильтров (автоматически не обновляется).
+          </p>
+          <div class="export-btn-row">
+            <button id="exportDownloadBtn" class="export-btn" type="button">⬇ Скачать .ics</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script>
     // --- НАСТРОЙКИ ---
-    const PAGE_SIZE = 30;           // Сколько карточек показывать за раз
-    const ENABLE_MODAL = true;      // false — убрать всплывающее окно вообще
-    const SHOW_RESULTS = false;     // true — показать вкладку «Результаты»
-    const SHOW_STANDINGS = false;   // true — показать вкладку «Таблица чемпионата»
+    const PAGE_SIZE = 30;
+    const ENABLE_MODAL = true;
+    const SHOW_RESULTS = false;
+    const SHOW_STANDINGS = false;
 
     const DEFAULT_WATCH_URL = '';
     const DEFAULT_WATCH_LABEL = 'Где смотреть';
@@ -945,155 +1113,27 @@
       'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
     ];
 
-    // Словарь «Название страны -> ISO-код для флага»
     const COUNTRY_CODES = {
       'австралия': 'au', 'австрия': 'at', 'азербайджан': 'az', 'аргентина': 'ar', 'армения': 'am',
       'бахрейн': 'bh', 'беларусь': 'by', 'белоруссия': 'by', 'бельгия': 'be', 'болгария': 'bg', 'бразилия': 'br',
       'великобритания': 'gb', 'англия': 'gb', 'венгрия': 'hu', 'вьетнам': 'vn',
-      'германия': 'de', 'греция': 'gr', 'грузия': 'ge',
+      'германия': 'de', 'гонконг': 'hk', 'греция': 'gr', 'грузия': 'ge',
       'дания': 'dk', 'египет': 'eg',
       'израиль': 'il', 'индия': 'in', 'индонезия': 'id', 'ирландия': 'ie', 'исландия': 'is', 'испания': 'es', 'италия': 'it',
       'казахстан': 'kz', 'канада': 'ca', 'катар': 'qa', 'кения': 'ke', 'кипр': 'cy', 'китай': 'cn', 'колумбия': 'co', 'корея': 'kr', 'южная корея': 'kr',
       'латвия': 'lv', 'литва': 'lt', 'люксембург': 'lu',
-      'малайзия': 'my', 'марокко': 'ma', 'мексика': 'mx', 'монако': 'mc',
+      'макао': 'mo', 'малайзия': 'my', 'марокко': 'ma', 'мексика': 'mx', 'монако': 'mc',
       'нидерланды': 'nl', 'голландия': 'nl', 'новая зеландия': 'nz', 'норвегия': 'no',
       'оаэ': 'ae', 'эмираты': 'ae', 'оман': 'om',
       'парагвай': 'py', 'перу': 'pe', 'польша': 'pl', 'португалия': 'pt',
       'россия': 'ru', 'рф': 'ru', 'румыния': 'ro',
       'сан-марино': 'sm', 'саудовская аравия': 'sa', 'сербия': 'rs', 'сингапур': 'sg', 'словакия': 'sk', 'словения': 'si', 'сша': 'us',
-      'таиланд': 'th', 'тайвань': 'tw', 'турция': 'tr',
+      'таиланд': 'th', 'тайланд': 'th', 'тайвань': 'tw', 'турция': 'tr',
       'узбекистан': 'uz', 'украина': 'ua', 'уругвай': 'uy',
       'финляндия': 'fi', 'франция': 'fr',
       'хорватия': 'hr', 'черногория': 'me', 'чехия': 'cz', 'чили': 'cl',
       'швейцария': 'ch', 'швеция': 'se', 'эстония': 'ee', 'юар': 'za', 'япония': 'jp'
     };
-
-    const PRIORITY_TAGS = ['Открытые колеса', 'Закрытые колеса'];
-
-    const els = {
-      msSeries: document.getElementById('msSeries'),
-      msTag: document.getElementById('msTag'),
-      from: document.getElementById('fFrom'),
-      to: document.getElementById('fTo'),
-      search: document.getElementById('fSearch'),
-      hidePast: document.getElementById('fHidePast'),
-      reset: document.getElementById('btnReset'),
-      list: document.getElementById('raceList'),
-      stats: document.getElementById('stats'),
-      tzInfo: document.getElementById('tzInfo'),
-      loadMoreWrap: document.getElementById('loadMoreWrap'),
-      loadMoreBtn: document.getElementById('btnLoadMore'),
-      backdrop: document.getElementById('modalBackdrop'),
-      modalBox: document.getElementById('modalBox'),
-      modalSeries: document.getElementById('modalSeries'),
-      modalTitle: document.getElementById('modalTitle'),
-      modalSubtitle: document.getElementById('modalSubtitle'),
-      modalTags: document.getElementById('modalTags'),
-      modalTabs: document.getElementById('modalTabs'),
-      modalBody: document.getElementById('modalBody'),
-      modalClose: document.getElementById('modalClose')
-    };
-
-    let allRaces = [];
-    let currentFiltered = [];
-    let renderedCount = 0;
-    let lastRenderedMonthKey = null;
-    let nextUpcomingId = null;
-
-    let standingsData = {};
-    let currentRace = null;
-    let activeTab = 'schedule';
-    let activeStandingsType = 'drivers';
-
-    const LIVE_WINDOW_MS = 3 * 60 * 60 * 1000;
-    const DAY_MS = 24 * 60 * 60 * 1000;
-    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    els.tzInfo.textContent = `Часовой пояс: ${userTz}`;
-
-    const escapeHtml = (str = '') =>
-      String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
-
-    const safeUrl = (url = '') => {
-      const trimmed = String(url).trim();
-      return /^https?:\/\//i.test(trimmed) ? trimmed : '';
-    };
-
-    function parseDateInfo(val) {
-      if (!val) return { ts: Infinity, hasTime: false };
-      const s = String(val).trim();
-      if (!s) return { ts: Infinity, hasTime: false };
-
-      // Чистая дата YYYY-MM-DD (локальная полночь без сдвига по часовому поясу)
-      const isoDateOnly = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-      if (isoDateOnly) {
-        const [, y, m, d] = isoDateOnly;
-        const ts = new Date(Number(y), Number(m) - 1, Number(d)).getTime();
-        return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: false };
-      }
-
-      // ISO с ровно 00:00:00 — тоже считаем датой без времени
-      const midnightIso = s.match(/^(\d{4})-(\d{2})-(\d{2})T00:00(?::00)?(?:Z|[+-]\d{2}:?\d{2})?$/);
-      if (midnightIso) {
-        const [, y, m, d] = midnightIso;
-        const ts = new Date(Number(y), Number(m) - 1, Number(d)).getTime();
-        return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: false };
-      }
-
-      // Формат ДД.ММ.ГГГГ или ДД.ММ.ГГГГ ЧЧ:ММ
-      const ruMatch = s.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})(?:[\sT]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
-      if (ruMatch) {
-        const [, d, m, y, hh, mm, ss = '00'] = ruMatch;
-        if (hh === undefined || (Number(hh) === 0 && Number(mm) === 0 && Number(ss) === 0)) {
-          const ts = new Date(Number(y), Number(m) - 1, Number(d)).getTime();
-          return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: false };
-        }
-        const iso = `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}T${hh.padStart(2, '0')}:${mm.padStart(2, '0')}:${ss.padStart(2, '0')}+03:00`;
-        const ts = Date.parse(iso);
-        return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: Number.isFinite(ts) };
-      }
-
-      const normalized = /^\d{4}-\d{2}-\d{2}\s+\d{1,2}:\d{2}/.test(s) ? s.replace(/\s+/, 'T') : s;
-      const ts = Date.parse(normalized);
-      return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: Number.isFinite(ts) };
-    }
-
-    function isEventPast(ts, hasTime, now) {
-      if (!Number.isFinite(ts)) return false;
-      return hasTime ? (ts < now - LIVE_WINDOW_MS) : (now >= ts + DAY_MS);
-    }
-
-    function compareRaces(a, b) {
-      const aOk = Number.isFinite(a._ts);
-      const bOk = Number.isFinite(b._ts);
-      if (aOk && bOk) {
-        if (a._ts !== b._ts) return a._ts - b._ts;
-      } else if (aOk !== bOk) {
-        return aOk ? -1 : 1;
-      }
-      return (a.series || '').localeCompare(b.series || '', 'ru')
-        || (a.name || '').localeCompare(b.name || '', 'ru');
-    }
-
-    function getMonthInfo(ts) {
-      if (!Number.isFinite(ts)) {
-        return { key: 'tba', label: 'Дата уточняется' };
-      }
-      const d = new Date(ts);
-      const y = d.getFullYear();
-      const m = d.getMonth();
-      return {
-        key: `${y}-${String(m + 1).padStart(2, '0')}`,
-        label: `${MONTH_NAMES[m]} ${y}`
-      };
-    }
-
-    function getCountryCode(country) {
-      const key = String(country || '').trim().toLowerCase();
-      if (!key) return '';
-      if (COUNTRY_CODES[key]) return COUNTRY_CODES[key];
-      if (/^[a-z]{2}$/.test(key)) return key;
-      return '';
-    }
 
     const SVG_FLAGS = {
       au: '<svg viewBox="0 0 60 30"><rect width="60" height="30" fill="#00008b"/><path d="M0,0 L30,15 M30,0 L0,15" stroke="#fff" stroke-width="3"/><path d="M15,0 V15 M0,7.5 H30" stroke="#fff" stroke-width="5"/><path d="M15,0 V15 M0,7.5 H30" stroke="#c8102e" stroke-width="3"/><circle cx="15" cy="22.5" r="3" fill="#fff"/><circle cx="45" cy="6" r="1.8" fill="#fff"/><circle cx="38" cy="13" r="1.8" fill="#fff"/><circle cx="51" cy="11" r="1.8" fill="#fff"/><circle cx="45" cy="22" r="1.8" fill="#fff"/></svg>',
@@ -1148,6 +1188,185 @@
       jp: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r="0.6" fill="#bc002d"/></svg>'
     };
 
+    const PRIORITY_TAGS = ['Открытые колеса', 'Закрытые колеса'];
+
+    const els = {
+      msSeries: document.getElementById('msSeries'),
+      msTag: document.getElementById('msTag'),
+      from: document.getElementById('fFrom'),
+      to: document.getElementById('fTo'),
+      search: document.getElementById('fSearch'),
+      hidePast: document.getElementById('fHidePast'),
+      reset: document.getElementById('btnReset'),
+      list: document.getElementById('raceList'),
+      stats: document.getElementById('stats'),
+      tzInfo: document.getElementById('tzInfo'),
+      loadMoreWrap: document.getElementById('loadMoreWrap'),
+      loadMoreBtn: document.getElementById('btnLoadMore'),
+      backdrop: document.getElementById('modalBackdrop'),
+      modalBox: document.getElementById('modalBox'),
+      modalSeries: document.getElementById('modalSeries'),
+      modalTitle: document.getElementById('modalTitle'),
+      modalSubtitle: document.getElementById('modalSubtitle'),
+      modalTags: document.getElementById('modalTags'),
+      modalTabs: document.getElementById('modalTabs'),
+      modalBody: document.getElementById('modalBody'),
+      modalClose: document.getElementById('modalClose'),
+      openExportBtn: document.getElementById('btnOpenExport'),
+      exportBackdrop: document.getElementById('exportBackdrop'),
+      exportClose: document.getElementById('exportClose'),
+      exportSubBlock: document.getElementById('exportSubBlock'),
+      exportSubSelect: document.getElementById('exportSubSelect'),
+      exportWebcalBtn: document.getElementById('exportWebcalBtn'),
+      exportGoogleBtn: document.getElementById('exportGoogleBtn'),
+      exportCopyBtn: document.getElementById('exportCopyBtn'),
+      exportCopyStatus: document.getElementById('exportCopyStatus'),
+      exportDownloadBtn: document.getElementById('exportDownloadBtn'),
+      exportDownloadHint: document.getElementById('exportDownloadHint')
+    };
+
+    let allRaces = [];
+    let currentFiltered = [];
+    let renderedCount = 0;
+    let lastRenderedMonthKey = null;
+    let nextUpcomingId = null;
+
+    let standingsData = {};
+    let icsManifest = null;
+    let currentRace = null;
+    let activeTab = 'schedule';
+    let activeStandingsType = 'drivers';
+
+    const LIVE_WINDOW_MS = 3 * 60 * 60 * 1000;
+    const DAY_MS = 24 * 60 * 60 * 1000;
+    const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    els.tzInfo.textContent = `Часовой пояс: ${userTz}`;
+
+    const escapeHtml = (str = '') =>
+      String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+
+    const safeUrl = (url = '') => {
+      const trimmed = String(url).trim();
+      return /^https?:\/\//i.test(trimmed) ? trimmed : '';
+    };
+
+    function parseDateInfo(val) {
+      if (!val) return { ts: Infinity, hasTime: false };
+      const s = String(val).trim();
+      if (!s) return { ts: Infinity, hasTime: false };
+
+      const isoDateOnly = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (isoDateOnly) {
+        const [, y, m, d] = isoDateOnly;
+        const ts = new Date(Number(y), Number(m) - 1, Number(d)).getTime();
+        return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: false };
+      }
+
+      const midnightIso = s.match(/^(\d{4})-(\d{2})-(\d{2})T00:00(?::00)?(?:Z|[+-]\d{2}:?\d{2})?$/);
+      if (midnightIso) {
+        const [, y, m, d] = midnightIso;
+        const ts = new Date(Number(y), Number(m) - 1, Number(d)).getTime();
+        return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: false };
+      }
+
+      const ruMatch = s.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})(?:[\sT]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+      if (ruMatch) {
+        const [, d, m, y, hh, mm, ss = '00'] = ruMatch;
+        if (hh === undefined || (Number(hh) === 0 && Number(mm) === 0 && Number(ss) === 0)) {
+          const ts = new Date(Number(y), Number(m) - 1, Number(d)).getTime();
+          return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: false };
+        }
+        const iso = `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}T${hh.padStart(2, '0')}:${mm.padStart(2, '0')}:${ss.padStart(2, '0')}+03:00`;
+        const ts = Date.parse(iso);
+        return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: Number.isFinite(ts) };
+      }
+
+      const normalized = /^\d{4}-\d{2}-\d{2}\s+\d{1,2}:\d{2}/.test(s) ? s.replace(/\s+/, 'T') : s;
+      const ts = Date.parse(normalized);
+      return { ts: Number.isFinite(ts) ? ts : Infinity, hasTime: Number.isFinite(ts) };
+    }
+
+    function getEffectiveEndTs(ts, hasTime, endTs, endHasTime) {
+      if (Number.isFinite(endTs) && endTs >= ts) {
+        return endHasTime ? endTs : (endTs + DAY_MS);
+      }
+      if (!Number.isFinite(ts)) return Infinity;
+      return hasTime ? (ts + LIVE_WINDOW_MS) : (ts + DAY_MS);
+    }
+
+    function isEventPast(ts, hasTime, now, endTs = Infinity, endHasTime = false) {
+      if (!Number.isFinite(ts)) return false;
+      return now >= getEffectiveEndTs(ts, hasTime, endTs, endHasTime);
+    }
+
+    function isSameLocalDay(ts1, ts2) {
+      if (!Number.isFinite(ts1) || !Number.isFinite(ts2)) return false;
+      const a = new Date(ts1);
+      const b = new Date(ts2);
+      return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    }
+
+    function formatDateRange(ts, hasTime, endTs, endHasTime) {
+      if (!Number.isFinite(ts)) return 'Дата уточняется';
+      const d1 = new Date(ts);
+      const hasMultiDay = Number.isFinite(endTs) && endTs > ts && !isSameLocalDay(ts, endTs);
+
+      if (!hasMultiDay) {
+        return hasTime
+          ? d1.toLocaleString('ru-RU', { day: 'numeric', month: 'short', weekday: 'short', hour: '2-digit', minute: '2-digit' })
+          : d1.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short', weekday: 'short' });
+      }
+
+      const d2 = new Date(endTs);
+      const sameMonth = d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth();
+      if (!hasTime && !endHasTime) {
+        if (sameMonth) {
+          const monthStr = d2.toLocaleDateString('ru-RU', { month: 'short' });
+          return `${d1.getDate()}–${d2.getDate()} ${monthStr}`;
+        }
+        const s1 = d1.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+        const s2 = d2.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+        return `${s1} – ${s2}`;
+      }
+
+      const fmt1 = hasTime
+        ? d1.toLocaleString('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+        : d1.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+      const fmt2 = endHasTime
+        ? d2.toLocaleString('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+        : d2.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+      return `${fmt1} – ${fmt2}`;
+    }
+
+    function compareRaces(a, b) {
+      const aOk = Number.isFinite(a._ts);
+      const bOk = Number.isFinite(b._ts);
+      if (aOk && bOk) {
+        if (a._ts !== b._ts) return a._ts - b._ts;
+      } else if (aOk !== bOk) {
+        return aOk ? -1 : 1;
+      }
+      return (a.series || '').localeCompare(b.series || '', 'ru')
+        || (a.name || '').localeCompare(b.name || '', 'ru');
+    }
+
+    function getMonthInfo(ts) {
+      if (!Number.isFinite(ts)) return { key: 'tba', label: 'Дата уточняется' };
+      const d = new Date(ts);
+      return {
+        key: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`,
+        label: `${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`
+      };
+    }
+
+    function getCountryCode(country) {
+      const key = String(country || '').trim().toLowerCase();
+      if (!key) return '';
+      if (COUNTRY_CODES[key]) return COUNTRY_CODES[key];
+      if (/^[a-z]{2}$/.test(key)) return key;
+      return '';
+    }
+
     function renderFlag(country) {
       const name = String(country || '').trim();
       if (!name) return '';
@@ -1159,19 +1378,21 @@
       return `<span class="flag-icon" title="${safeName}" aria-label="${safeName}">${stretchedSvg}</span>`;
     }
 
+    function normalizeStringList(val) {
+      if (Array.isArray(val)) return val.map(v => String(v).trim()).filter(Boolean);
+      if (typeof val === 'string' && val.trim()) return val.split(/[,;]+/).map(v => v.trim()).filter(Boolean);
+      return [];
+    }
+
     function normalizeTags(race) {
-      if (Array.isArray(race.tags) && race.tags.length) {
-        return race.tags.map(t => String(t).trim()).filter(Boolean);
-      }
-      if (typeof race.tags === 'string' && race.tags.trim()) {
-        return race.tags.split(/[,;]+/).map(t => t.trim()).filter(Boolean);
-      }
+      const list = normalizeStringList(race.tags);
+      if (list.length) return list;
       if (race.wheels === 'open') return ['Открытые колеса'];
       if (race.wheels === 'closed') return ['Закрытые колеса'];
       return [];
     }
 
-    /* --- Логика мультиселектов --- */
+    /* --- Мультиселекты --- */
     function populateMultiSelect(container, values, priority = []) {
       const optionsBox = container.querySelector('.ms-options');
       optionsBox.innerHTML = '';
@@ -1191,14 +1412,11 @@
       unique.forEach(val => {
         const label = document.createElement('label');
         label.className = 'ms-option';
-
         const cb = document.createElement('input');
         cb.type = 'checkbox';
         cb.value = val;
-
         const span = document.createElement('span');
         span.textContent = val;
-
         label.append(cb, span);
         optionsBox.appendChild(label);
       });
@@ -1234,9 +1452,7 @@
     }
 
     function clearMultiSelect(container) {
-      container.querySelectorAll('.ms-options input[type="checkbox"]').forEach(cb => {
-        cb.checked = false;
-      });
+      container.querySelectorAll('.ms-options input[type="checkbox"]').forEach(cb => { cb.checked = false; });
       updateMultiSelectUI(container);
     }
 
@@ -1278,28 +1494,25 @@
     initMultiSelectEvents(els.msTag);
 
     document.addEventListener('click', e => {
-      if (!e.target.closest('.multi-select')) {
-        closeAllMultiSelects();
-      }
+      if (!e.target.closest('.multi-select')) closeAllMultiSelects();
     });
 
-    function formatCountdown(ts, hasTime, now) {
+    function formatCountdown(ts, hasTime, now, endTs = Infinity, endHasTime = false) {
       if (!Number.isFinite(ts)) return '';
+      const effEnd = getEffectiveEndTs(ts, hasTime, endTs, endHasTime);
+      if (now >= effEnd) return 'Завершена';
+      if (now >= ts) return Number.isFinite(endTs) && !isSameLocalDay(ts, endTs) ? 'Идет сейчас' : (hasTime ? 'Идет сейчас' : 'Сегодня');
 
       if (!hasTime) {
-        if (now >= ts + DAY_MS) return 'Завершена';
-        if (now >= ts) return 'Сегодня';
         const todayStart = new Date(now);
         todayStart.setHours(0, 0, 0, 0);
         const days = Math.round((ts - todayStart.getTime()) / DAY_MS);
+        if (days <= 0) return 'Сегодня';
         if (days === 1) return 'Завтра';
         return `Через ${days} дн.`;
       }
 
       const msDiff = ts - now;
-      if (msDiff < -LIVE_WINDOW_MS) return 'Завершена';
-      if (msDiff <= 0) return 'Идет сейчас';
-
       const totalHours = Math.floor(msDiff / (1000 * 60 * 60));
       const days = Math.floor(totalHours / 24);
       const hours = totalHours % 24;
@@ -1310,8 +1523,7 @@
     }
 
     function buildCardHtml(r, now) {
-      const hasDate = Number.isFinite(r._ts);
-      const isPast = isEventPast(r._ts, r._hasTime, now);
+      const isPast = isEventPast(r._ts, r._hasTime, now, r._endTs, r._endHasTime);
       const isNext = r._id === nextUpcomingId;
 
       const watchUrl = safeUrl(r.watch || DEFAULT_WATCH_URL);
@@ -1319,28 +1531,17 @@
       const showWatch = Boolean(watchUrl && !isPast);
       const showActions = ENABLE_MODAL || showWatch;
 
-      const formattedDate = hasDate
-        ? (r._hasTime
-            ? new Date(r._ts).toLocaleString('ru-RU', {
-                day: 'numeric',
-                month: 'short',
-                weekday: 'short',
-                hour: '2-digit',
-                minute: '2-digit'
-              })
-            : new Date(r._ts).toLocaleDateString('ru-RU', {
-                day: 'numeric',
-                month: 'short',
-                weekday: 'short'
-              }))
-        : 'Дата уточняется';
-
+      const formattedDate = formatDateRange(r._ts, r._hasTime, r._endTs, r._endHasTime);
       const hasResults = SHOW_RESULTS && r.results?.length;
       const detailLabel = isPast && hasResults ? 'Результаты' : 'Подробнее';
       const cardStyle = `--series-color: ${escapeHtml(r.color || '#e10600')}${ENABLE_MODAL ? '' : '; cursor: default'}`;
 
       const tagsHtml = r._tags.length
         ? `<div class="tag-list">${r._tags.map(t => `<span class="pill">${escapeHtml(t)}</span>`).join('')}</div>`
+        : '';
+
+      const supportHtml = r._support.length
+        ? `<div class="support-meta"><strong>Поддержка:</strong> ${escapeHtml(r._support.join(', '))}</div>`
         : '';
 
       return `
@@ -1357,10 +1558,11 @@
           <div class="race-title">${escapeHtml(r.name)}</div>
           ${r.circuit ? `<div class="race-meta">Трасса: ${escapeHtml(r.circuit)}</div>` : ''}
           ${tagsHtml}
+          ${supportHtml}
           <div class="card-footer">
             <div class="race-time">
               <strong>${formattedDate}</strong>
-              <span class="countdown">${formatCountdown(r._ts, r._hasTime, now)}</span>
+              <span class="countdown">${formatCountdown(r._ts, r._hasTime, now, r._endTs, r._endHasTime)}</span>
             </div>
             ${showActions ? `
               <div class="card-actions">
@@ -1421,21 +1623,22 @@
 
       currentFiltered = allRaces.filter(r => {
         const ts = r._ts;
+        const effEnd = getEffectiveEndTs(ts, r._hasTime, r._endTs, r._endHasTime);
         const hasDate = Number.isFinite(ts);
-        if (hidePast && isEventPast(ts, r._hasTime, now)) return false;
+        if (hidePast && isEventPast(ts, r._hasTime, now, r._endTs, r._endHasTime)) return false;
         if (selectedSeries.size && !selectedSeries.has(r.series)) return false;
         if (selectedTags.size && !r._tags.some(t => selectedTags.has(t))) return false;
         if ((fromTs || toTs) && !hasDate) return false;
-        if (fromTs && ts < fromTs) return false;
+        if (fromTs && effEnd < fromTs) return false;
         if (toTs && ts > toTs) return false;
         if (query) {
-          const hay = `${r.series} ${r.name} ${r.circuit} ${r.country} ${r._tags.join(' ')}`.toLowerCase();
+          const hay = `${r.series} ${r.name} ${r.circuit} ${r.country} ${r._tags.join(' ')} ${r._support.join(' ')}`.toLowerCase();
           if (!hay.includes(query)) return false;
         }
         return true;
       });
 
-      const nextUpcoming = currentFiltered.find(r => Number.isFinite(r._ts) && !isEventPast(r._ts, r._hasTime, now));
+      const nextUpcoming = currentFiltered.find(r => Number.isFinite(r._ts) && !isEventPast(r._ts, r._hasTime, now, r._endTs, r._endHasTime));
       nextUpcomingId = nextUpcoming ? nextUpcoming._id : null;
 
       renderedCount = 0;
@@ -1452,7 +1655,7 @@
       renderNextBatch();
     }
 
-    /* --- Логика модального окна --- */
+    /* --- Модальное окно этапа --- */
     function getAvailableTabs(race) {
       const tabs = [{ id: 'schedule', label: 'Расписание уик-энда' }];
       if (SHOW_RESULTS && Array.isArray(race.results) && race.results.length) {
@@ -1471,7 +1674,7 @@
       closeAllMultiSelects();
       currentRace = race;
       const color = race.color || '#e10600';
-      const isPast = isEventPast(race._ts, race._hasTime, Date.now());
+      const isPast = isEventPast(race._ts, race._hasTime, Date.now(), race._endTs, race._endHasTime);
 
       els.modalBox.style.setProperty('--modal-color', color);
       els.modalSeries.style.color = color;
@@ -1507,9 +1710,7 @@
       } else {
         els.modalTabs.style.display = '';
         els.modalTabs.innerHTML = tabs.map(t => `
-          <button class="tab-btn ${t.id === activeTab ? 'active' : ''}" data-tab="${t.id}">
-            ${t.label}
-          </button>
+          <button class="tab-btn ${t.id === activeTab ? 'active' : ''}" data-tab="${t.id}">${t.label}</button>
         `).join('');
       }
 
@@ -1529,26 +1730,31 @@
             if (Number.isFinite(ta) !== Number.isFinite(tb)) return Number.isFinite(ta) ? -1 : 1;
             return 0;
           })
-        : [{ name: 'Старт гонки', start: race.start, main: true }];
+        : [{ name: Number.isFinite(race._endTs) ? 'Даты проведения' : 'Старт гонки', start: race.start, end: race.end, main: true }];
 
       const watchUrl = safeUrl(race.watch || DEFAULT_WATCH_URL);
       const watchLabel = escapeHtml(race.watchLabel || DEFAULT_WATCH_LABEL);
-      const isPastRace = isEventPast(race._ts, race._hasTime, now);
+      const isPastRace = isEventPast(race._ts, race._hasTime, now, race._endTs, race._endHasTime);
 
       const rows = sessions.map(s => {
         const info = parseDateInfo(s.start);
+        const endInfo = parseDateInfo(s.end);
         const hasDate = Number.isFinite(info.ts);
-        const isPast = isEventPast(info.ts, info.hasTime, now);
+        const isPast = isEventPast(info.ts, info.hasTime, now, endInfo.ts, endInfo.hasTime);
         let dateHtml = '<strong>Уточняется</strong>';
 
         if (hasDate) {
-          const d = new Date(info.ts);
-          const dayStr = d.toLocaleDateString('ru-RU', { weekday: 'short', day: 'numeric', month: 'short' });
-          if (info.hasTime) {
-            const timeStr = d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-            dateHtml = `<span class="session-day">${dayStr}</span><strong>${timeStr}</strong>`;
+          if (Number.isFinite(endInfo.ts) && !isSameLocalDay(info.ts, endInfo.ts)) {
+            dateHtml = `<strong>${formatDateRange(info.ts, info.hasTime, endInfo.ts, endInfo.hasTime)}</strong>`;
           } else {
-            dateHtml = `<span class="session-day">${dayStr}</span><strong class="col-muted">Время уточняется</strong>`;
+            const d = new Date(info.ts);
+            const dayStr = d.toLocaleDateString('ru-RU', { weekday: 'short', day: 'numeric', month: 'short' });
+            if (info.hasTime) {
+              const timeStr = d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+              dateHtml = `<span class="session-day">${dayStr}</span><strong>${timeStr}</strong>`;
+            } else {
+              dateHtml = `<span class="session-day">${dayStr}</span><strong class="col-muted">Время уточняется</strong>`;
+            }
           }
         }
 
@@ -1560,8 +1766,13 @@
         `;
       }).join('');
 
+      const supportBlock = race._support.length
+        ? `<p class="modal-note" style="margin-top: 12px;"><strong style="color:#e5e7eb;">Серии поддержки:</strong> ${escapeHtml(race._support.join(', '))}</p>`
+        : '';
+
       els.modalBody.innerHTML = `
         <div class="session-list">${rows}</div>
+        ${supportBlock}
         ${!hasFull ? '<p class="modal-note">Подробное расписание сессий для этого этапа пока не добавлено.</p>' : ''}
         ${watchUrl && !isPastRace
           ? `<a class="watch-link modal-watch" href="${escapeHtml(watchUrl)}" target="_blank" rel="noopener noreferrer">▶ ${watchLabel} ↗</a>`
@@ -1658,6 +1869,178 @@
       `;
     }
 
+    /* --- Генерация .ics в браузере и живые подписки --- */
+    function icsEscape(str = '') {
+      return String(str)
+        .replace(/\\/g, '\\\\')
+        .replace(/\r\n|\r|\n/g, '\\n')
+        .replace(/;/g, '\\;')
+        .replace(/,/g, '\\,');
+    }
+
+    function toIcsUtc(date) {
+      const p = n => String(n).padStart(2, '0');
+      return `${date.getUTCFullYear()}${p(date.getUTCMonth() + 1)}${p(date.getUTCDate())}T${p(date.getUTCHours())}${p(date.getUTCMinutes())}${p(date.getUTCSeconds())}Z`;
+    }
+
+    function toIcsLocalDate(date) {
+      const p = n => String(n).padStart(2, '0');
+      return `${date.getFullYear()}${p(date.getMonth() + 1)}${p(date.getDate())}`;
+    }
+
+    function buildClientIcsBounds(startVal, endVal, defaultHours = 2) {
+      const sInfo = parseDateInfo(startVal);
+      if (!Number.isFinite(sInfo.ts)) return null;
+      const eInfo = parseDateInfo(endVal);
+
+      if (!sInfo.hasTime) {
+        const d1 = new Date(sInfo.ts);
+        const d2 = (Number.isFinite(eInfo.ts) && eInfo.ts >= sInfo.ts) ? new Date(eInfo.ts) : new Date(sInfo.ts);
+        const dEndExcl = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate() + 1);
+        return [
+          `DTSTART;VALUE=DATE:${toIcsLocalDate(d1)}`,
+          `DTEND;VALUE=DATE:${toIcsLocalDate(dEndExcl)}`
+        ];
+      }
+
+      const d1 = new Date(sInfo.ts);
+      let d2;
+      if (Number.isFinite(eInfo.ts) && eInfo.ts > sInfo.ts) {
+        d2 = eInfo.hasTime ? new Date(eInfo.ts) : new Date(eInfo.ts + DAY_MS - 1000);
+      } else {
+        d2 = new Date(sInfo.ts + defaultHours * 60 * 60 * 1000);
+      }
+      return [`DTSTART:${toIcsUtc(d1)}`, `DTEND:${toIcsUtc(d2)}`];
+    }
+
+    function generateClientIcs(races, mode) {
+      const stamp = toIcsUtc(new Date());
+      const lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Racing Buckets//Motorsport Calendar//RU',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        `X-WR-CALNAME:${icsEscape(mode === 'full' ? 'Автоспорт (выбранное — все сессии)' : 'Автоспорт (выбранное — гонки)')}`
+      ];
+
+      races.forEach((r, rIdx) => {
+        const uidBase = r.id ? String(r.id).replace(/[^a-zA-Z0-9._-]/g, '_') : `race-${rIdx}-${r._ts}`;
+        const location = [r.circuit, r.country].filter(Boolean).join(', ');
+        const descParts = [];
+        if (r._tags.length) descParts.push(`Классы: ${r._tags.join(', ')}`);
+        if (r._support.length) descParts.push(`Серии поддержки: ${r._support.join(', ')}`);
+        if (r.watch) descParts.push(`Смотреть: ${r.watch}`);
+        const description = descParts.join('\n');
+
+        const sessions = Array.isArray(r.sessions) ? r.sessions : [];
+        if (mode === 'full' && sessions.length > 0) {
+          sessions.forEach((s, sIdx) => {
+            const bounds = buildClientIcsBounds(s.start, s.end, s.main ? 2 : 1);
+            if (!bounds) return;
+            lines.push(
+              'BEGIN:VEVENT',
+              `UID:${uidBase}-s${sIdx + 1}@racingbuckets`,
+              `DTSTAMP:${stamp}`,
+              bounds[0],
+              bounds[1],
+              `SUMMARY:${icsEscape(`${r.series}: ${r.name} — ${s.name}`)}`
+            );
+            if (location) lines.push(`LOCATION:${icsEscape(location)}`);
+            if (description) lines.push(`DESCRIPTION:${icsEscape(description)}`);
+            lines.push('END:VEVENT');
+          });
+        } else {
+          const bounds = buildClientIcsBounds(r.start, r.end, 2);
+          if (!bounds) return;
+          lines.push(
+            'BEGIN:VEVENT',
+            `UID:${uidBase}@racingbuckets`,
+            `DTSTAMP:${stamp}`,
+            bounds[0],
+            bounds[1],
+            `SUMMARY:${icsEscape(`${r.series}: ${r.name}`)}`
+          );
+          if (location) lines.push(`LOCATION:${icsEscape(location)}`);
+          if (description) lines.push(`DESCRIPTION:${icsEscape(description)}`);
+          lines.push('END:VEVENT');
+        }
+      });
+
+      lines.push('END:VCALENDAR');
+      return lines.join('\r\n') + '\r\n';
+    }
+
+    function getExportMode() {
+      const checked = document.querySelector('input[name="exportMode"]:checked');
+      return checked ? checked.value : 'races';
+    }
+
+    function getSelectedSubHttpsUrl() {
+      if (!icsManifest || !els.exportSubSelect) return '';
+      const key = els.exportSubSelect.value;
+      const mode = getExportMode();
+      const relPath = key === '__all__'
+        ? icsManifest.all?.[mode]
+        : icsManifest.series?.[key]?.[mode];
+      if (!relPath) return '';
+      return new URL(relPath, window.location.href).href;
+    }
+
+    function updateExportLinks() {
+      if (!els.exportBackdrop) return;
+      const mode = getExportMode();
+      const count = currentFiltered.length;
+      els.exportDownloadHint.textContent = count > 0
+        ? `В файл попадёт этапов по текущим фильтрам: ${count} (режим: ${mode === 'full' ? 'все сессии' : 'только гонки'}). Разовый файл автоматически не обновляется.`
+        : 'По текущим фильтрам этапов нет — измените фильтры или оформите живую подписку выше.';
+      els.exportDownloadBtn.disabled = count === 0;
+
+      if (!icsManifest) {
+        els.exportSubBlock.style.display = 'none';
+        return;
+      }
+      els.exportSubBlock.style.display = '';
+      const httpsUrl = getSelectedSubHttpsUrl();
+      const webcalUrl = httpsUrl.replace(/^https?:\/\//i, 'webcal://');
+      els.exportWebcalBtn.href = webcalUrl;
+      els.exportGoogleBtn.href = `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcalUrl)}`;
+      els.exportCopyStatus.textContent = '';
+    }
+
+    function populateExportSubSelect() {
+      if (!icsManifest || !els.exportSubSelect) return;
+      const opts = ['<option value="__all__">Все чемпионаты</option>'];
+      Object.keys(icsManifest.series || {})
+        .sort((a, b) => a.localeCompare(b, 'ru'))
+        .forEach(s => {
+          opts.push(`<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`);
+        });
+      els.exportSubSelect.innerHTML = opts.join('');
+    }
+
+    function openExportModal() {
+      if (!els.exportBackdrop) return;
+      closeAllMultiSelects();
+      if (icsManifest && els.exportSubSelect) {
+        const selectedSeries = Array.from(getSelectedSet(els.msSeries));
+        if (selectedSeries.length === 1 && icsManifest.series?.[selectedSeries[0]]) {
+          els.exportSubSelect.value = selectedSeries[0];
+        } else {
+          els.exportSubSelect.value = '__all__';
+        }
+      }
+      updateExportLinks();
+      els.exportBackdrop.classList.add('open');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeExportModal() {
+      if (!els.exportBackdrop) return;
+      els.exportBackdrop.classList.remove('open');
+      document.body.classList.remove('modal-open');
+    }
+
     /* --- События --- */
     els.loadMoreBtn.addEventListener('click', renderNextBatch);
 
@@ -1685,19 +2068,52 @@
     });
 
     els.modalClose.addEventListener('click', closeModal);
-    els.backdrop.addEventListener('click', e => {
-      if (e.target === els.backdrop) closeModal();
-    });
+    els.backdrop.addEventListener('click', e => { if (e.target === els.backdrop) closeModal(); });
+
+    if (els.openExportBtn && els.exportBackdrop) {
+      els.openExportBtn.addEventListener('click', openExportModal);
+      els.exportClose.addEventListener('click', closeExportModal);
+      els.exportBackdrop.addEventListener('click', e => { if (e.target === els.exportBackdrop) closeExportModal(); });
+      els.exportSubSelect.addEventListener('change', updateExportLinks);
+      document.querySelectorAll('input[name="exportMode"]').forEach(r => r.addEventListener('change', updateExportLinks));
+
+      els.exportCopyBtn.addEventListener('click', async () => {
+        const url = getSelectedSubHttpsUrl();
+        if (!url) return;
+        try {
+          await navigator.clipboard.writeText(url);
+          els.exportCopyStatus.textContent = 'Ссылка скопирована! Вставьте её в «Добавить календарь по URL».';
+        } catch {
+          window.prompt('Скопируйте ссылку для подписки:', url);
+        }
+      });
+
+      els.exportDownloadBtn.addEventListener('click', () => {
+        if (!currentFiltered.length) return;
+        const mode = getExportMode();
+        const content = generateClientIcs(currentFiltered, mode);
+        const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `racingbuckets-${mode}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      });
+    }
+
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        if (currentRace) closeModal();
+        if (els.exportBackdrop?.classList.contains('open')) closeExportModal();
+        else if (currentRace) closeModal();
         else closeAllMultiSelects();
       }
     });
 
     ['change', 'input'].forEach(evt => {
-      [els.from, els.to, els.search, els.hidePast]
-        .forEach(el => el.addEventListener(evt, render));
+      [els.from, els.to, els.search, els.hidePast].forEach(el => el.addEventListener(evt, render));
     });
 
     els.reset.addEventListener('click', () => {
@@ -1713,13 +2129,24 @@
 
     async function init() {
       try {
-        const racesRes = await fetch(`./races.json?v=${Date.now()}`);
+        const v = Date.now();
+        const racesRes = await fetch(`./races.json?v=${v}`);
         if (!racesRes.ok) throw new Error('races.json load failed');
         const data = await racesRes.json();
 
+        try {
+          const mRes = await fetch(`./ics/manifest.json?v=${v}`);
+          if (mRes.ok) {
+            icsManifest = await mRes.json();
+            populateExportSubSelect();
+          }
+        } catch {
+          icsManifest = null;
+        }
+
         if (SHOW_STANDINGS) {
           try {
-            const stRes = await fetch(`./standings.json?v=${Date.now()}`);
+            const stRes = await fetch(`./standings.json?v=${v}`);
             if (stRes.ok) standingsData = await stRes.json();
           } catch {
             standingsData = {};
@@ -1729,12 +2156,16 @@
         allRaces = data
           .map((r, idx) => {
             const dInfo = parseDateInfo(r.start);
+            const eInfo = parseDateInfo(r.end);
             return {
               ...r,
               _id: idx,
               _ts: dInfo.ts,
               _hasTime: dInfo.hasTime,
-              _tags: normalizeTags(r)
+              _endTs: eInfo.ts,
+              _endHasTime: eInfo.hasTime,
+              _tags: normalizeTags(r),
+              _support: normalizeStringList(r.support)
             };
           })
           .sort(compareRaces);
