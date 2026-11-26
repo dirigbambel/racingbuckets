@@ -1,0 +1,80 @@
+{
+  "all": {
+    "races": "ics/all-races.ics",
+    "full": "ics/all-full.ics"
+  },
+  "series": {
+    "74-й Гран-При Макао": {
+      "races": "ics/74-y-gran-pri-makao-races.ics",
+      "full": "ics/74-y-gran-pri-makao-full.ics"
+    },
+    "DTM": {
+      "races": "ics/dtm-races.ics",
+      "full": "ics/dtm-full.ics"
+    },
+    "Formula Drift": {
+      "races": "ics/formula-drift-races.ics",
+      "full": "ics/formula-drift-full.ics"
+    },
+    "GT World Challenge Asia": {
+      "races": "ics/gt-world-challenge-asia-races.ics",
+      "full": "ics/gt-world-challenge-asia-full.ics"
+    },
+    "GT World Challenge Europe": {
+      "races": "ics/gt-world-challenge-europe-races.ics",
+      "full": "ics/gt-world-challenge-europe-full.ics"
+    },
+    "IMSA": {
+      "races": "ics/imsa-races.ics",
+      "full": "ics/imsa-full.ics"
+    },
+    "IndyCar": {
+      "races": "ics/indycar-races.ics",
+      "full": "ics/indycar-full.ics"
+    },
+    "Intercontinental GT Challenge": {
+      "races": "ics/intercontinental-gt-challenge-races.ics",
+      "full": "ics/intercontinental-gt-challenge-full.ics"
+    },
+    "NASCAR": {
+      "races": "ics/nascar-races.ics",
+      "full": "ics/nascar-full.ics"
+    },
+    "NASCAR Chase": {
+      "races": "ics/nascar-chase-races.ics",
+      "full": "ics/nascar-chase-full.ics"
+    },
+    "NASCAR In-Season Challenge": {
+      "races": "ics/nascar-in-season-challenge-races.ics",
+      "full": "ics/nascar-in-season-challenge-full.ics"
+    },
+    "Super GT": {
+      "races": "ics/super-gt-races.ics",
+      "full": "ics/super-gt-full.ics"
+    },
+    "WEC": {
+      "races": "ics/wec-races.ics",
+      "full": "ics/wec-full.ics"
+    },
+    "WRC": {
+      "races": "ics/wrc-races.ics",
+      "full": "ics/wrc-full.ics"
+    },
+    "Азиатская серия Ле-Ман (ALMS)": {
+      "races": "ics/aziatskaya-seriya-le-man-alms-races.ics",
+      "full": "ics/aziatskaya-seriya-le-man-alms-full.ics"
+    },
+    "Европейская серия Ле-Ман (ELMS)": {
+      "races": "ics/evropeyskaya-seriya-le-man-elms-races.ics",
+      "full": "ics/evropeyskaya-seriya-le-man-elms-full.ics"
+    },
+    "Формула-1": {
+      "races": "ics/formula-1-races.ics",
+      "full": "ics/formula-1-full.ics"
+    },
+    "Формула-Е": {
+      "races": "ics/formula-e-races.ics",
+      "full": "ics/formula-e-full.ics"
+    }
+  }
+}
