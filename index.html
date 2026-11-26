@@ -413,14 +413,18 @@
     }
 
     .flag-icon {
-      width: 22px;
-      height: 15px;
-      object-fit: cover;
+      display: inline-flex;
+      width: 24px;
+      height: 17px;
       border-radius: 3px;
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
-      display: inline-block;
-      vertical-align: middle;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
       flex-shrink: 0;
+    }
+    .flag-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     .country-fallback {
@@ -1091,13 +1095,67 @@
       return '';
     }
 
+    const SVG_FLAGS = {
+      au: '<svg viewBox="0 0 60 30"><rect width="60" height="30" fill="#00008b"/><path d="M0,0 L30,15 M30,0 L0,15" stroke="#fff" stroke-width="3"/><path d="M15,0 V15 M0,7.5 H30" stroke="#fff" stroke-width="5"/><path d="M15,0 V15 M0,7.5 H30" stroke="#c8102e" stroke-width="3"/><circle cx="15" cy="22.5" r="3" fill="#fff"/><circle cx="45" cy="6" r="1.8" fill="#fff"/><circle cx="38" cy="13" r="1.8" fill="#fff"/><circle cx="51" cy="11" r="1.8" fill="#fff"/><circle cx="45" cy="22" r="1.8" fill="#fff"/></svg>',
+      at: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#ed2939"/><rect y="0.67" width="3" height="0.67" fill="#fff"/></svg>',
+      az: '<svg viewBox="0 0 6 3"><rect width="6" height="1" fill="#00b5e2"/><rect y="1" width="6" height="1" fill="#ef3340"/><rect y="2" width="6" height="1" fill="#509e2f"/><circle cx="2.9" cy="1.5" r="0.45" fill="#fff"/><circle cx="3.05" cy="1.5" r="0.36" fill="#ef3340"/></svg>',
+      bh: '<svg viewBox="0 0 5 3"><rect width="5" height="3" fill="#ce1126"/><path d="M0,0 H1.5 L2,0.3 L1.5,0.6 L2,0.9 L1.5,1.2 L2,1.5 L1.5,1.8 L2,2.1 L1.5,2.4 L2,2.7 L1.5,3 H0 Z" fill="#fff"/></svg>',
+      be: '<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#000"/><rect x="1" width="1" height="2" fill="#fdda24"/><rect x="2" width="1" height="2" fill="#ef3340"/></svg>',
+      br: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#009c3b"/><polygon points="10,1.7 18.3,7 10,12.3 1.7,7" fill="#ffdf00"/><circle cx="10" cy="7" r="3.5" fill="#002776"/></svg>',
+      gb: '<svg viewBox="0 0 60 30"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#c8102e" stroke-width="3"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#c8102e" stroke-width="6"/></svg>',
+      hu: '<svg viewBox="0 0 3 2"><rect width="3" height="0.67" fill="#ce2939"/><rect y="0.67" width="3" height="0.67" fill="#fff"/><rect y="1.33" width="3" height="0.67" fill="#477050"/></svg>',
+      de: '<svg viewBox="0 0 5 3"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#dd0000"/><rect y="2" width="5" height="1" fill="#ffce00"/></svg>',
+      gr: '<svg viewBox="0 0 27 18"><rect width="27" height="18" fill="#0d5eaf"/><path d="M0,3 H27 M0,7 H27 M0,11 H27 M0,15 H27" stroke="#fff" stroke-width="2"/><rect width="10" height="10" fill="#0d5eaf"/><path d="M5,0 V10 M0,5 H10" stroke="#fff" stroke-width="2"/></svg>',
+      dk: '<svg viewBox="0 0 37 28"><rect width="37" height="28" fill="#c8102e"/><path d="M14,0 V28 M0,14 H37" stroke="#fff" stroke-width="4"/></svg>',
+      id: '<svg viewBox="0 0 3 2"><rect width="3" height="1" fill="#ce1126"/><rect y="1" width="3" height="1" fill="#fff"/></svg>',
+      ie: '<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#169b62"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ff883e"/></svg>',
+      es: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#aa151b"/><rect y="0.5" width="3" height="1" fill="#f1bf00"/></svg>',
+      it: '<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg>',
+      ca: '<svg viewBox="0 0 4 2"><rect width="1" height="2" fill="#d80621"/><rect x="1" width="2" height="2" fill="#fff"/><rect x="3" width="1" height="2" fill="#d80621"/><polygon points="2,0.45 2.25,1 2.55,0.95 2.35,1.35 2.05,1.35 2.05,1.65 1.95,1.65 1.95,1.35 1.65,1.35 1.45,0.95 1.75,1" fill="#d80621"/></svg>',
+      qa: '<svg viewBox="0 0 11 4"><rect width="11" height="4" fill="#8d1b3d"/><path d="M0,0 H3.2 L4.2,0.22 L3.2,0.44 L4.2,0.67 L3.2,0.89 L4.2,1.11 L3.2,1.33 L4.2,1.56 L3.2,1.78 L4.2,2 L3.2,2.22 L4.2,2.44 L3.2,2.67 L4.2,2.89 L3.2,3.11 L4.2,3.33 L3.2,3.56 L4.2,3.78 L3.2,4 H0 Z" fill="#fff"/></svg>',
+      ke: '<svg viewBox="0 0 3 2"><rect width="3" height="0.6" fill="#000"/><rect y="0.6" width="3" height="0.8" fill="#bb0000"/><rect y="1.4" width="3" height="0.6" fill="#006600"/><path d="M0,0.6 H3 M0,1.4 H3" stroke="#fff" stroke-width="0.12"/><ellipse cx="1.5" cy="1" rx="0.25" ry="0.5" fill="#bb0000" stroke="#fff" stroke-width="0.06"/></svg>',
+      cn: '<svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#de2910"/><polygon points="5,2 6.2,5.6 3.1,3.4 6.9,3.4 3.8,5.6" fill="#ffde00"/><circle cx="10" cy="2" r="0.6" fill="#ffde00"/><circle cx="12" cy="4" r="0.6" fill="#ffde00"/><circle cx="12" cy="7" r="0.6" fill="#ffde00"/><circle cx="10" cy="9" r="0.6" fill="#ffde00"/></svg>',
+      kr: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r="0.48" fill="#cd2e3a"/><path d="M1.02,1 A0.24,0.24 0 0,0 1.5,1 A0.24,0.24 0 0,1 1.98,1 A0.48,0.48 0 0,1 1.02,1 Z" fill="#0047a0"/></svg>',
+      lv: '<svg viewBox="0 0 5 2.5"><rect width="5" height="2.5" fill="#9e3039"/><rect y="1" width="5" height="0.5" fill="#fff"/></svg>',
+      mo: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#00785e"/><circle cx="1.5" cy="1.15" r="0.45" fill="#fff"/></svg>',
+      my: '<svg viewBox="0 0 28 14"><rect width="28" height="14" fill="#cc0001"/><path d="M0,1.5 H28 M0,3.5 H28 M0,5.5 H28 M0,7.5 H28 M0,9.5 H28 M0,11.5 H28 M0,13.5 H28" stroke="#fff" stroke-width="1"/><rect width="14" height="8" fill="#010066"/><circle cx="6.2" cy="4" r="2.5" fill="#ffcc00"/><circle cx="7" cy="4" r="2.1" fill="#010066"/><circle cx="9.2" cy="4" r="1.3" fill="#ffcc00"/></svg>',
+      ma: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#c1272d"/><polygon points="1.5,0.45 1.82,1.45 0.98,0.83 2.02,0.83 1.18,1.45" fill="none" stroke="#006233" stroke-width="0.1"/></svg>',
+      mx: '<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#006847"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ce1126"/><circle cx="1.5" cy="1" r="0.25" fill="#8c6239"/></svg>',
+      mc: '<svg viewBox="0 0 5 4"><rect width="5" height="2" fill="#ce1126"/><rect y="2" width="5" height="2" fill="#fff"/></svg>',
+      nl: '<svg viewBox="0 0 3 2"><rect width="3" height="0.67" fill="#ae1c28"/><rect y="0.67" width="3" height="0.67" fill="#fff"/><rect y="1.33" width="3" height="0.67" fill="#21468b"/></svg>',
+      nz: '<svg viewBox="0 0 60 30"><rect width="60" height="30" fill="#00247d"/><path d="M0,0 L30,15 M30,0 L0,15" stroke="#fff" stroke-width="3"/><path d="M15,0 V15 M0,7.5 H30" stroke="#fff" stroke-width="5"/><path d="M15,0 V15 M0,7.5 H30" stroke="#cc142b" stroke-width="3"/><circle cx="45" cy="6" r="1.7" fill="#cc142b" stroke="#fff" stroke-width="0.6"/><circle cx="39" cy="13" r="1.7" fill="#cc142b" stroke="#fff" stroke-width="0.6"/><circle cx="51" cy="12" r="1.7" fill="#cc142b" stroke="#fff" stroke-width="0.6"/><circle cx="45" cy="23" r="1.9" fill="#cc142b" stroke="#fff" stroke-width="0.6"/></svg>',
+      no: '<svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#ba0c2f"/><path d="M8,0 V16 M0,8 H22" stroke="#fff" stroke-width="4"/><path d="M8,0 V16 M0,8 H22" stroke="#00205b" stroke-width="2"/></svg>',
+      ae: '<svg viewBox="0 0 6 3"><rect x="1.5" width="4.5" height="1" fill="#00732f"/><rect x="1.5" y="1" width="4.5" height="1" fill="#fff"/><rect x="1.5" y="2" width="4.5" height="1" fill="#000"/><rect width="1.5" height="3" fill="#ff0000"/></svg>',
+      py: '<svg viewBox="0 0 3 2"><rect width="3" height="0.67" fill="#d52b1e"/><rect y="0.67" width="3" height="0.67" fill="#fff"/><rect y="1.33" width="3" height="0.67" fill="#0038a8"/><circle cx="1.5" cy="1" r="0.2" fill="#f7d117"/></svg>',
+      pl: '<svg viewBox="0 0 8 5"><rect width="8" height="2.5" fill="#fff"/><rect y="2.5" width="8" height="2.5" fill="#dc143c"/></svg>',
+      pt: '<svg viewBox="0 0 3 2"><rect width="1.2" height="2" fill="#006600"/><rect x="1.2" width="1.8" height="2" fill="#ff0000"/><circle cx="1.2" cy="1" r="0.38" fill="#ffcc00"/></svg>',
+      ru: '<svg viewBox="0 0 3 2"><rect width="3" height="0.67" fill="#fff"/><rect y="0.67" width="3" height="0.67" fill="#0039a6"/><rect y="1.33" width="3" height="0.67" fill="#d52b1e"/></svg>',
+      sm: '<svg viewBox="0 0 4 3"><rect width="4" height="1.5" fill="#fff"/><rect y="1.5" width="4" height="1.5" fill="#5eb6e4"/></svg>',
+      sa: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#006c35"/><rect x="0.7" y="1.35" width="1.6" height="0.14" fill="#fff"/><rect x="0.7" y="0.7" width="1.6" height="0.35" rx="0.1" fill="#fff"/></svg>',
+      sg: '<svg viewBox="0 0 3 2"><rect width="3" height="1" fill="#ef3340"/><rect y="1" width="3" height="1" fill="#fff"/><circle cx="0.75" cy="0.5" r="0.32" fill="#fff"/><circle cx="0.88" cy="0.5" r="0.27" fill="#ef3340"/></svg>',
+      us: '<svg viewBox="0 0 19 10"><rect width="19" height="10" fill="#b22234"/><path d="M0,1.15 H19 M0,2.7 H19 M0,4.25 H19 M0,5.8 H19 M0,7.35 H19 M0,8.9 H19" stroke="#fff" stroke-width="0.75"/><rect width="7.6" height="5.4" fill="#3c3b6e"/></svg>',
+      th: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#a51931"/><rect y="0.33" width="3" height="1.34" fill="#f4f5f8"/><rect y="0.67" width="3" height="0.66" fill="#2d2a4a"/></svg>',
+      tr: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#e30a17"/><circle cx="1.15" cy="1" r="0.45" fill="#fff"/><circle cx="1.27" cy="1" r="0.36" fill="#e30a17"/><polygon points="1.6,1 1.95,1.12 1.74,0.82 1.74,1.18 1.95,0.88" fill="#fff"/></svg>',
+      fi: '<svg viewBox="0 0 18 11"><rect width="18" height="11" fill="#fff"/><path d="M6.5,0 V11 M0,5.5 H18" stroke="#003580" stroke-width="3"/></svg>',
+      fr: '<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#002395"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ed2939"/></svg>',
+      hr: '<svg viewBox="0 0 3 2"><rect width="3" height="0.67" fill="#ff0000"/><rect y="0.67" width="3" height="0.67" fill="#fff"/><rect y="1.33" width="3" height="0.67" fill="#171796"/><rect x="1.25" y="0.55" width="0.5" height="0.6" fill="#ff0000"/></svg>',
+      cz: '<svg viewBox="0 0 3 2"><rect width="3" height="1" fill="#fff"/><rect y="1" width="3" height="1" fill="#d7141a"/><polygon points="0,0 1.5,1 0,2" fill="#11457e"/></svg>',
+      cl: '<svg viewBox="0 0 3 2"><rect width="3" height="1" fill="#fff"/><rect y="1" width="3" height="1" fill="#d52b1e"/><rect width="1" height="1" fill="#0039a6"/><polygon points="0.5,0.22 0.58,0.46 0.82,0.46 0.62,0.6 0.7,0.84 0.5,0.69 0.3,0.84 0.38,0.6 0.18,0.46 0.42,0.46" fill="#fff"/></svg>',
+      ch: '<svg viewBox="0 0 1 1"><rect width="1" height="1" fill="#da291c"/><path d="M0.5,0.2 V0.8 M0.2,0.5 H0.8" stroke="#fff" stroke-width="0.18"/></svg>',
+      se: '<svg viewBox="0 0 16 10"><rect width="16" height="10" fill="#006aa7"/><path d="M6,0 V10 M0,5 H16" stroke="#fecc02" stroke-width="2"/></svg>',
+      ee: '<svg viewBox="0 0 3 2"><rect width="3" height="0.67" fill="#0072ce"/><rect y="0.67" width="3" height="0.67" fill="#000"/><rect y="1.33" width="3" height="0.67" fill="#fff"/></svg>',
+      za: '<svg viewBox="0 0 3 2"><rect width="3" height="1" fill="#e03c31"/><rect y="1" width="3" height="1" fill="#001489"/><path d="M0,0 L1.35,1 L0,2" fill="#000" stroke="#ffb81c" stroke-width="0.22"/><path d="M0,0 L1.35,1 H3 M0,2 L1.35,1" fill="none" stroke="#fff" stroke-width="0.48"/><path d="M0,0 L1.35,1 H3 M0,2 L1.35,1" fill="none" stroke="#007749" stroke-width="0.3"/></svg>',
+      jp: '<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r="0.6" fill="#bc002d"/></svg>'
+    };
+
     function renderFlag(country) {
       const name = String(country || '').trim();
       if (!name) return '';
       const code = getCountryCode(name);
       const safeName = escapeHtml(name);
-      if (!code) return `<span class="country-fallback">${safeName}</span>`;
-      return `<img class="flag-icon" src="https://flagcdn.com/w40/${code}.png" srcset="https://flagcdn.com/w80/${code}.png 2x" alt="${safeName}" title="${safeName}" loading="lazy">`;
+      const svg = code && SVG_FLAGS[code];
+      if (!svg) return `<span class="country-fallback">${safeName}</span>`;
+      return `<span class="flag-icon" title="${safeName}" aria-label="${safeName}">${svg}</span>`;
     }
 
     function normalizeTags(race) {
@@ -1418,7 +1476,7 @@
       els.modalSeries.style.color = color;
       els.modalSeries.textContent = race.series;
       els.modalTitle.textContent = race.name;
-      els.modalSubtitle.innerHTML = `${renderFlag(race.country)} <span>${escapeHtml(race.circuit || race.country || '')}</span>`;
+      els.modalSubtitle.innerHTML = `${lag(race.country)} <span>${escapeHtml(race.circuit || race.country || '')}</span>`;
       els.modalTags.innerHTML = race._tags.map(t => `<span class="pill">${escapeHtml(t)}</span>`).join('');
 
       const tabs = getAvailableTabs(race);
