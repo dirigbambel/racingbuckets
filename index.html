@@ -1477,7 +1477,7 @@
       els.modalSeries.style.color = color;
       els.modalSeries.textContent = race.series;
       els.modalTitle.textContent = race.name;
-      els.modalSubtitle.innerHTML = `${lag(race.country)} <span>${escapeHtml(race.circuit || race.country || '')}</span>`;
+      els.modalSubtitle.innerHTML = `${renderFlag(race.country)} <span>${escapeHtml(race.circuit || race.country || '')}</span>`;
       els.modalTags.innerHTML = race._tags.map(t => `<span class="pill">${escapeHtml(t)}</span>`).join('');
 
       const tabs = getAvailableTabs(race);
