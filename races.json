@@ -59,6 +59,28 @@
     "color": "#14B8A6"
   },
   {
+    "series": "Формула-Е",
+    "name": "Е-при Мексики",
+    "circuit": "Autódromo Hermanos Rodríguez",
+    "country": "Мексика",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-01-16",
+    "color": "#38BDF8"
+  },
+  {
+    "series": "WRC",
+    "name": "Ралли Монте-Карло",
+    "circuit": "",
+    "country": "Монако",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-01-21",
+    "color": "#84CC16"
+  },
+  {
     "series": "IMSA",
     "name": "24 часа Дайтоны",
     "circuit": "Daytona",
@@ -72,6 +94,17 @@
     "color": "#F97316"
   },
   {
+    "series": "Формула-Е",
+    "name": "Е-при Остина",
+    "circuit": "Circuit of the Americas",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-02-06",
+    "color": "#38BDF8"
+  },
+  {
     "series": "Intercontinental GT Challenge",
     "name": "12 часов Батёрста",
     "circuit": "Bathurst",
@@ -81,6 +114,17 @@
     ],
     "start": "2027-02-14",
     "color": "#22C55E"
+  },
+  {
+    "series": "WRC",
+    "name": "Ралли Швеции",
+    "circuit": "",
+    "country": "Швеция",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-02-18",
+    "color": "#84CC16"
   },
   {
     "series": "Азиатская серия Ле-Ман (ALMS)",
@@ -94,6 +138,17 @@
     ],
     "start": "2027-02-20",
     "color": "#14B8A6"
+  },
+  {
+    "series": "Формула-Е",
+    "name": "Е-при Майами",
+    "circuit": "Miami International Autodrome",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-02-20",
+    "color": "#38BDF8"
   },
   {
     "series": "NASCAR",
@@ -127,6 +182,39 @@
     ],
     "start": "2027-03-07",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Firestone Grand Prix of St. Petersburg",
+    "circuit": "Streets of St. Petersburg",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-07",
+    "color": "#F43F5E"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Good Ranchers 250",
+    "circuit": "Phoenix Raceway",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-13",
+    "color": "#F43F5E"
+  },
+  {
+    "series": "Формула-Е",
+    "name": "Е-при Сан-Паулу",
+    "circuit": "São Paulo Street Circuit",
+    "country": "Бразилия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-13",
+    "color": "#38BDF8"
   },
   {
     "series": "NASCAR",
@@ -163,6 +251,17 @@
     "color": "#e10600"
   },
   {
+    "series": "WRC",
+    "name": "Сафари Ралли Кении",
+    "circuit": "",
+    "country": "Кения",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-03-18",
+    "color": "#84CC16"
+  },
+  {
     "series": "IMSA",
     "name": "12 часов Сибринга",
     "circuit": "Sebring",
@@ -185,6 +284,17 @@
     ],
     "start": "2027-03-21",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Java House Grand Prix of Arlington",
+    "circuit": "Streets of Arlington",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-21",
+    "color": "#F43F5E"
   },
   {
     "series": "Формула-1",
@@ -233,6 +343,17 @@
     "color": "#C084FC"
   },
   {
+    "series": "Формула-Е",
+    "name": "Е-при Саньи",
+    "circuit": "Sanya Street Circuit",
+    "country": "Китай",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-04-03",
+    "color": "#38BDF8"
+  },
+  {
     "series": "NASCAR",
     "name": "Goodyear 400",
     "circuit": "Darlington Raceway",
@@ -244,6 +365,17 @@
     "color": "#FACC15"
   },
   {
+    "series": "IndyCar",
+    "name": "Children's of Alabama Indy Grand Prix",
+    "circuit": "Barber Motorsports Park",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-04-04",
+    "color": "#F43F5E"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Австралии",
     "circuit": "Albert Park",
@@ -253,6 +385,17 @@
     ],
     "start": "2027-04-04T07:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "WRC",
+    "name": "Ралли Хорватии",
+    "circuit": "",
+    "country": "Хорватия",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-04-08",
+    "color": "#84CC16"
   },
   {
     "series": "Formula Drift",
@@ -300,6 +443,17 @@
     "color": "#e10600"
   },
   {
+    "series": "Формула-Е",
+    "name": "Е-при Джедды",
+    "circuit": "Jeddah Corniche Circuit",
+    "country": "Саудовская Аравия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-04-16",
+    "color": "#38BDF8"
+  },
+  {
     "series": "IMSA",
     "name": "Acura Grand Prix of Long Beach",
     "circuit": "Long Beach",
@@ -332,6 +486,28 @@
     ],
     "start": "2027-04-18",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Grand Prix of Long Beach",
+    "circuit": "Streets of Long Beach",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-04-18",
+    "color": "#F43F5E"
+  },
+  {
+    "series": "IndyCar",
+    "name": "IndyCar Grand Prix of Barcelona",
+    "circuit": "Circuit de Barcelona-Catalunya",
+    "country": "Испания",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-04-18",
+    "color": "#F43F5E"
   },
   {
     "series": "Формула-1",
@@ -401,6 +577,17 @@
     "color": "#C084FC"
   },
   {
+    "series": "Формула-Е",
+    "name": "Е-при Монако",
+    "circuit": "Circuit de Monaco",
+    "country": "Монако",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-01",
+    "color": "#38BDF8"
+  },
+  {
     "series": "IMSA",
     "name": "StubHub Monterey SportsCar Championship",
     "circuit": "Laguna Seca",
@@ -459,6 +646,17 @@
     "color": "#FB3768"
   },
   {
+    "series": "WRC",
+    "name": "Ралли Канарских островов",
+    "circuit": "",
+    "country": "Испания",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-05-06",
+    "color": "#84CC16"
+  },
+  {
     "series": "Formula Drift",
     "name": "2 этап",
     "circuit": "ORLANDO SPEED WORLD",
@@ -479,6 +677,28 @@
     ],
     "start": "2027-05-08",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Kansas Speedway",
+    "circuit": "Kansas Speedway",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-08",
+    "color": "#F43F5E"
+  },
+  {
+    "series": "Формула-Е",
+    "name": "Е-при Берлина",
+    "circuit": "Tempelhof Airport Street Circuit",
+    "country": "Германия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-08",
+    "color": "#38BDF8"
   },
   {
     "series": "Intercontinental GT Challenge",
@@ -513,6 +733,17 @@
     ],
     "start": "2027-05-15",
     "color": "#2E90FA"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Sonsio Grand Prix",
+    "circuit": "Indianapolis Motor Speedway Road Course",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-15",
+    "color": "#F43F5E"
   },
   {
     "series": "NASCAR",
@@ -570,6 +801,17 @@
     "color": "#22C55E"
   },
   {
+    "series": "Формула-Е",
+    "name": "Е-при Великобритании",
+    "circuit": "Brands Hatch",
+    "country": "Великобритания",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-29",
+    "color": "#38BDF8"
+  },
+  {
     "series": "NASCAR",
     "name": "Coca-Cola 600",
     "circuit": "Charlotte Motor Speedway",
@@ -579,6 +821,28 @@
     ],
     "start": "2027-05-30",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Indianapolis 500",
+    "circuit": "Indianapolis Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-30",
+    "color": "#F43F5E"
+  },
+  {
+    "series": "WRC",
+    "name": "Ралли Японии",
+    "circuit": "",
+    "country": "Япония",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-06-03",
+    "color": "#84CC16"
   },
   {
     "series": "IMSA",
@@ -602,6 +866,17 @@
     ],
     "start": "2027-06-06",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Chevrolet Detroit Grand Prix",
+    "circuit": "Streets of Detroit",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-06-06",
+    "color": "#F43F5E"
   },
   {
     "series": "Формула-1",
@@ -650,6 +925,17 @@
     "color": "#FACC15"
   },
   {
+    "series": "IndyCar",
+    "name": "Bommarito Automotive Group 500",
+    "circuit": "World Wide Technology Raceway",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-06-13",
+    "color": "#F43F5E"
+  },
+  {
     "series": "Formula Drift",
     "name": "4 этап",
     "circuit": "STAFFORD",
@@ -671,6 +957,17 @@
     ],
     "start": "2027-06-18",
     "color": "#FB3768"
+  },
+  {
+    "series": "Формула-Е",
+    "name": "Е-при Нидерландов",
+    "circuit": "Circuit Zandvoort",
+    "country": "Нидерланды",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-06-18",
+    "color": "#38BDF8"
   },
   {
     "series": "DTM",
@@ -706,6 +1003,17 @@
     "color": "#e10600"
   },
   {
+    "series": "WRC",
+    "name": "Акрополь Ралли Греции",
+    "circuit": "",
+    "country": "Греция",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-06-24",
+    "color": "#84CC16"
+  },
+  {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 24 часа Спа",
     "circuit": "Spa",
@@ -715,6 +1023,17 @@
     ],
     "start": "2027-06-26",
     "color": "#A855F7"
+  },
+  {
+    "series": "Формула-Е",
+    "name": "Е-при Мадрида",
+    "circuit": "Circuito del Jarama",
+    "country": "Испания",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-06-26",
+    "color": "#38BDF8"
   },
   {
     "series": "IMSA",
@@ -739,6 +1058,17 @@
     ],
     "start": "2027-06-27",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "XPEL Grand Prix at Road America",
+    "circuit": "Road America",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-06-27",
+    "color": "#F43F5E"
   },
   {
     "series": "DTM",
@@ -775,6 +1105,17 @@
     "color": "#0EA5E9"
   },
   {
+    "series": "IndyCar",
+    "name": "Honda Indy 200 at Mid-Ohio",
+    "circuit": "Mid-Ohio Sports Car Course",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-04",
+    "color": "#F43F5E"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Великобритании",
     "circuit": "Silverstone",
@@ -786,6 +1127,17 @@
     "color": "#e10600"
   },
   {
+    "series": "WRC",
+    "name": "Ралли Италии",
+    "circuit": "",
+    "country": "Италия",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-07-08",
+    "color": "#84CC16"
+  },
+  {
     "series": "GT World Challenge Asia",
     "name": "4 этап",
     "circuit": "Fuji",
@@ -795,6 +1147,17 @@
     ],
     "start": "2027-07-10",
     "color": "#C084FC"
+  },
+  {
+    "series": "Формула-Е",
+    "name": "Е-при Шанхая",
+    "circuit": "Shanghai International Circuit",
+    "country": "Китай",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-10",
+    "color": "#38BDF8"
   },
   {
     "series": "IMSA",
@@ -865,6 +1228,28 @@
     "color": "#FACC15"
   },
   {
+    "series": "WRC",
+    "name": "Ралли Эстонии",
+    "circuit": "",
+    "country": "Эстония",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-07-22",
+    "color": "#84CC16"
+  },
+  {
+    "series": "Формула-Е",
+    "name": "Е-при Токио",
+    "circuit": "Tokyo Street Circuit",
+    "country": "Япония",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-24",
+    "color": "#38BDF8"
+  },
+  {
     "series": "NASCAR In-Season Challenge",
     "name": "Brickyard 400",
     "circuit": "Indianapolis Motor Speedway",
@@ -896,6 +1281,17 @@
     ],
     "start": "2027-07-29",
     "color": "#EC4899"
+  },
+  {
+    "series": "WRC",
+    "name": "Ралли Финляндии",
+    "circuit": "",
+    "country": "Финляндия",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-07-29",
+    "color": "#84CC16"
   },
   {
     "series": "Super GT",
@@ -930,6 +1326,17 @@
     ],
     "start": "2027-08-01",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "OnlyBulls Grand Prix of Portland",
+    "circuit": "Portland International Raceway",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-08-01",
+    "color": "#F43F5E"
   },
   {
     "series": "Формула-1",
@@ -989,6 +1396,17 @@
     "color": "#FACC15"
   },
   {
+    "series": "IndyCar",
+    "name": "Ontario Honda Dealers Indy at Markham",
+    "circuit": "Streets of Markham",
+    "country": "Канада",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-08-15",
+    "color": "#F43F5E"
+  },
+  {
     "series": "DTM",
     "name": "6 этап",
     "circuit": "Nurburgring",
@@ -1034,6 +1452,17 @@
     "color": "#0EA5E9"
   },
   {
+    "series": "WRC",
+    "name": "Ралли США",
+    "circuit": "",
+    "country": "США",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-08-26",
+    "color": "#84CC16"
+  },
+  {
     "series": "NASCAR",
     "name": "Coke Zero Sugar 400",
     "circuit": "Daytona International Speedway",
@@ -1043,6 +1472,17 @@
     ],
     "start": "2027-08-28",
     "color": "#FACC15"
+  },
+  {
+    "series": "IndyCar",
+    "name": "Snap-on Milwaukee Mile double-header",
+    "circuit": "Milwaukee Mile",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-08-28",
+    "color": "#F43F5E"
   },
   {
     "series": "GT World Challenge Europe",
@@ -1089,6 +1529,17 @@
     ],
     "start": "2027-09-05",
     "color": "#0EA5E9"
+  },
+  {
+    "series": "IndyCar",
+    "name": "IndyCar Grand Prix of Monterey",
+    "circuit": "WeatherTech Raceway Laguna Seca",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-09-05",
+    "color": "#F43F5E"
   },
   {
     "series": "Формула-1",
@@ -1250,6 +1701,17 @@
     "color": "#EC4899"
   },
   {
+    "series": "WRC",
+    "name": "Ралли Шотландии",
+    "circuit": "",
+    "country": "Великобритания",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-09-30",
+    "color": "#84CC16"
+  },
+  {
     "series": "GT World Challenge Asia",
     "name": "5 этап",
     "circuit": "Beijing Street",
@@ -1375,6 +1837,17 @@
     "color": "#FACC15"
   },
   {
+    "series": "WRC",
+    "name": "Ралли Парагвая",
+    "circuit": "",
+    "country": "Парагвай",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-10-21",
+    "color": "#84CC16"
+  },
+  {
     "series": "GT World Challenge Asia",
     "name": "6 этап",
     "circuit": "Shanghai",
@@ -1439,6 +1912,17 @@
     ],
     "start": "2027-10-31T22:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "WRC",
+    "name": "Ралли Чили",
+    "circuit": "",
+    "country": "Чили",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-11-04",
+    "color": "#84CC16"
   },
   {
     "series": "Super GT",
@@ -1531,6 +2015,17 @@
     ],
     "start": "2027-11-20T07:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "WRC",
+    "name": "Ралли Саудовской Аравии",
+    "circuit": "",
+    "country": "Саудовская Аравия",
+    "tags": [
+      "Ралли"
+    ],
+    "start": "2027-11-25",
+    "color": "#84CC16"
   },
   {
     "series": "Формула-1",
