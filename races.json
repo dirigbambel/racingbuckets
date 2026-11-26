@@ -2,7 +2,7 @@
   {
     "series": "Азиатская серия Ле-Ман (ALMS)",
     "name": "4 часа Ле-Кастелье",
-    "circuit": "Paul Ricard",
+    "circuit": "Circuit Paul Ricard",
     "country": "Франция",
     "tags": [
       "Гиперкары",
@@ -44,6 +44,23 @@
       {
         "name": "Гонка",
         "start": "2026-11-22T07:00:00+03:00"
+      }
+    ],
+    "results": [
+      {
+        "driver": "Ферстаппен",
+        "pos": 1,
+        "team": "Red Bull"
+      },
+      {
+        "driver": "Норрис",
+        "pos": 2,
+        "team": "McLaren"
+      },
+      {
+        "driver": "Пиастри",
+        "pos": 3,
+        "team": "McLaren"
       }
     ]
   },
@@ -125,7 +142,7 @@
   {
     "series": "Азиатская серия Ле-Ман (ALMS)",
     "name": "4 часа Хереса",
-    "circuit": "Jerez",
+    "circuit": "Circuito de Jerez",
     "country": "Испания",
     "tags": [
       "Гиперкары",
@@ -164,7 +181,7 @@
   {
     "series": "IMSA",
     "name": "24 часа Дайтоны",
-    "circuit": "Daytona",
+    "circuit": "Daytona International Speedway",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -173,7 +190,8 @@
     ],
     "start": "2027-01-30",
     "color": "#F97316",
-    "id": "imsa27_01"
+    "id": "imsa27_01",
+    "end": "2027-01-31"
   },
   {
     "series": "Формула-Е",
@@ -190,7 +208,7 @@
   {
     "series": "Intercontinental GT Challenge",
     "name": "12 часов Батёрста",
-    "circuit": "Bathurst",
+    "circuit": "Mount Panorama Circuit",
     "country": "Австралия",
     "tags": [
       "GT3"
@@ -215,7 +233,7 @@
   {
     "series": "Азиатская серия Ле-Ман (ALMS)",
     "name": "4 часа Портимана",
-    "circuit": "Portimao",
+    "circuit": "Algarve International Circuit",
     "country": "Португалия",
     "tags": [
       "Гиперкары",
@@ -325,7 +343,7 @@
   {
     "series": "Европейская серия Ле-Ман (ELMS)",
     "name": "4 часа Барселоны",
-    "circuit": "Barcelona",
+    "circuit": "Circuit de Barcelona-Catalunya",
     "country": "Испания",
     "tags": [
       "LMP2",
@@ -345,7 +363,11 @@
     ],
     "start": "2027-03-14T17:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_01"
+    "id": "f127_01",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "WRC",
@@ -363,7 +385,7 @@
   {
     "series": "IMSA",
     "name": "12 часов Сибринга",
-    "circuit": "Sebring",
+    "circuit": "Sebring International Raceway",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -408,12 +430,16 @@
     ],
     "start": "2027-03-21T19:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_02"
+    "id": "f127_02",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "WEC",
     "name": "1825 км Катара",
-    "circuit": "Lusail",
+    "circuit": "Lusail International Circuit",
     "country": "Катар",
     "tags": [
       "Гиперкары",
@@ -426,7 +452,7 @@
   {
     "series": "GT World Challenge Asia",
     "name": "1 этап",
-    "circuit": "Sepang",
+    "circuit": "Sepang International Circuit",
     "country": "Малайзия",
     "tags": [
       "GT3"
@@ -438,7 +464,7 @@
   {
     "series": "Super GT",
     "name": "300 км Окаямы",
-    "circuit": "Okayama",
+    "circuit": "Okayama International Circuit",
     "country": "Япония",
     "tags": [
       "GT500",
@@ -494,7 +520,11 @@
     ],
     "start": "2027-04-04T07:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_03"
+    "id": "f127_03",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "WRC",
@@ -536,7 +566,7 @@
   {
     "series": "WEC",
     "name": "6 часов Имолы",
-    "circuit": "Imola",
+    "circuit": "Imola Circuit",
     "country": "Италия",
     "tags": [
       "Гиперкары",
@@ -574,7 +604,7 @@
   {
     "series": "IMSA",
     "name": "Acura Grand Prix of Long Beach",
-    "circuit": "Long Beach",
+    "circuit": "Long Beach Street Circuit",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -587,7 +617,7 @@
   {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 6 часов Поль Рикар",
-    "circuit": "Paul Ricard",
+    "circuit": "Circuit Paul Ricard",
     "country": "Франция",
     "tags": [
       "GT3"
@@ -647,7 +677,7 @@
   {
     "series": "DTM",
     "name": "1 этап",
-    "circuit": "Spielberg",
+    "circuit": "Red Bull Ring",
     "country": "Австрия",
     "tags": [
       "GT3"
@@ -671,7 +701,7 @@
   {
     "series": "WEC",
     "name": "6 часов Сильверстоуна",
-    "circuit": "Silverstone",
+    "circuit": "Silverstone Circuit",
     "country": "Великобритания",
     "tags": [
       "Гиперкары",
@@ -684,7 +714,7 @@
   {
     "series": "GT World Challenge Asia",
     "name": "2 этап",
-    "circuit": "Chang",
+    "circuit": "Chang International Circuit",
     "country": "Таиланд",
     "tags": [
       "GT3"
@@ -721,7 +751,7 @@
   {
     "series": "IMSA",
     "name": "StubHub Monterey SportsCar Championship",
-    "circuit": "Laguna Seca",
+    "circuit": "WeatherTech Raceway Laguna Seca",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -745,8 +775,8 @@
   },
   {
     "series": "Европейская серия Ле-Ман (ELMS)",
-    "name": "4 часа Ле Сателлет",
-    "circuit": "Paul Ricard",
+    "name": "4 часа Ле-Кастелье",
+    "circuit": "Circuit Paul Ricard",
     "country": "Франция",
     "tags": [
       "LMP2",
@@ -771,7 +801,7 @@
   {
     "series": "Super GT",
     "name": "3 часа Фудзи",
-    "circuit": "Fuji",
+    "circuit": "Fuji Speedway",
     "country": "Япония",
     "tags": [
       "GT500",
@@ -809,7 +839,7 @@
   {
     "series": "DTM",
     "name": "2 этап",
-    "circuit": "Oschersleben",
+    "circuit": "Motorsport Arena Oschersleben",
     "country": "Германия",
     "tags": [
       "GT3"
@@ -846,7 +876,7 @@
   {
     "series": "Intercontinental GT Challenge",
     "name": "8 часов Техаса",
-    "circuit": "COTA",
+    "circuit": "Circuit of the Americas",
     "country": "США",
     "tags": [
       "GT3"
@@ -882,7 +912,7 @@
   {
     "series": "WEC",
     "name": "6 часов Спа-Франкоршам",
-    "circuit": "Spa",
+    "circuit": "Circuit de Spa-Francorchamps",
     "country": "Бельгия",
     "tags": [
       "Гиперкары",
@@ -919,7 +949,7 @@
   {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 3 часа Имолы",
-    "circuit": "Imola",
+    "circuit": "Imola Circuit",
     "country": "Италия",
     "tags": [
       "GT3"
@@ -938,19 +968,24 @@
     ],
     "start": "2027-05-23T23:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_07"
+    "id": "f127_07",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "Intercontinental GT Challenge",
     "name": "24 часа Нюрбургринга",
-    "circuit": "Nurburgring",
+    "circuit": "Nürburgring Nordschleife",
     "country": "Германия",
     "tags": [
       "GT3"
     ],
     "start": "2027-05-29",
     "color": "#22C55E",
-    "id": "igt27_03"
+    "id": "igt27_03",
+    "end": "2027-05-30"
   },
   {
     "series": "Формула-Е",
@@ -1005,7 +1040,7 @@
   {
     "series": "IMSA",
     "name": "Chevrolet Detroit Sports Car Classic",
-    "circuit": "Detroit",
+    "circuit": "Detroit Street Circuit",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -1049,12 +1084,16 @@
     ],
     "start": "2027-06-06T17:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_08"
+    "id": "f127_08",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "GT World Challenge Asia",
     "name": "3 этап",
-    "circuit": "Suzuka",
+    "circuit": "Suzuka Circuit",
     "country": "Япония",
     "tags": [
       "GT3"
@@ -1066,7 +1105,7 @@
   {
     "series": "WEC",
     "name": "24 часа Ле-Мана",
-    "circuit": "Le Mans",
+    "circuit": "Circuit de la Sarthe",
     "country": "Франция",
     "tags": [
       "Гиперкары",
@@ -1075,7 +1114,8 @@
     ],
     "start": "2027-06-12",
     "color": "#2E90FA",
-    "id": "wec27_05"
+    "id": "wec27_05",
+    "end": "2027-06-13"
   },
   {
     "series": "IndyCar",
@@ -1116,7 +1156,7 @@
   {
     "series": "Super GT",
     "name": "300 км Сепанга",
-    "circuit": "Sepang",
+    "circuit": "Sepang International Circuit",
     "country": "Малайзия",
     "tags": [
       "GT500",
@@ -1191,14 +1231,15 @@
   {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 24 часа Спа",
-    "circuit": "Spa",
+    "circuit": "Circuit de Spa-Francorchamps",
     "country": "Бельгия",
     "tags": [
       "GT3"
     ],
     "start": "2027-06-26",
     "color": "#A855F7",
-    "id": "gtwce27_04"
+    "id": "gtwce27_04",
+    "end": "2027-06-27"
   },
   {
     "series": "Формула-Е",
@@ -1216,7 +1257,7 @@
   {
     "series": "IMSA",
     "name": "6 часов Уоткинс Глен",
-    "circuit": "Watkins Glen",
+    "circuit": "Watkins Glen International",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -1290,7 +1331,7 @@
   {
     "series": "Европейская серия Ле-Ман (ELMS)",
     "name": "4 часа Имолы",
-    "circuit": "Imola",
+    "circuit": "Imola Circuit",
     "country": "Италия",
     "tags": [
       "LMP2",
@@ -1310,7 +1351,11 @@
     ],
     "start": "2027-07-04T17:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_10"
+    "id": "f127_10",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "WRC",
@@ -1328,7 +1373,7 @@
   {
     "series": "GT World Challenge Asia",
     "name": "4 этап",
-    "circuit": "Fuji",
+    "circuit": "Fuji Speedway",
     "country": "Япония",
     "tags": [
       "GT3"
@@ -1353,7 +1398,7 @@
   {
     "series": "IMSA",
     "name": "Гран-При Шевроле",
-    "circuit": "Mosport",
+    "circuit": "Canadian Tire Motorsport Park",
     "country": "Канада",
     "tags": [
       "LMP2",
@@ -1378,7 +1423,7 @@
   {
     "series": "WEC",
     "name": "6 часов Сан-Паулу",
-    "circuit": "Interlagos",
+    "circuit": "Interlagos Circuit",
     "country": "Бразилия",
     "tags": [
       "Гиперкары",
@@ -1398,12 +1443,16 @@
     ],
     "start": "2027-07-11T16:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_11"
+    "id": "f127_11",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "GT World Challenge Europe",
     "name": "Спринт. Мизано",
-    "circuit": "Misano",
+    "circuit": "Misano World Circuit",
     "country": "Италия",
     "tags": [
       "GT3"
@@ -1502,7 +1551,7 @@
   {
     "series": "Super GT",
     "name": "300 км Судзуки",
-    "circuit": "Suzuka",
+    "circuit": "Suzuka Circuit",
     "country": "Япония",
     "tags": [
       "GT500",
@@ -1515,7 +1564,7 @@
   {
     "series": "GT World Challenge Europe",
     "name": "Спринт. Маньи-Кур",
-    "circuit": "Magny-Cours",
+    "circuit": "Circuit de Nevers Magny-Cours",
     "country": "Франция",
     "tags": [
       "GT3"
@@ -1563,7 +1612,7 @@
   {
     "series": "DTM",
     "name": "5 этап",
-    "circuit": "Zandvoort",
+    "circuit": "Circuit Zandvoort",
     "country": "Нидерланды",
     "tags": [
       "GT3"
@@ -1625,7 +1674,7 @@
   {
     "series": "DTM",
     "name": "6 этап",
-    "circuit": "Nurburgring",
+    "circuit": "Nürburgring",
     "country": "Германия",
     "tags": [
       "GT3"
@@ -1637,7 +1686,7 @@
   {
     "series": "IMSA",
     "name": "Michelin GT Challenge at VIR",
-    "circuit": "VIR",
+    "circuit": "Virginia International Raceway",
     "country": "США",
     "tags": [
       "GT3"
@@ -1661,7 +1710,7 @@
   {
     "series": "Европейская серия Ле-Ман (ELMS)",
     "name": "4 часа Спа-Франкоршарм",
-    "circuit": "Spa",
+    "circuit": "Circuit de Spa-Francorchamps",
     "country": "Бельгия",
     "tags": [
       "LMP2",
@@ -1712,7 +1761,7 @@
   {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 3 часа Нюрбургринга",
-    "circuit": "Nurburgring",
+    "circuit": "Nürburgring",
     "country": "Германия",
     "tags": [
       "GT3"
@@ -1736,7 +1785,7 @@
   {
     "series": "Intercontinental GT Challenge",
     "name": "1000 км Судзуки",
-    "circuit": "Suzuka",
+    "circuit": "Suzuka Circuit",
     "country": "Япония",
     "tags": [
       "GT3",
@@ -1761,7 +1810,7 @@
   {
     "series": "Европейская серия Ле-Ман (ELMS)",
     "name": "4 часа Сильверстоуна",
-    "circuit": "Silverstone",
+    "circuit": "Silverstone Circuit",
     "country": "Великобритания",
     "tags": [
       "LMP2",
@@ -1781,7 +1830,11 @@
     ],
     "start": "2027-09-05T16:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_14"
+    "id": "f127_14",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "NASCAR Chase",
@@ -1798,7 +1851,7 @@
   {
     "series": "WEC",
     "name": "Одинокая звезда Ле-Ман",
-    "circuit": "COTA",
+    "circuit": "Circuit of the Americas",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -1818,7 +1871,11 @@
     ],
     "start": "2027-09-12T16:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_15"
+    "id": "f127_15",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "Formula Drift",
@@ -1835,7 +1892,7 @@
   {
     "series": "Super GT",
     "name": "300 км Суго",
-    "circuit": "Sugo",
+    "circuit": "Sportsland Sugo",
     "country": "Япония",
     "tags": [
       "GT500",
@@ -1848,7 +1905,7 @@
   {
     "series": "GT World Challenge Europe",
     "name": "Спринт. Зандвоорт",
-    "circuit": "Zandvoort",
+    "circuit": "Circuit Zandvoort",
     "country": "Нидерланды",
     "tags": [
       "GT3"
@@ -1860,7 +1917,7 @@
   {
     "series": "IMSA",
     "name": "Battle on the Bricks",
-    "circuit": "Indianapolis",
+    "circuit": "Indianapolis Motor Speedway",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -1886,7 +1943,7 @@
   {
     "series": "DTM",
     "name": "7 этап",
-    "circuit": "Sachenring",
+    "circuit": "Sachsenring",
     "country": "Германия",
     "tags": [
       "GT3"
@@ -1910,7 +1967,7 @@
   {
     "series": "WEC",
     "name": "6 часов Фудзи",
-    "circuit": "Fuji",
+    "circuit": "Fuji Speedway",
     "country": "Япония",
     "tags": [
       "Гиперкары",
@@ -1930,7 +1987,10 @@
     ],
     "start": "2027-09-26T14:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_16"
+    "id": "f127_16",
+    "support": [
+      "Формула-2"
+    ]
   },
   {
     "series": "Formula Drift",
@@ -1960,7 +2020,7 @@
   {
     "series": "GT World Challenge Asia",
     "name": "5 этап",
-    "circuit": "Beijing Street",
+    "circuit": "Beijing Street Circuit",
     "country": "Китай",
     "tags": [
       "GT3"
@@ -2003,7 +2063,11 @@
     ],
     "start": "2027-10-03T15:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_17"
+    "id": "f127_17",
+    "support": [
+      "Формула-2",
+      "Формула-3"
+    ]
   },
   {
     "series": "DTM",
@@ -2020,7 +2084,7 @@
   {
     "series": "IMSA",
     "name": "Малый Ле-Ман",
-    "circuit": "Road Atlanta",
+    "circuit": "Michelin Raceway Road Atlanta",
     "country": "США",
     "tags": [
       "Гиперкары",
@@ -2071,7 +2135,7 @@
   {
     "series": "Европейская серия Ле-Ман (ELMS)",
     "name": "4 часа Портимана",
-    "circuit": "Portimao",
+    "circuit": "Algarve International Circuit",
     "country": "Португалия",
     "tags": [
       "LMP2",
@@ -2109,7 +2173,7 @@
   {
     "series": "GT World Challenge Asia",
     "name": "6 этап",
-    "circuit": "Shanghai",
+    "circuit": "Shanghai International Circuit",
     "country": "Китай",
     "tags": [
       "GT3"
@@ -2121,7 +2185,7 @@
   {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 3 часа Барселоны",
-    "circuit": "Barcelona",
+    "circuit": "Circuit de Barcelona-Catalunya",
     "country": "Испания",
     "tags": [
       "GT3"
@@ -2176,7 +2240,10 @@
     ],
     "start": "2027-10-31T22:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_20"
+    "id": "f127_20",
+    "support": [
+      "Формула-2"
+    ]
   },
   {
     "series": "WRC",
@@ -2194,7 +2261,7 @@
   {
     "series": "Super GT",
     "name": "300 км Фудзи",
-    "circuit": "Fuji",
+    "circuit": "Fuji Speedway",
     "country": "Япония",
     "tags": [
       "GT500",
@@ -2207,7 +2274,7 @@
   {
     "series": "WEC",
     "name": "8 часов Бахрейна",
-    "circuit": "Bahrain",
+    "circuit": "Bahrain International Circuit",
     "country": "Бахрейн",
     "tags": [
       "Гиперкары",
@@ -2269,7 +2336,7 @@
   {
     "series": "Super GT",
     "name": "300 км Мотеги",
-    "circuit": "Motegi",
+    "circuit": "Mobility Resort Motegi",
     "country": "Япония",
     "tags": [
       "GT500",
@@ -2314,7 +2381,10 @@
     ],
     "start": "2027-12-05T19:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_23"
+    "id": "f127_23",
+    "support": [
+      "Формула-2"
+    ]
   },
   {
     "series": "Формула-1",
@@ -2326,6 +2396,9 @@
     ],
     "start": "2027-12-12T16:00:00+03:00",
     "color": "#e10600",
-    "id": "f127_24"
+    "id": "f127_24",
+    "support": [
+      "Формула-2"
+    ]
   }
 ]

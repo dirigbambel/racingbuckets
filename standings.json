@@ -1,1 +1,64 @@
-{}
+{
+  "Формула-1": {
+    "drivers": [
+      {
+        "name": "Антонелли",
+        "points": "402",
+        "pos": 1,
+        "team": "Mercedes"
+      },
+      {
+        "name": "Ферстаппен",
+        "points": "304",
+        "pos": 2,
+        "team": "Red Bull"
+      },
+      {
+        "name": "Хэмилтон",
+        "points": "267",
+        "pos": 3,
+        "team": "Ferrari"
+      },
+      {
+        "name": "Расселл",
+        "points": "264",
+        "pos": 4,
+        "team": "Mercedes"
+      },
+      {
+        "name": "Норрис",
+        "points": "264",
+        "pos": 5,
+        "team": "McLaren"
+      }
+    ],
+    "teams": [
+      {
+        "name": "Mercedes",
+        "points": "666",
+        "pos": 1
+      },
+      {
+        "name": "Ferrari",
+        "points": "517",
+        "pos": 2
+      },
+      {
+        "name": "Red Bull",
+        "points": "440",
+        "pos": 3
+      },
+      {
+        "name": "McLaren",
+        "points": "431",
+        "pos": 4
+      },
+      {
+        "name": "Racing Bulls",
+        "points": "114",
+        "pos": 5
+      }
+    ],
+    "updated": "После Лас-Вегаса"
+  }
+}
