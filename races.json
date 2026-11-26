@@ -1,6 +1,6 @@
 [
   {
-    "series": "Азитаский Ле-Ман",
+    "series": "Азиатская серия Ле-Ман (ALMS)",
     "name": "4 часа Ле-Кастелье",
     "circuit": "Paul Ricard",
     "country": "Франция",
@@ -46,7 +46,7 @@
     "color": "#e10600"
   },
   {
-    "series": "Азитаский Ле-Ман",
+    "series": "Азиатская серия Ле-Ман (ALMS)",
     "name": "4 часа Хереса",
     "circuit": "Jerez",
     "country": "Испания",
@@ -83,7 +83,7 @@
     "color": "#22C55E"
   },
   {
-    "series": "Азитаский Ле-Ман",
+    "series": "Азиатская серия Ле-Ман (ALMS)",
     "name": "4 часа Портимана",
     "circuit": "Portimao",
     "country": "Португалия",
@@ -94,6 +94,62 @@
     ],
     "start": "2027-02-20",
     "color": "#14B8A6"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Daytona 500",
+    "circuit": "Daytona International Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-02-21",
+    "color": "#FACC15"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Autotrader 400",
+    "circuit": "EchoPark Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-02-28",
+    "color": "#FACC15"
+  },
+  {
+    "series": "NASCAR",
+    "name": "DuraMAX Grand Prix",
+    "circuit": "Circuit of the Americas",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-03-07",
+    "color": "#FACC15"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Straight Talk Wireless 500",
+    "circuit": "Phoenix Raceway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-03-14",
+    "color": "#FACC15"
+  },
+  {
+    "series": "Европейская серия Ле-Ман (ELMS)",
+    "name": "4 часа Барселоны",
+    "circuit": "Barcelona",
+    "country": "Испания",
+    "tags": [
+      "LMP2",
+      "GT3"
+    ],
+    "start": "2027-03-14",
+    "color": "#0EA5E9"
   },
   {
     "series": "Формула-1",
@@ -118,6 +174,17 @@
     ],
     "start": "2027-03-20",
     "color": "#F97316"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Pennzoil 400",
+    "circuit": "Las Vegas Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-03-21",
+    "color": "#FACC15"
   },
   {
     "series": "Формула-1",
@@ -155,6 +222,28 @@
     "color": "#FB3768"
   },
   {
+    "series": "GT World Challenge Asia",
+    "name": "1 этап",
+    "circuit": "Sepang",
+    "country": "Малайзия",
+    "tags": [
+      "GT3"
+    ],
+    "start": "2027-04-03",
+    "color": "#C084FC"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Goodyear 400",
+    "circuit": "Darlington Raceway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-04-04",
+    "color": "#FACC15"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Австралии",
     "circuit": "Albert Park",
@@ -164,6 +253,17 @@
     ],
     "start": "2027-04-04T07:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "Formula Drift",
+    "name": "1 этап",
+    "circuit": "STREETS OF LONG BEACH",
+    "country": "США",
+    "tags": [
+      "Дрифт"
+    ],
+    "start": "2027-04-09",
+    "color": "#EC4899"
   },
   {
     "series": "WEC",
@@ -176,6 +276,17 @@
     ],
     "start": "2027-04-11",
     "color": "#2E90FA"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Food City 500",
+    "circuit": "Bristol Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-04-11",
+    "color": "#FACC15"
   },
   {
     "series": "Формула-1",
@@ -212,6 +323,17 @@
     "color": "#A855F7"
   },
   {
+    "series": "NASCAR",
+    "name": "Cook Out 400",
+    "circuit": "Martinsville Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-04-18",
+    "color": "#FACC15"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Китая",
     "circuit": "Shanghai",
@@ -224,7 +346,7 @@
   },
   {
     "series": "DTM",
-    "name": "Этап 1. Ред Булл Ринг",
+    "name": "1 этап",
     "circuit": "Spielberg",
     "country": "Австрия",
     "tags": [
@@ -246,6 +368,17 @@
     "color": "#2E90FA"
   },
   {
+    "series": "NASCAR",
+    "name": "Jack Link's 500",
+    "circuit": "Talladega Superspeedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-04-25",
+    "color": "#FACC15"
+  },
+  {
     "series": "GT World Challenge Europe",
     "name": "Спринт. Брэндс-Хэтч",
     "circuit": "Brands Hatch",
@@ -255,6 +388,17 @@
     ],
     "start": "2027-05-01",
     "color": "#A855F7"
+  },
+  {
+    "series": "GT World Challenge Asia",
+    "name": "2 этап",
+    "circuit": "Chang",
+    "country": "Таиланд",
+    "tags": [
+      "GT3"
+    ],
+    "start": "2027-05-01",
+    "color": "#C084FC"
   },
   {
     "series": "IMSA",
@@ -267,6 +411,29 @@
     ],
     "start": "2027-05-02",
     "color": "#F97316"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Würth 400",
+    "circuit": "Texas Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-05-02",
+    "color": "#FACC15"
+  },
+  {
+    "series": "Европейская серия Ле-Ман (ELMS)",
+    "name": "4 часа Ле Сателлет",
+    "circuit": "Paul Ricard",
+    "country": "Франция",
+    "tags": [
+      "LMP2",
+      "GT3"
+    ],
+    "start": "2027-05-02",
+    "color": "#0EA5E9"
   },
   {
     "series": "Формула-1",
@@ -292,8 +459,19 @@
     "color": "#FB3768"
   },
   {
+    "series": "Formula Drift",
+    "name": "2 этап",
+    "circuit": "ORLANDO SPEED WORLD",
+    "country": "США",
+    "tags": [
+      "Дрифт"
+    ],
+    "start": "2027-05-07",
+    "color": "#EC4899"
+  },
+  {
     "series": "DTM",
-    "name": "Этап 2. Ошерслебен",
+    "name": "2 этап",
     "circuit": "Oschersleben",
     "country": "Германия",
     "tags": [
@@ -314,6 +492,17 @@
     "color": "#22C55E"
   },
   {
+    "series": "NASCAR",
+    "name": "AdventHealth 400",
+    "circuit": "Kansas Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-05-09",
+    "color": "#FACC15"
+  },
+  {
     "series": "WEC",
     "name": "6 часов Спа-Франкоршам",
     "circuit": "Spa",
@@ -324,6 +513,28 @@
     ],
     "start": "2027-05-15",
     "color": "#2E90FA"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Ecosave 400",
+    "circuit": "Dover Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-05-16",
+    "color": "#FACC15"
+  },
+  {
+    "series": "Formula Drift",
+    "name": "3 этап",
+    "circuit": "ROAD ATLANTA",
+    "country": "США",
+    "tags": [
+      "Дрифт"
+    ],
+    "start": "2027-05-21",
+    "color": "#EC4899"
   },
   {
     "series": "GT World Challenge Europe",
@@ -359,6 +570,17 @@
     "color": "#22C55E"
   },
   {
+    "series": "NASCAR",
+    "name": "Coca-Cola 600",
+    "circuit": "Charlotte Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-05-30",
+    "color": "#FACC15"
+  },
+  {
     "series": "IMSA",
     "name": "Chevrolet Detroit Sports Car Classic",
     "circuit": "Detroit",
@@ -369,6 +591,17 @@
     ],
     "start": "2027-06-05",
     "color": "#F97316"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Cracker Barrel 400",
+    "circuit": "Nashville Superspeedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-06-06",
+    "color": "#FACC15"
   },
   {
     "series": "Формула-1",
@@ -395,6 +628,39 @@
     "color": "#2E90FA"
   },
   {
+    "series": "GT World Challenge Asia",
+    "name": "3 этап",
+    "circuit": "Suzuka",
+    "country": "Япония",
+    "tags": [
+      "GT3"
+    ],
+    "start": "2027-06-12",
+    "color": "#C084FC"
+  },
+  {
+    "series": "NASCAR",
+    "name": "The Great American Getaway 400",
+    "circuit": "Pocono Raceway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-06-13",
+    "color": "#FACC15"
+  },
+  {
+    "series": "Formula Drift",
+    "name": "4 этап",
+    "circuit": "STAFFORD",
+    "country": "США",
+    "tags": [
+      "Дрифт"
+    ],
+    "start": "2027-06-17",
+    "color": "#EC4899"
+  },
+  {
     "series": "Super GT",
     "name": "300 км Сепанга",
     "circuit": "Sepang",
@@ -408,13 +674,24 @@
   },
   {
     "series": "DTM",
-    "name": "Этап 3. Лаусицринг",
+    "name": "3 этап",
     "circuit": "Lausitzring",
     "country": "Германия",
     "tags": [
       "GT3"
     ],
     "start": "2027-06-19",
+    "color": "#FACC15"
+  },
+  {
+    "series": "NASCAR",
+    "name": "FireKeepers Casino 400",
+    "circuit": "Michigan International Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-06-20",
     "color": "#FACC15"
   },
   {
@@ -453,8 +730,19 @@
     "color": "#F97316"
   },
   {
+    "series": "NASCAR",
+    "name": "eero 400",
+    "circuit": "Chicagoland Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-06-27",
+    "color": "#FACC15"
+  },
+  {
     "series": "DTM",
-    "name": "Этап 4. Норисринг",
+    "name": "4 этап",
     "circuit": "Norisring",
     "country": "Германия",
     "tags": [
@@ -462,6 +750,29 @@
     ],
     "start": "2027-07-03",
     "color": "#FACC15"
+  },
+  {
+    "series": "NASCAR In-Season Challenge",
+    "name": "Iowa Corn 350",
+    "circuit": "Iowa Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-07-04",
+    "color": "#FACC15"
+  },
+  {
+    "series": "Европейская серия Ле-Ман (ELMS)",
+    "name": "4 часа Имолы",
+    "circuit": "Imola",
+    "country": "Италия",
+    "tags": [
+      "LMP2",
+      "GT3"
+    ],
+    "start": "2027-07-04",
+    "color": "#0EA5E9"
   },
   {
     "series": "Формула-1",
@@ -473,6 +784,17 @@
     ],
     "start": "2027-07-04T17:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "GT World Challenge Asia",
+    "name": "4 этап",
+    "circuit": "Fuji",
+    "country": "Япония",
+    "tags": [
+      "GT3"
+    ],
+    "start": "2027-07-10",
+    "color": "#C084FC"
   },
   {
     "series": "IMSA",
@@ -499,6 +821,17 @@
     "color": "#2E90FA"
   },
   {
+    "series": "NASCAR In-Season Challenge",
+    "name": "Toyota/Save Mart 350",
+    "circuit": "Sonoma Raceway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-07-11",
+    "color": "#FACC15"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Австрии",
     "circuit": "Spielberg",
@@ -521,6 +854,28 @@
     "color": "#A855F7"
   },
   {
+    "series": "NASCAR In-Season Challenge",
+    "name": "Dollar Tree 400",
+    "circuit": "EchoPark Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-07-18",
+    "color": "#FACC15"
+  },
+  {
+    "series": "NASCAR In-Season Challenge",
+    "name": "Brickyard 400",
+    "circuit": "Indianapolis Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-07-25",
+    "color": "#FACC15"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Бельгии",
     "circuit": "Spa",
@@ -530,6 +885,17 @@
     ],
     "start": "2027-07-25T16:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "Formula Drift",
+    "name": "5 этап",
+    "circuit": "INDIANAPOLIS RACEWAY PARK",
+    "country": "США",
+    "tags": [
+      "Дрифт"
+    ],
+    "start": "2027-07-29",
+    "color": "#EC4899"
   },
   {
     "series": "Super GT",
@@ -555,6 +921,17 @@
     "color": "#A855F7"
   },
   {
+    "series": "NASCAR In-Season Challenge",
+    "name": "Anduril 250",
+    "circuit": "Coronado Street Course",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-08-01",
+    "color": "#FACC15"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Венгрии",
     "circuit": "Hungaroring",
@@ -567,7 +944,7 @@
   },
   {
     "series": "DTM",
-    "name": "Этап 5. Зандвоорт",
+    "name": "5 этап",
     "circuit": "Zandvoort",
     "country": "Нидерланды",
     "tags": [
@@ -590,8 +967,30 @@
     "color": "#F97316"
   },
   {
+    "series": "Formula Drift",
+    "name": "6 этап",
+    "circuit": "OLD BRIDGE TOWNSHIP RACEWAY PARK",
+    "country": "США",
+    "tags": [
+      "Дрифт"
+    ],
+    "start": "2027-08-12",
+    "color": "#EC4899"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Bass Pro Shops Night Race",
+    "circuit": "Bristol Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-08-14",
+    "color": "#FACC15"
+  },
+  {
     "series": "DTM",
-    "name": "Этап 6. Нюрбургринг",
+    "name": "6 этап",
     "circuit": "Nurburgring",
     "country": "Германия",
     "tags": [
@@ -610,6 +1009,40 @@
     ],
     "start": "2027-08-22",
     "color": "#F97316"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Enjoy Illinois 300",
+    "circuit": "World Wide Technology Raceway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-08-22",
+    "color": "#FACC15"
+  },
+  {
+    "series": "Европейская серия Ле-Ман (ELMS)",
+    "name": "4 часа Спа-Франкоршарм",
+    "circuit": "Spa",
+    "country": "Бельгия",
+    "tags": [
+      "LMP2",
+      "GT3"
+    ],
+    "start": "2027-08-22",
+    "color": "#0EA5E9"
+  },
+  {
+    "series": "NASCAR",
+    "name": "Coke Zero Sugar 400",
+    "circuit": "Daytona International Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-08-28",
+    "color": "#FACC15"
   },
   {
     "series": "GT World Challenge Europe",
@@ -635,6 +1068,29 @@
     "color": "#22C55E"
   },
   {
+    "series": "NASCAR",
+    "name": "Cook Out Southern 500",
+    "circuit": "Darlington Raceway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-09-05",
+    "color": "#FACC15"
+  },
+  {
+    "series": "Европейская серия Ле-Ман (ELMS)",
+    "name": "4 часа Сильверстоуна",
+    "circuit": "Silverstone",
+    "country": "Великобритания",
+    "tags": [
+      "LMP2",
+      "GT3"
+    ],
+    "start": "2027-09-05",
+    "color": "#0EA5E9"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Италии",
     "circuit": "Monza",
@@ -644,6 +1100,17 @@
     ],
     "start": "2027-09-05T16:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "NASCAR Chase",
+    "name": "Cook Out 400",
+    "circuit": "Richmond Raceway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-09-11",
+    "color": "#FACC15"
   },
   {
     "series": "WEC",
@@ -667,6 +1134,17 @@
     ],
     "start": "2027-09-12T16:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "Formula Drift",
+    "name": "7 этап",
+    "circuit": "EVERGREEN SPEEDWAY",
+    "country": "США",
+    "tags": [
+      "Дрифт"
+    ],
+    "start": "2027-09-17",
+    "color": "#EC4899"
   },
   {
     "series": "Super GT",
@@ -705,8 +1183,19 @@
     "color": "#F97316"
   },
   {
+    "series": "NASCAR Chase",
+    "name": "Busch Light at The Glen",
+    "circuit": "Watkins Glen International",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-09-19",
+    "color": "#FACC15"
+  },
+  {
     "series": "DTM",
-    "name": "Этап 7. Сашенринг",
+    "name": "7 этап",
     "circuit": "Sachenring",
     "country": "Германия",
     "tags": [
@@ -728,6 +1217,17 @@
     "color": "#2E90FA"
   },
   {
+    "series": "NASCAR Chase",
+    "name": "Dollar Tree 301",
+    "circuit": "New Hampshire Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-09-26",
+    "color": "#FACC15"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Азербайджана",
     "circuit": "Baku",
@@ -739,6 +1239,28 @@
     "color": "#e10600"
   },
   {
+    "series": "Formula Drift",
+    "name": "8 этап",
+    "circuit": "THE BULLRING AT LVMS",
+    "country": "США",
+    "tags": [
+      "Дрифт"
+    ],
+    "start": "2027-09-30",
+    "color": "#EC4899"
+  },
+  {
+    "series": "GT World Challenge Asia",
+    "name": "5 этап",
+    "circuit": "Beijing Street",
+    "country": "Китай",
+    "tags": [
+      "GT3"
+    ],
+    "start": "2027-10-02",
+    "color": "#C084FC"
+  },
+  {
     "series": "GT World Challenge Europe",
     "name": "Спринт. Хунгароринг",
     "circuit": "Hungaroring",
@@ -748,6 +1270,17 @@
     ],
     "start": "2027-10-03",
     "color": "#A855F7"
+  },
+  {
+    "series": "NASCAR Chase",
+    "name": "Hollywood Casino 400",
+    "circuit": "Kansas Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-10-03",
+    "color": "#FACC15"
   },
   {
     "series": "Формула-1",
@@ -762,7 +1295,7 @@
   },
   {
     "series": "DTM",
-    "name": "Этап 8. Хоккенхаймринг",
+    "name": "8 этап",
     "circuit": "Hockenheimring",
     "country": "Германия",
     "tags": [
@@ -783,6 +1316,17 @@
     ],
     "start": "2027-10-09",
     "color": "#F97316"
+  },
+  {
+    "series": "NASCAR Chase",
+    "name": "South Point 400",
+    "circuit": "Las Vegas Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-10-10",
+    "color": "#FACC15"
   },
   {
     "series": "Формула-1",
@@ -808,6 +1352,40 @@
     "color": "#FB3768"
   },
   {
+    "series": "Европейская серия Ле-Ман (ELMS)",
+    "name": "4 часа Портимана",
+    "circuit": "Portimao",
+    "country": "Португалия",
+    "tags": [
+      "LMP2",
+      "GT3"
+    ],
+    "start": "2027-10-16",
+    "color": "#0EA5E9"
+  },
+  {
+    "series": "NASCAR Chase",
+    "name": "Bank of America 400",
+    "circuit": "Charlotte Motor Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-10-17",
+    "color": "#FACC15"
+  },
+  {
+    "series": "GT World Challenge Asia",
+    "name": "6 этап",
+    "circuit": "Shanghai",
+    "country": "Китай",
+    "tags": [
+      "GT3"
+    ],
+    "start": "2027-10-23",
+    "color": "#C084FC"
+  },
+  {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 3 часа Барселоны",
     "circuit": "Barcelona",
@@ -819,6 +1397,17 @@
     "color": "#A855F7"
   },
   {
+    "series": "NASCAR Chase",
+    "name": "Freeway Insurance 500",
+    "circuit": "Phoenix Raceway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-10-24",
+    "color": "#FACC15"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при США",
     "circuit": "COTA",
@@ -828,6 +1417,17 @@
     ],
     "start": "2027-10-24T23:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "NASCAR Chase",
+    "name": "YellaWood 500",
+    "circuit": "Talladega Superspeedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-10-31",
+    "color": "#FACC15"
   },
   {
     "series": "Формула-1",
@@ -865,6 +1465,17 @@
     "color": "#2E90FA"
   },
   {
+    "series": "NASCAR Chase",
+    "name": "Xfinity 500",
+    "circuit": "Martinsville Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-11-07",
+    "color": "#FACC15"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Бразилии",
     "circuit": "Interlagos",
@@ -874,6 +1485,29 @@
     ],
     "start": "2027-11-07T21:00:00+03:00",
     "color": "#e10600"
+  },
+  {
+    "series": "NASCAR Chase",
+    "name": "Season Finale 400",
+    "circuit": "Homestead–Miami Speedway",
+    "country": "США",
+    "tags": [
+      "Сток-кары"
+    ],
+    "start": "2027-11-14",
+    "color": "#FACC15"
+  },
+  {
+    "series": "74-й Гран-При Макао",
+    "name": "Гонка",
+    "circuit": "Guia",
+    "country": "Макао",
+    "tags": [
+      "GT3",
+      "Открытые колеса"
+    ],
+    "start": "2027-11-19",
+    "color": "#10B981"
   },
   {
     "series": "Super GT",
