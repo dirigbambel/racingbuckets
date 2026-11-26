@@ -1155,7 +1155,8 @@
       const safeName = escapeHtml(name);
       const svg = code && SVG_FLAGS[code];
       if (!svg) return `<span class="country-fallback">${safeName}</span>`;
-      return `<span class="flag-icon" title="${safeName}" aria-label="${safeName}">${svg}</span>`;
+      const stretchedSvg = svg.replace('<svg ', '<svg preserveAspectRatio="none" ');
+      return `<span class="flag-icon" title="${safeName}" aria-label="${safeName}">${stretchedSvg}</span>`;
     }
 
     function normalizeTags(race) {
