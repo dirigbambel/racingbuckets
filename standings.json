@@ -1,127 +1,136 @@
 {
   "Формула-1": {
-    "drivers": [
-      {
-        "name": "Антонелли",
-        "points": "402",
-        "pos": 1,
-        "team": "Mercedes"
-      },
-      {
-        "name": "Ферстаппен",
-        "points": "304",
-        "pos": 2,
-        "team": "Red Bull"
-      },
-      {
-        "name": "Хэмилтон",
-        "points": "267",
-        "pos": 3,
-        "team": "Ferrari"
-      }
-    ],
-    "teams": [
-      {
-        "name": "Mercedes",
-        "points": "666",
-        "pos": 1
-      },
-      {
-        "name": "Ferrari",
-        "points": "517",
-        "pos": 2
-      },
-      {
-        "name": "Red Bull",
-        "points": "440",
-        "pos": 3
-      }
-    ],
+    "tables": {
+      "Личный зачёт": [
+        {
+          "name": "Антонелли",
+          "points": "402",
+          "pos": 1,
+          "team": "Mercedes"
+        },
+        {
+          "name": "Ферстаппен",
+          "points": "304",
+          "pos": 2,
+          "team": "Red Bull"
+        },
+        {
+          "name": "Хэмилтон",
+          "points": "267",
+          "pos": 3,
+          "team": "Ferrari"
+        }
+      ],
+      "Команды": [
+        {
+          "name": "Mercedes",
+          "points": "666",
+          "pos": 1
+        },
+        {
+          "name": "Ferrari",
+          "points": "517",
+          "pos": 2
+        },
+        {
+          "name": "Red Bull",
+          "points": "440",
+          "pos": 3
+        }
+      ]
+    },
     "updated": "После Лас-Вегаса"
   },
   "Азиатская серия Ле-Ман (ALMS)": {
-    "drivers": [
-      {
-        "name": "#90 AF Corse",
-        "points": "51",
-        "pos": 1
-      },
-      {
-        "name": "#47 Cetilar Racing",
-        "points": "37",
-        "pos": 2
-      },
-      {
-        "name": "#37 CLX Motorsport",
-        "points": "36",
-        "pos": 1
-      },
-      {
-        "name": "#25 Algarve Pro Racing",
-        "points": "35",
-        "pos": 2
-      },
-      {
-        "name": "#11 Proton Competition",
-        "points": "28",
-        "pos": 3
-      },
-      {
-        "name": "#62 Team Qatar",
-        "points": "35",
-        "pos": 1
-      },
-      {
-        "name": "#58 Garage 59",
-        "points": "27",
-        "pos": 2
-      },
-      {
-        "name": "#50 AF Corse",
-        "points": "27",
-        "pos": 3
-      }
-    ],
-    "teams": [],
+    "tables": {
+      "Гиперкары": [
+        {
+          "name": "#90 AF Corse",
+          "points": "51",
+          "pos": 1
+        },
+        {
+          "name": "#47 Cetilar Racing",
+          "points": "37",
+          "pos": 2
+        }
+      ],
+      "LMP2": [
+        {
+          "name": "#37 CLX Motorsport",
+          "points": "36",
+          "pos": 1
+        },
+        {
+          "name": "#25 Algarve Pro Racing",
+          "points": "35",
+          "pos": 2
+        },
+        {
+          "name": "#11 Proton Competition",
+          "points": "28",
+          "pos": 3
+        }
+      ],
+      "GT3": [
+        {
+          "name": "#62 Team Qatar",
+          "points": "35",
+          "pos": 1
+        },
+        {
+          "name": "#58 Garage 59",
+          "points": "27",
+          "pos": 2
+        },
+        {
+          "name": "#50 AF Corse",
+          "points": "27",
+          "pos": 3
+        }
+      ]
+    },
     "updated": "После 1 этапа из 3"
   },
   "Формула-2": {
-    "drivers": [
-      {
-        "name": "Камара",
-        "points": "207",
-        "pos": 1,
-        "team": "Invicta"
-      },
-      {
-        "name": "Цолов",
-        "points": "200",
-        "pos": 2,
-        "team": "Campos"
-      },
-      {
-        "name": "Данн",
-        "points": "189",
-        "pos": 3,
-        "team": "Rodin"
-      }
-    ],
-    "teams": [
-      {
-        "name": "Campos",
-        "points": "333",
-        "pos": 1
-      },
-      {
-        "name": "Invicta",
-        "points": "297",
-        "pos": 2
-      },
-      {
-        "name": "Rodin",
-        "points": "296",
-        "pos": 3
-      }
-    ]
+    "tables": {
+      "Личный зачёт": [
+        {
+          "name": "Камара",
+          "points": "207",
+          "pos": 1,
+          "team": "Invicta"
+        },
+        {
+          "name": "Цолов",
+          "points": "200",
+          "pos": 2,
+          "team": "Campos"
+        },
+        {
+          "name": "Данн",
+          "points": "189",
+          "pos": 3,
+          "team": "Rodin"
+        }
+      ],
+      "Команды": [
+        {
+          "name": "Campos",
+          "points": "333",
+          "pos": 1
+        },
+        {
+          "name": "Invicta",
+          "points": "297",
+          "pos": 2
+        },
+        {
+          "name": "Rodin",
+          "points": "296",
+          "pos": 3
+        }
+      ]
+    }
   }
 }
