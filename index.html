@@ -1777,7 +1777,7 @@
       }
     }
 
-    function render() {
+   function render() {
       const now = Date.now();
       const selectedSeries = getSelectedSet(els.msSeries);
       const selectedTags = getSelectedSet(els.msTag);
@@ -1803,7 +1803,24 @@
         return true;
       });
 
-      function renderThisWeek() {
+      const nextUpcoming = currentFiltered.find(r => Number.isFinite(r._ts) && !isEventPast(r._ts, r._hasTime, now, r._endTs, r._endHasTime));
+      nextUpcomingId = nextUpcoming ? nextUpcoming._id : null;
+
+      renderedCount = 0;
+      lastRenderedMonthKey = null;
+      els.list.innerHTML = '';
+
+      if (!currentFiltered.length) {
+        els.stats.textContent = 'Найдено этапов: 0';
+        els.list.innerHTML = '<div class="empty">По выбранным фильтрам гонок нет.</div>';
+        els.loadMoreWrap.style.display = 'none';
+        return;
+      }
+
+      renderNextBatch();
+    }
+
+    function renderThisWeek() {
       if (!els.thisWeekSection || !els.thisWeekGrid) return;
       const now = Date.now();
       const nowDate = new Date(now);
@@ -1849,23 +1866,6 @@
       }).join('');
 
       els.thisWeekSection.classList.add('visible');
-    }
-
-      const nextUpcoming = currentFiltered.find(r => Number.isFinite(r._ts) && !isEventPast(r._ts, r._hasTime, now, r._endTs, r._endHasTime));
-      nextUpcomingId = nextUpcoming ? nextUpcoming._id : null;
-
-      renderedCount = 0;
-      lastRenderedMonthKey = null;
-      els.list.innerHTML = '';
-
-      if (!currentFiltered.length) {
-        els.stats.textContent = 'Найдено этапов: 0';
-        els.list.innerHTML = '<div class="empty">По выбранным фильтрам гонок нет.</div>';
-        els.loadMoreWrap.style.display = 'none';
-        return;
-      }
-
-      renderNextBatch();
     }
 
     /* --- Модальное окно этапа --- */
