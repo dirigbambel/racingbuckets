@@ -743,6 +743,7 @@
 
     .sub-tab-group {
       display: inline-flex;
+      flex-wrap: wrap;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -830,6 +831,7 @@
       margin-top: 16px;
       display: inline-flex;
     }
+
     .support-meta {
       font-size: 12px;
       color: #9ca3af;
@@ -840,6 +842,7 @@
       color: #d1d5db;
       font-weight: 500;
     }
+
     .btn-export-cal {
       display: inline-flex;
       align-items: center;
@@ -858,6 +861,7 @@
       background: rgba(56, 189, 248, 0.22);
       border-color: rgba(56, 189, 248, 0.6);
     }
+
     .export-section {
       padding: 14px;
       border-radius: 12px;
@@ -951,6 +955,7 @@
       margin-top: 8px;
       min-height: 16px;
     }
+
     /* Вывеска "На этой неделе" */
     .week-spotlight {
       display: none;
@@ -1064,8 +1069,10 @@
       }
     }
 
+    /* Подвал */
     .site-footer {
-      margin-top: 44px;
+      max-width: 1080px;
+      margin: 44px auto 0;
       padding: 20px 12px 28px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       text-align: center;
@@ -1088,8 +1095,8 @@
       color: #525866;
     }
   </style>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
@@ -1098,9 +1105,10 @@
     })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114703970', 'ym');
 
     ym(114703970, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/114703970" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/114703970" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
   <div class="container">
@@ -1121,13 +1129,15 @@
         </a>
       </nav>
     </header>
-<section id="thisWeekSection" class="week-spotlight" aria-label="Гонки на этой неделе">
+
+    <section id="thisWeekSection" class="week-spotlight" aria-label="Гонки на этой неделе">
       <div class="week-header">
         <h2 class="week-title">🏁 На этой неделе</h2>
         <span id="thisWeekRange" class="week-range"></span>
       </div>
       <div id="thisWeekGrid" class="week-grid"></div>
     </section>
+
     <section class="filters">
       <div class="filter-group">
         <span class="filter-label">Чемпионаты</span>
@@ -1189,14 +1199,16 @@
       <button type="button" class="btn-load-more" id="btnLoadMore">Показать ещё</button>
     </div>
   </div>
-<footer class="site-footer">
-      <div>
-        Календарь автоспорта · <a href="https://t.me/racing_journalf1" target="_blank" rel="noopener noreferrer">@racing_journalf1</a> · <a href="https://t.me/racingbuckets" target="_blank" rel="noopener noreferrer">@racingbuckets</a>
-      </div>
-      <div class="footer-legal">
-        На сайте используются файлы cookie и сервис веб-аналитики Яндекс Метрика для сбора обезличенной статистики посещений.
-      </div>
-    </footer>
+
+  <footer class="site-footer">
+    <div>
+      Календарь автоспорта · <a href="https://t.me/racing_journalf1" target="_blank" rel="noopener noreferrer">@racing_journalf1</a> · <a href="https://t.me/racingbuckets" target="_blank" rel="noopener noreferrer">@racingbuckets</a>
+    </div>
+    <div class="footer-legal">
+      На сайте используются файлы cookie и сервис веб-аналитики Яндекс Метрика для сбора обезличенной статистики посещений.
+    </div>
+  </footer>
+
   <!-- Модальное окно этапа -->
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" id="modalBox">
@@ -1213,7 +1225,9 @@
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
-<div id="exportBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="exportTitle">
+
+  <!-- Модальное окно экспорта -->
+  <div id="exportBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="exportTitle">
     <div class="modal" style="--modal-color: #38bdf8; max-width: 520px;">
       <div class="modal-header">
         <div>
@@ -1260,7 +1274,15 @@
       </div>
     </div>
   </div>
+
   <script>
+    // --- TELEGRAM MINI APP ---
+    const tg = window.Telegram?.WebApp;
+    if (tg) {
+      tg.ready();
+      tg.expand();
+    }
+
     // --- НАСТРОЙКИ ---
     const PAGE_SIZE = 30;
     const ENABLE_MODAL = true;
@@ -1400,7 +1422,8 @@
     let icsManifest = null;
     let currentRace = null;
     let activeTab = 'schedule';
-    let activeStandingsType = 'drivers';
+    let activeStandingsType = '';
+    let activeResultsSession = '';
 
     const LIVE_WINDOW_MS = 3 * 60 * 60 * 1000;
     const DAY_MS = 24 * 60 * 60 * 1000;
@@ -1777,7 +1800,7 @@
       }
     }
 
-   function render() {
+    function render() {
       const now = Date.now();
       const selectedSeries = getSelectedSet(els.msSeries);
       const selectedTags = getSelectedSet(els.msTag);
@@ -1869,16 +1892,26 @@
     }
 
     /* --- Модальное окно этапа --- */
+    function getStandingsTables(series) {
+      const st = standingsData[series];
+      if (!st) return null;
+      if (st.tables && typeof st.tables === 'object') {
+        const entries = Object.entries(st.tables).filter(([, rows]) => Array.isArray(rows) && rows.length > 0);
+        return entries.length ? { updated: st.updated || '', tables: Object.fromEntries(entries) } : null;
+      }
+      const tables = {};
+      if (st.drivers?.length) tables['Личный зачёт'] = st.drivers;
+      if (st.teams?.length) tables['Команды'] = st.teams;
+      return Object.keys(tables).length ? { updated: st.updated || '', tables } : null;
+    }
+
     function getAvailableTabs(race) {
       const tabs = [{ id: 'schedule', label: 'Расписание уик-энда' }];
       if (SHOW_RESULTS && Array.isArray(race.results) && race.results.length) {
         tabs.push({ id: 'results', label: 'Результаты' });
       }
-      if (SHOW_STANDINGS) {
-        const st = standingsData[race.series];
-        if (st && (st.drivers?.length || st.teams?.length)) {
-          tabs.push({ id: 'standings', label: 'Таблица чемпионата' });
-        }
+      if (SHOW_STANDINGS && getStandingsTables(race.series)) {
+        tabs.push({ id: 'standings', label: 'Таблица чемпионата' });
       }
       return tabs;
     }
@@ -1898,9 +1931,8 @@
 
       const tabs = getAvailableTabs(race);
       activeTab = (isPast && tabs.some(t => t.id === 'results')) ? 'results' : 'schedule';
-
-      const hasStandings = SHOW_STANDINGS && Boolean(getStandingsTables(race.series));
       activeStandingsType = '';
+      activeResultsSession = '';
 
       renderModalContent();
       els.backdrop.classList.add('open');
@@ -1995,14 +2027,37 @@
     }
 
     function renderResultsTab(race) {
-      const rows = race.results || [];
+      const allRows = race.results || [];
+      const hasSessions = allRows.some(r => r.session);
+      const getLabel = r => r.session || 'Гонка';
+      const sessions = hasSessions ? [...new Set(allRows.map(getLabel))] : [];
+
+      let rows = allRows;
+      let subTabsHtml = '';
+
+      if (sessions.length > 0) {
+        if (!sessions.includes(activeResultsSession)) {
+          activeResultsSession = sessions[0];
+        }
+        rows = allRows.filter(r => getLabel(r) === activeResultsSession);
+        subTabsHtml = `
+          <div class="sub-tabs">
+            <div class="sub-tab-group">
+              ${sessions.map(s => `
+                <button class="sub-tab-btn ${s === activeResultsSession ? 'active' : ''}" data-res-session="${escapeHtml(s)}">${escapeHtml(s)}</button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
       const hasTeam = rows.some(r => r.team);
       const hasTime = rows.some(r => r.time);
       const hasPoints = rows.some(r => r.points !== undefined && r.points !== '');
 
       const body = rows.map((r, i) => {
         const pos = r.pos ?? (i + 1);
-        const posClass = pos <= 3 ? `pos-${pos}` : '';
+        const posClass = Number(pos) <= 3 ? `pos-${pos}` : '';
         return `
           <tr>
             <td class="col-pos ${posClass}">${escapeHtml(pos)}</td>
@@ -2015,6 +2070,7 @@
       }).join('');
 
       els.modalBody.innerHTML = `
+        ${subTabsHtml}
         <div class="table-wrap">
           <table class="data-table">
             <thead>
@@ -2031,18 +2087,7 @@
         </div>
       `;
     }
-function getStandingsTables(series) {
-      const st = standingsData[series];
-      if (!st) return null;
-      if (st.tables && typeof st.tables === 'object') {
-        const entries = Object.entries(st.tables).filter(([, rows]) => Array.isArray(rows) && rows.length > 0);
-        return entries.length ? { updated: st.updated || '', tables: Object.fromEntries(entries) } : null;
-      }
-      const tables = {};
-      if (st.drivers?.length) tables['Личный зачёт'] = st.drivers;
-      if (st.teams?.length) tables['Команды'] = st.teams;
-      return Object.keys(tables).length ? { updated: st.updated || '', tables } : null;
-    }
+
     function renderStandingsTab(race) {
       const st = getStandingsTables(race.series);
       if (!st) {
@@ -2066,9 +2111,9 @@ function getStandingsTables(series) {
               <button class="sub-tab-btn ${name === activeStandingsType ? 'active' : ''}" data-st="${escapeHtml(name)}">${escapeHtml(name)}</button>
             `).join('')}
           </div>
-          ${st.updated ? `<span class="st-updated">${escapeHtml(st.updated)}</span>` : ''}
+          ${st.updated ? `<span class="updated-note">${escapeHtml(st.updated)}</span>` : ''}
         </div>
-      ` : (st.updated ? `<div class="sub-tabs"><span class="st-updated">${escapeHtml(st.updated)}</span></div>` : '');
+      ` : (st.updated ? `<div class="sub-tabs"><span class="updated-note">${escapeHtml(st.updated)}</span></div>` : '');
 
       const body = rows.map((r, i) => {
         const pos = r.pos ?? (i + 1);
@@ -2303,10 +2348,17 @@ function getStandingsTables(series) {
     });
 
     els.modalBody.addEventListener('click', e => {
-      const btn = e.target.closest('.sub-tab-btn');
-      if (!btn) return;
-      activeStandingsType = btn.dataset.st;
-      renderModalContent();
+      const stBtn = e.target.closest('.sub-tab-btn[data-st]');
+      if (stBtn) {
+        activeStandingsType = stBtn.dataset.st;
+        renderModalContent();
+        return;
+      }
+      const resBtn = e.target.closest('.sub-tab-btn[data-res-session]');
+      if (resBtn) {
+        activeResultsSession = resBtn.dataset.resSession;
+        renderModalContent();
+      }
     });
 
     els.modalClose.addEventListener('click', closeModal);
@@ -2318,6 +2370,23 @@ function getStandingsTables(series) {
       els.exportBackdrop.addEventListener('click', e => { if (e.target === els.exportBackdrop) closeExportModal(); });
       els.exportSubSelect.addEventListener('change', updateExportLinks);
       document.querySelectorAll('input[name="exportMode"]').forEach(r => r.addEventListener('change', updateExportLinks));
+
+      els.exportWebcalBtn.addEventListener('click', e => {
+        if (tg?.openLink) {
+          const httpsUrl = getSelectedSubHttpsUrl();
+          if (httpsUrl) {
+            e.preventDefault();
+            tg.openLink(httpsUrl);
+          }
+        }
+      });
+
+      els.exportGoogleBtn.addEventListener('click', e => {
+        if (tg?.openLink && els.exportGoogleBtn.href) {
+          e.preventDefault();
+          tg.openLink(els.exportGoogleBtn.href);
+        }
+      });
 
       els.exportCopyBtn.addEventListener('click', async () => {
         const url = getSelectedSubHttpsUrl();
@@ -2417,6 +2486,7 @@ function getStandingsTables(series) {
         renderThisWeek();
         render();
       } catch (err) {
+        console.error(err);
         els.list.innerHTML = `
           <div class="error">
             Не удалось загрузить <b>races.json</b>.<br>
