@@ -84,5 +84,44 @@
     ],
     "teams": [],
     "updated": "После 1 этапа из 3"
+  },
+  "Формула-2": {
+    "drivers": [
+      {
+        "name": "Камара",
+        "points": "207",
+        "pos": 1,
+        "team": "Invicta"
+      },
+      {
+        "name": "Цолов",
+        "points": "200",
+        "pos": 2,
+        "team": "Campos"
+      },
+      {
+        "name": "Данн",
+        "points": "189",
+        "pos": 3,
+        "team": "Rodin"
+      }
+    ],
+    "teams": [
+      {
+        "name": "Campos",
+        "points": "333",
+        "pos": 1
+      },
+      {
+        "name": "Invicta",
+        "points": "297",
+        "pos": 2
+      },
+      {
+        "name": "Rodin",
+        "points": "296",
+        "pos": 3
+      }
+    ]
   }
 }

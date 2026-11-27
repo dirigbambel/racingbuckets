@@ -88,6 +88,37 @@
     ]
   },
   {
+    "series": "Формула-2",
+    "name": "13 этап",
+    "circuit": "Lusail International Circuit",
+    "country": "Катар",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2026-11-28",
+    "color": "#0090D0",
+    "id": "f226_13",
+    "end": "2026-11-29",
+    "sessions": [
+      {
+        "name": "Практика",
+        "start": "2026-11-27T14:00:00+03:00"
+      },
+      {
+        "name": "Квалификация",
+        "start": "2026-11-27T18:00:00+03:00"
+      },
+      {
+        "name": "Спринт",
+        "start": "2026-11-28T19:15:00+03:00"
+      },
+      {
+        "name": "Гонка",
+        "start": "2026-11-29T15:00:00+03:00"
+      }
+    ]
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Катара",
     "circuit": "Lusail International Circuit",
@@ -123,6 +154,19 @@
         "start": "2026-11-29T19:00:00+03:00"
       }
     ]
+  },
+  {
+    "series": "Формула-2",
+    "name": "14 этап",
+    "circuit": "Yas Marina Circuit",
+    "country": "ОАЭ",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2026-12-05",
+    "color": "#0090D0",
+    "id": "f226_14",
+    "end": "2026-12-06"
   },
   {
     "series": "Формула-1",
@@ -386,6 +430,32 @@
     "id": "indycar27_02"
   },
   {
+    "series": "Формула-2",
+    "name": "1 этап",
+    "circuit": "Bahrain International Circuit",
+    "country": "Бахрейн",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-13",
+    "color": "#0090D0",
+    "id": "f227_01",
+    "end": "2027-03-14"
+  },
+  {
+    "series": "Формула-3",
+    "name": "1 этап",
+    "circuit": "Bahrain International Circuit",
+    "country": "Бахрейн",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-13",
+    "color": "#F97316",
+    "id": "f327_01",
+    "end": "2027-03-14"
+  },
+  {
     "series": "Формула-Е",
     "name": "Е-при Сан-Паулу",
     "circuit": "São Paulo Street Circuit",
@@ -466,6 +536,45 @@
     "id": "imsa27_02"
   },
   {
+    "series": "Ф1 Академия",
+    "name": "1 этап",
+    "circuit": "Jeddah Corniche Circuit",
+    "country": "Саудовская Аравия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-20",
+    "color": "#EC4899",
+    "id": "f1a27_01",
+    "end": "2027-03-21"
+  },
+  {
+    "series": "Формула-2",
+    "name": "2 этап",
+    "circuit": "Jeddah Corniche Circuit",
+    "country": "Саудовская Аравия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-20",
+    "color": "#0090D0",
+    "id": "f227_02",
+    "end": "2027-03-21"
+  },
+  {
+    "series": "Формула-3",
+    "name": "2 этап",
+    "circuit": "Jeddah Corniche Circuit",
+    "country": "Саудовская Аравия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-03-20",
+    "color": "#F97316",
+    "id": "f327_02",
+    "end": "2027-03-21"
+  },
+  {
     "series": "IndyCar",
     "name": "Java House Grand Prix of Arlington",
     "circuit": "Streets of Arlington",
@@ -542,6 +651,32 @@
     "start": "2027-04-03",
     "color": "#FB3768",
     "id": "supergt27_01"
+  },
+  {
+    "series": "Формула-2",
+    "name": "3 этап",
+    "circuit": "Albert Park Circuit",
+    "country": "Австралия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-04-03",
+    "color": "#0090D0",
+    "id": "f227_03",
+    "end": "2027-04-04"
+  },
+  {
+    "series": "Формула-3",
+    "name": "3 этап",
+    "circuit": "Albert Park Circuit",
+    "country": "Австралия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-04-03",
+    "color": "#F97316",
+    "id": "f327_03",
+    "end": "2027-04-04"
   },
   {
     "series": "Формула-Е",
@@ -682,6 +817,19 @@
     "start": "2027-04-17",
     "color": "#F97316",
     "id": "imsa27_03"
+  },
+  {
+    "series": "Ф1 Академия",
+    "name": "2 этап",
+    "circuit": "Shanghai International Circuit",
+    "country": "Китай",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-04-17",
+    "color": "#EC4899",
+    "id": "f1a27_02",
+    "end": "2027-04-18"
   },
   {
     "series": "GT World Challenge Europe",
@@ -1016,6 +1164,45 @@
     "id": "fd27_03"
   },
   {
+    "series": "Ф1 Академия",
+    "name": "3 этап",
+    "circuit": "Circuit Gilles Villeneuve",
+    "country": "Канада",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-22",
+    "color": "#EC4899",
+    "id": "f1a27_03",
+    "end": "2027-05-23"
+  },
+  {
+    "series": "Формула-2",
+    "name": "4 этап",
+    "circuit": "Circuit Gilles Villeneuve",
+    "country": "Канада",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-22",
+    "color": "#0090D0",
+    "id": "f227_04",
+    "end": "2027-05-23"
+  },
+  {
+    "series": "Формула-3",
+    "name": "4 этап",
+    "circuit": "Circuit Gilles Villeneuve",
+    "country": "Канада",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-05-22",
+    "color": "#F97316",
+    "id": "f327_04",
+    "end": "2027-05-23"
+  },
+  {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 3 часа Имолы",
     "circuit": "Imola Circuit",
@@ -1118,6 +1305,32 @@
     "start": "2027-06-05",
     "color": "#F97316",
     "id": "imsa27_05"
+  },
+  {
+    "series": "Формула-2",
+    "name": "5 этап",
+    "circuit": "Circuit de Monaco",
+    "country": "Монако",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-06-05",
+    "color": "#0090D0",
+    "id": "f227_05",
+    "end": "2027-06-06"
+  },
+  {
+    "series": "Формула-3",
+    "name": "5 этап",
+    "circuit": "Circuit de Monaco",
+    "country": "Монако",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-06-05",
+    "color": "#F97316",
+    "id": "f327_05",
+    "end": "2027-06-06"
   },
   {
     "series": "IndyCar",
@@ -1374,6 +1587,45 @@
     "id": "dtm27_04"
   },
   {
+    "series": "Ф1 Академия",
+    "name": "4 этап",
+    "circuit": "Silverstone Circuit",
+    "country": "Великобритания",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-03",
+    "color": "#EC4899",
+    "id": "f1a27_04",
+    "end": "2027-07-04"
+  },
+  {
+    "series": "Формула-2",
+    "name": "6 этап",
+    "circuit": "Silverstone Circuit",
+    "country": "Великобритания",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-03",
+    "color": "#0090D0",
+    "id": "f227_06",
+    "end": "2027-07-04"
+  },
+  {
+    "series": "Формула-3",
+    "name": "6 этап",
+    "circuit": "Silverstone Circuit",
+    "country": "Великобритания",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-03",
+    "color": "#F97316",
+    "id": "f327_06",
+    "end": "2027-07-04"
+  },
+  {
     "series": "IndyCar",
     "name": "Honda Indy 200 at Mid-Ohio",
     "circuit": "Mid-Ohio Sports Car Course",
@@ -1450,6 +1702,32 @@
     "start": "2027-07-10",
     "color": "#C084FC",
     "id": "gtwca27_04"
+  },
+  {
+    "series": "Формула-2",
+    "name": "7 этап",
+    "circuit": "Red Bull Ring",
+    "country": "Австрия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-10",
+    "color": "#0090D0",
+    "id": "f227_07",
+    "end": "2027-07-11"
+  },
+  {
+    "series": "Формула-3",
+    "name": "7 этап",
+    "circuit": "Red Bull Ring",
+    "country": "Австрия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-10",
+    "color": "#F97316",
+    "id": "f327_07",
+    "end": "2027-07-11"
   },
   {
     "series": "Формула-Е",
@@ -1629,6 +1907,19 @@
     "start": "2027-07-31",
     "color": "#FB3768",
     "id": "supergt27_04"
+  },
+  {
+    "series": "Ф1 Академия",
+    "name": "5 этап",
+    "circuit": "Hungaroring",
+    "country": "Венгрия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-07-31",
+    "color": "#EC4899",
+    "id": "f1a27_05",
+    "end": "2027-08-01"
   },
   {
     "series": "GT World Challenge Europe",
@@ -1840,6 +2131,32 @@
     "id": "gtwce27_07"
   },
   {
+    "series": "Формула-2",
+    "name": "8 этап",
+    "circuit": "Monza Circuit",
+    "country": "Италия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-09-04",
+    "color": "#0090D0",
+    "id": "f227_08",
+    "end": "2027-09-05"
+  },
+  {
+    "series": "Формула-3",
+    "name": "8 этап",
+    "circuit": "Monza Circuit",
+    "country": "Италия",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-09-04",
+    "color": "#F97316",
+    "id": "f327_08",
+    "end": "2027-09-05"
+  },
+  {
     "series": "IndyCar",
     "name": "IndyCar Grand Prix of Monterey",
     "circuit": "WeatherTech Raceway Laguna Seca",
@@ -1916,6 +2233,32 @@
     "start": "2027-09-11",
     "color": "#FACC15",
     "id": "nascar27_27"
+  },
+  {
+    "series": "Формула-2",
+    "name": "9 этап",
+    "circuit": "Madring",
+    "country": "Испания",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-09-11",
+    "color": "#0090D0",
+    "id": "f227_09",
+    "end": "2027-09-12"
+  },
+  {
+    "series": "Формула-3",
+    "name": "9 этап",
+    "circuit": "Madring",
+    "country": "Испания",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-09-11",
+    "color": "#F97316",
+    "id": "f327_09",
+    "end": "2027-09-12"
   },
   {
     "series": "WEC",
@@ -2022,6 +2365,19 @@
     "id": "dtm27_07"
   },
   {
+    "series": "Формула-2",
+    "name": "10 этап",
+    "circuit": "Baku City Circuit",
+    "country": "Азербайджан",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-09-25",
+    "color": "#0090D0",
+    "id": "f227_10",
+    "end": "2027-09-26"
+  },
+  {
     "series": "NASCAR Chase",
     "name": "Dollar Tree 301",
     "circuit": "New Hampshire Motor Speedway",
@@ -2097,6 +2453,32 @@
     "start": "2027-10-02",
     "color": "#C084FC",
     "id": "gtwca27_05"
+  },
+  {
+    "series": "Формула-2",
+    "name": "11 этап",
+    "circuit": "Istanbul Park",
+    "country": "Турция",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-10-02",
+    "color": "#0090D0",
+    "id": "f227_11",
+    "end": "2027-10-03"
+  },
+  {
+    "series": "Формула-3",
+    "name": "10 этап",
+    "circuit": "Istanbul Park",
+    "country": "Турция",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-10-02",
+    "color": "#F97316",
+    "id": "f327_10",
+    "end": "2027-10-03"
   },
   {
     "series": "GT World Challenge Europe",
@@ -2252,6 +2634,19 @@
     "id": "gtwca27_06"
   },
   {
+    "series": "Ф1 Академия",
+    "name": "6 этап",
+    "circuit": "Circuit of the Americas",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-10-23",
+    "color": "#EC4899",
+    "id": "f1a27_06",
+    "end": "2027-10-24"
+  },
+  {
     "series": "GT World Challenge Europe",
     "name": "Марафон. 3 часа Барселоны",
     "circuit": "Circuit de Barcelona-Catalunya",
@@ -2286,6 +2681,19 @@
     "start": "2027-10-24T23:00:00+03:00",
     "color": "#e10600",
     "id": "f127_19"
+  },
+  {
+    "series": "Формула-2",
+    "name": "12 этап",
+    "circuit": "Autódromo Hermanos Rodríguez",
+    "country": "Мексика",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-10-30",
+    "color": "#0090D0",
+    "id": "f227_12",
+    "end": "2027-10-31"
   },
   {
     "series": "NASCAR Chase",
@@ -2403,6 +2811,19 @@
     "id": "macao27"
   },
   {
+    "series": "Ф1 Академия",
+    "name": "7 этап",
+    "circuit": "Las Vegas Strip Circuit",
+    "country": "США",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-11-19",
+    "color": "#EC4899",
+    "id": "f1a27_07",
+    "end": "2027-11-20"
+  },
+  {
     "series": "Super GT",
     "name": "300 км Мотеги",
     "circuit": "Mobility Resort Motegi",
@@ -2441,6 +2862,19 @@
     "end": "2027-11-28"
   },
   {
+    "series": "Формула-2",
+    "name": "13 этап",
+    "circuit": "Lusail International Circuit",
+    "country": "Катар",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-12-04",
+    "color": "#0090D0",
+    "id": "f227_13",
+    "end": "2027-12-05"
+  },
+  {
     "series": "Формула-1",
     "name": "Гран-при Катара",
     "circuit": "Lusail International Circuit",
@@ -2454,6 +2888,19 @@
     "support": [
       "Формула-2"
     ]
+  },
+  {
+    "series": "Формула-2",
+    "name": "14 этап",
+    "circuit": "Yas Marina Circuit",
+    "country": "ОАЭ",
+    "tags": [
+      "Открытые колеса"
+    ],
+    "start": "2027-12-11",
+    "color": "#0090D0",
+    "id": "f227_14",
+    "end": "2027-12-12"
   },
   {
     "series": "Формула-1",
