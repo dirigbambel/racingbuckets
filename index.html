@@ -1899,8 +1899,8 @@
       const tabs = getAvailableTabs(race);
       activeTab = (isPast && tabs.some(t => t.id === 'results')) ? 'results' : 'schedule';
 
-      const st = standingsData[race.series];
-      activeStandingsType = st?.drivers?.length ? 'drivers' : 'teams';
+      const hasStandings = SHOW_STANDINGS && Boolean(getStandingsTables(race.series));
+      activeStandingsType = '';
 
       renderModalContent();
       els.backdrop.classList.add('open');
@@ -2031,48 +2031,67 @@
         </div>
       `;
     }
-
+function getStandingsTables(series) {
+      const st = standingsData[series];
+      if (!st) return null;
+      if (st.tables && typeof st.tables === 'object') {
+        const entries = Object.entries(st.tables).filter(([, rows]) => Array.isArray(rows) && rows.length > 0);
+        return entries.length ? { updated: st.updated || '', tables: Object.fromEntries(entries) } : null;
+      }
+      const tables = {};
+      if (st.drivers?.length) tables['Личный зачёт'] = st.drivers;
+      if (st.teams?.length) tables['Команды'] = st.teams;
+      return Object.keys(tables).length ? { updated: st.updated || '', tables } : null;
+    }
     function renderStandingsTab(race) {
-      const st = standingsData[race.series];
-      if (!st) return;
+      const st = getStandingsTables(race.series);
+      if (!st) {
+        els.modalBody.innerHTML = '<div class="empty">Таблица чемпионата пока не добавлена.</div>';
+        return;
+      }
 
-      const hasDrivers = Array.isArray(st.drivers) && st.drivers.length > 0;
-      const hasTeams = Array.isArray(st.teams) && st.teams.length > 0;
-      const rows = activeStandingsType === 'drivers' ? (st.drivers || []) : (st.teams || []);
-      const hasTeamCol = activeStandingsType === 'drivers' && rows.some(r => r.team);
+      const tabNames = Object.keys(st.tables);
+      if (!tabNames.includes(activeStandingsType)) {
+        activeStandingsType = tabNames[0];
+      }
 
-      const subTabsHtml = (hasDrivers && hasTeams) ? `
-        <div class="sub-tab-group">
-          <button class="sub-tab-btn ${activeStandingsType === 'drivers' ? 'active' : ''}" data-st="drivers">Личный зачёт</button>
-          <button class="sub-tab-btn ${activeStandingsType === 'teams' ? 'active' : ''}" data-st="teams">Команды</button>
+      const rows = st.tables[activeStandingsType] || [];
+      const hasTeam = rows.some(r => r.team);
+      const isTeamOnly = !hasTeam && /команд|конструктор|производител|team/i.test(activeStandingsType);
+
+      const subTabsHtml = tabNames.length > 1 ? `
+        <div class="sub-tabs">
+          <div class="sub-tab-group">
+            ${tabNames.map(name => `
+              <button class="sub-tab-btn ${name === activeStandingsType ? 'active' : ''}" data-st="${escapeHtml(name)}">${escapeHtml(name)}</button>
+            `).join('')}
+          </div>
+          ${st.updated ? `<span class="st-updated">${escapeHtml(st.updated)}</span>` : ''}
         </div>
-      ` : '<div></div>';
+      ` : (st.updated ? `<div class="sub-tabs"><span class="st-updated">${escapeHtml(st.updated)}</span></div>` : '');
 
       const body = rows.map((r, i) => {
         const pos = r.pos ?? (i + 1);
-        const posClass = pos <= 3 ? `pos-${pos}` : '';
+        const posClass = Number(pos) <= 3 ? `pos-${pos}` : '';
         return `
           <tr>
             <td class="col-pos ${posClass}">${escapeHtml(pos)}</td>
             <td><strong>${escapeHtml(r.name || '')}</strong></td>
-            ${hasTeamCol ? `<td class="col-muted">${escapeHtml(r.team || '—')}</td>` : ''}
-            <td class="col-num"><strong>${escapeHtml(r.points ?? 0)}</strong></td>
+            ${hasTeam ? `<td class="col-muted">${escapeHtml(r.team || '—')}</td>` : ''}
+            <td class="col-num"><strong>${escapeHtml(r.points ?? '—')}</strong></td>
           </tr>
         `;
       }).join('');
 
       els.modalBody.innerHTML = `
-        <div class="sub-tabs">
-          ${subTabsHtml}
-          ${st.updated ? `<span class="updated-note">${escapeHtml(st.updated)}</span>` : ''}
-        </div>
+        ${subTabsHtml}
         <div class="table-wrap">
           <table class="data-table">
             <thead>
               <tr>
                 <th>#</th>
-                <th>${activeStandingsType === 'drivers' ? 'Пилот' : 'Команда'}</th>
-                ${hasTeamCol ? '<th>Команда</th>' : ''}
+                <th>${isTeamOnly ? 'Команда' : 'Пилот / Экипаж'}</th>
+                ${hasTeam ? '<th>Команда</th>' : ''}
                 <th class="col-num">Очки</th>
               </tr>
             </thead>
