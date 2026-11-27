@@ -951,6 +951,142 @@
       margin-top: 8px;
       min-height: 16px;
     }
+    /* Вывеска "На этой неделе" */
+    .week-spotlight {
+      display: none;
+      margin: 0 0 20px;
+      padding: 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(225, 6, 0, 0.06));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .week-spotlight.visible {
+      display: block;
+    }
+    .week-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .week-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f9fafb;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .week-range {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 10px;
+    }
+    .week-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 11px 12px 11px 14px;
+      border-radius: 11px;
+      background: rgba(17, 21, 34, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 3px solid var(--series-color, #e10600);
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .week-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.2);
+      border-left-color: var(--series-color, #e10600);
+      background: rgba(24, 30, 48, 0.95);
+    }
+    .week-card.past {
+      opacity: 0.55;
+    }
+    .week-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .week-card-series {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--series-color, #e10600);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .week-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f3f4f6;
+      line-height: 1.3;
+    }
+    .week-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #d1d5db;
+    }
+    .week-card-status {
+      font-size: 11px;
+      color: #38bdf8;
+      white-space: nowrap;
+    }
+    .week-card.past .week-card-status {
+      color: #9ca3af;
+    }
+    @media (max-width: 640px) {
+      .week-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .week-card {
+        flex: 0 0 245px;
+        scroll-snap-align: start;
+      }
+    }
+
+    .site-footer {
+      margin-top: 44px;
+      padding: 20px 12px 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.55;
+      color: #6b7280;
+    }
+    .site-footer a {
+      color: #9ca3af;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(156, 163, 175, 0.45);
+    }
+    .site-footer a:hover {
+      color: #e5e7eb;
+      border-bottom-color: #e5e7eb;
+    }
+    .footer-legal {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #525866;
+    }
   </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -985,7 +1121,13 @@
         </a>
       </nav>
     </header>
-
+<section id="thisWeekSection" class="week-spotlight" aria-label="Гонки на этой неделе">
+      <div class="week-header">
+        <h2 class="week-title">🏁 На этой неделе</h2>
+        <span id="thisWeekRange" class="week-range"></span>
+      </div>
+      <div id="thisWeekGrid" class="week-grid"></div>
+    </section>
     <section class="filters">
       <div class="filter-group">
         <span class="filter-label">Чемпионаты</span>
@@ -1047,7 +1189,14 @@
       <button type="button" class="btn-load-more" id="btnLoadMore">Показать ещё</button>
     </div>
   </div>
-
+<footer class="site-footer">
+      <div>
+        Календарь автоспорта · <a href="https://t.me/racing_journalf1" target="_blank" rel="noopener noreferrer">@racing_journalf1</a> · <a href="https://t.me/racingbuckets" target="_blank" rel="noopener noreferrer">@racingbuckets</a>
+      </div>
+      <div class="footer-legal">
+        На сайте используются файлы cookie и сервис веб-аналитики Яндекс Метрика для сбора обезличенной статистики посещений.
+      </div>
+    </footer>
   <!-- Модальное окно этапа -->
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal" id="modalBox">
@@ -1235,7 +1384,10 @@
       exportCopyBtn: document.getElementById('exportCopyBtn'),
       exportCopyStatus: document.getElementById('exportCopyStatus'),
       exportDownloadBtn: document.getElementById('exportDownloadBtn'),
-      exportDownloadHint: document.getElementById('exportDownloadHint')
+      exportDownloadHint: document.getElementById('exportDownloadHint'),
+      thisWeekSection: document.getElementById('thisWeekSection'),
+      thisWeekRange: document.getElementById('thisWeekRange'),
+      thisWeekGrid: document.getElementById('thisWeekGrid')
     };
 
     let allRaces = [];
@@ -1650,6 +1802,54 @@
         }
         return true;
       });
+
+      function renderThisWeek() {
+      if (!els.thisWeekSection || !els.thisWeekGrid) return;
+      const now = Date.now();
+      const nowDate = new Date(now);
+      const dayOfWeek = (nowDate.getDay() + 6) % 7; // 0 = Пн, 6 = Вс
+      const weekStartDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate() - dayOfWeek, 0, 0, 0, 0);
+      const weekStart = weekStartDate.getTime();
+      const weekEnd = weekStart + 7 * DAY_MS - 1;
+      const weekEndDate = new Date(weekStart + 6 * DAY_MS);
+
+      const weekRaces = allRaces.filter(r => {
+        if (!Number.isFinite(r._ts)) return false;
+        const effEnd = getEffectiveEndTs(r._ts, r._hasTime, r._endTs, r._endHasTime);
+        return r._ts <= weekEnd && effEnd > weekStart;
+      });
+
+      if (!weekRaces.length) {
+        els.thisWeekSection.classList.remove('visible');
+        return;
+      }
+
+      if (els.thisWeekRange) {
+        const fmt = d => d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+        els.thisWeekRange.textContent = `${fmt(weekStartDate)} – ${fmt(weekEndDate)} · этапов: ${weekRaces.length}`;
+      }
+
+      els.thisWeekGrid.innerHTML = weekRaces.map(r => {
+        const isPast = isEventPast(r._ts, r._hasTime, now, r._endTs, r._endHasTime);
+        const dateStr = formatDateRange(r._ts, r._hasTime, r._endTs, r._endHasTime);
+        const statusStr = formatCountdown(r._ts, r._hasTime, now, r._endTs, r._endHasTime);
+        return `
+          <div class="week-card ${isPast ? 'past' : ''}" data-id="${r._id}" style="--series-color: ${escapeHtml(r.color || '#e10600')}">
+            <div class="week-card-top">
+              <span class="week-card-series">${escapeHtml(r.series)}</span>
+              ${renderFlag(r.country)}
+            </div>
+            <div class="week-card-name">${escapeHtml(r.name)}</div>
+            <div class="week-card-meta">
+              <span>${dateStr}</span>
+              <span class="week-card-status">${statusStr}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      els.thisWeekSection.classList.add('visible');
+    }
 
       const nextUpcoming = currentFiltered.find(r => Number.isFinite(r._ts) && !isEventPast(r._ts, r._hasTime, now, r._endTs, r._endHasTime));
       nextUpcomingId = nextUpcoming ? nextUpcoming._id : null;
@@ -2066,6 +2266,16 @@
       if (race) openModal(race);
     });
 
+    if (els.thisWeekGrid) {
+      els.thisWeekGrid.addEventListener('click', e => {
+        if (!ENABLE_MODAL) return;
+        const card = e.target.closest('.week-card');
+        if (!card) return;
+        const race = allRaces.find(r => r._id === Number(card.dataset.id));
+        if (race) openModal(race);
+      });
+    }
+
     els.modalTabs.addEventListener('click', e => {
       const btn = e.target.closest('.tab-btn');
       if (!btn) return;
@@ -2185,6 +2395,7 @@
 
         populateMultiSelect(els.msSeries, allRaces.map(r => r.series));
         populateMultiSelect(els.msTag, allRaces.flatMap(r => r._tags), PRIORITY_TAGS);
+        renderThisWeek();
         render();
       } catch (err) {
         els.list.innerHTML = `
